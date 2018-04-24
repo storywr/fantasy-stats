@@ -1,25 +1,37 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchPlayers, selectPlayers } from '../../ducks/players'
+import AutoComplete from 'material-ui/AutoComplete'
+
+import { fetchPlayers, selectPlayerNames } from '../../ducks/players'
 
 export class Homepage extends Component {
   componentDidMount() {
     this.props.fetchPlayers()
   }
 
-  render() {
-    const { currentPage, fetchProductSkuList, totalPages } = this.props
+  state = {
+    dataSource: this.props.players
+  }
 
+  render() {
+    console.log(this.props.players)    
     return (
       <div>
-        test
+        <AutoComplete
+          hintText="Type a player's name"
+          filter={AutoComplete.caseInsensitiveFilter}
+          dataSource={this.props.players}
+          floatingLabelText="Search Players"
+          maxSearchResults={5}
+          fullWidth={true}
+        />
       </div>
     )
   }
 }
 
 const mapStateToProps = state => ({
-  players: selectPlayers(state),
+  players: selectPlayerNames(state),
 })
 export default connect(mapStateToProps, { fetchPlayers })(Homepage)
