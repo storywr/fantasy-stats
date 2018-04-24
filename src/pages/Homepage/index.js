@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import styled from 'styled-components'
 
 import AutoComplete from 'material-ui/AutoComplete'
 
 import { fetchPlayers, selectPlayerNames } from '../../ducks/players'
+
+const Wrapper = styled.div`
+  padding: 0.5rem 4rem;
+`
 
 export class Homepage extends Component {
   componentDidMount() {
@@ -14,10 +19,18 @@ export class Homepage extends Component {
     dataSource: this.props.players
   }
 
+  searchPlayer = (player) => {
+    console.log(player)
+  }
+
   render() {
-    console.log(this.props.players)    
+    const dataSourceConfig = {
+      text: 'name',
+      value: 'id',
+    }
+   
     return (
-      <div>
+      <Wrapper>
         <AutoComplete
           hintText="Type a player's name"
           filter={AutoComplete.caseInsensitiveFilter}
@@ -25,8 +38,10 @@ export class Homepage extends Component {
           floatingLabelText="Search Players"
           maxSearchResults={5}
           fullWidth={true}
+          onNewRequest={this.searchPlayer}
+          dataSourceConfig={dataSourceConfig}
         />
-      </div>
+      </Wrapper>
     )
   }
 }

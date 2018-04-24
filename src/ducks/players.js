@@ -39,5 +39,8 @@ export const selectPlayers = state => state.players.players
 
 export const selectPlayerNames = createSelector(
   selectPlayers,
-  players => players.map(player => player.name)
+  players => players.map(player => ({
+    name: player.name,
+    id: player.id
+  }))
 )
