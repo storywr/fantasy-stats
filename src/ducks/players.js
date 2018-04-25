@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
 
 export const fetchPlayers = () => {
   return dispatch => {
-    return fetch('http://api.fantasy.nfl.com/v1/players/stats?statType=seasonStats&position=RB&season=2017&week=1&format=json')
+    return fetch('http://api.fantasy.nfl.com/v1/players/stats?statType=seasonStats&season=2017&week=1&format=json')
       .then(response => response.json())
       .then(players => dispatch({ type: LIST, players }))
       .catch(console.log)
