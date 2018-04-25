@@ -37,7 +37,7 @@ export class Draft extends Component {
       <Wrapper>
         {!isLoading &&
           <Table multiSelectable>
-            <TableHeader>
+            <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>Rank</TableHeaderColumn>
                 <TableHeaderColumn>Auction</TableHeaderColumn>
@@ -46,7 +46,7 @@ export class Draft extends Component {
                 <TableHeaderColumn>Team</TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            <TableBody>
+            <TableBody displayRowCheckbox={false}>
               {players.map(player => (
                 <TableRow>
                   <TableRowColumn>{player.rank}</TableRowColumn>

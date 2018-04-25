@@ -36,7 +36,7 @@ export class AutoCompleteBar extends Component {
     return (
       <Wrapper>
         <AutoComplete
-          hintText="Type a player's name"
+          hintText="Ex. Tom Brady"
           filter={AutoComplete.caseInsensitiveFilter}
           dataSource={this.props.players}
           floatingLabelText="Search Players"

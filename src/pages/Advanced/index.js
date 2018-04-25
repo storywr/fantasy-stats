@@ -129,20 +129,20 @@ export class Advanced extends Component {
               </WeekSearch>
             </SearchBoxes>
             <Table onRowSelection={this.handleSelectPlayer}>
-              <TableHeader>
+              <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
                   <TableHeaderColumn>Name</TableHeaderColumn>
                   <TableHeaderColumn>Team</TableHeaderColumn>
                   <TableHeaderColumn>Carries</TableHeaderColumn>
                   <TableHeaderColumn>Touches</TableHeaderColumn>
-                  <TableHeaderColumn>Receptions</TableHeaderColumn>
+                  <TableHeaderColumn>Rec</TableHeaderColumn>
                   <TableHeaderColumn>Targets</TableHeaderColumn>
-                  <TableHeaderColumn>Reception %</TableHeaderColumn>
-                  <TableHeaderColumn>RZone Targets</TableHeaderColumn>
-                  <TableHeaderColumn>RZone Touches</TableHeaderColumn>
+                  <TableHeaderColumn>Rec %</TableHeaderColumn>
+                  <TableHeaderColumn>RZ Targets</TableHeaderColumn>
+                  <TableHeaderColumn>RZ Touches</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody displayRowCheckbox={false}>
                 {advanced[this.state.position].map(player => (
                   <TableRow>
                     <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>

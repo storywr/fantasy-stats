@@ -104,7 +104,7 @@ export class Draft extends Component {
               </WeekSearch>
             </SearchBoxes>
             <Table onRowSelection={this.handleSelectPlayer}>
-              <TableHeader>
+              <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
                   <TableHeaderColumn>Rank</TableHeaderColumn>
                   <TableHeaderColumn>Name</TableHeaderColumn>
@@ -113,7 +113,7 @@ export class Draft extends Component {
                   <TableHeaderColumn>Stat Line</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
-              <TableBody>
+              <TableBody displayRowCheckbox={false}>
                 {scoring[this.state.position].map(player => (
                   <TableRow>
                     <TableRowColumn>{player.rank}</TableRowColumn>
