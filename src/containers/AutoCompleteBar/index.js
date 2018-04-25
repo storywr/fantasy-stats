@@ -25,6 +25,7 @@ export class AutoCompleteBar extends Component {
 
   searchPlayer = (player) => {
     this.props.history.push(`/players/${player.id}`)
+    this.refs[`autocomplete`].setState({searchText:''})
   }
 
   render() {
@@ -36,6 +37,7 @@ export class AutoCompleteBar extends Component {
     return (
       <Wrapper>
         <AutoComplete
+          ref={`autocomplete`}
           hintText="Ex. Tom Brady"
           filter={AutoComplete.caseInsensitiveFilter}
           dataSource={this.props.players}
