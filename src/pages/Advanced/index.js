@@ -27,15 +27,40 @@ const MaterialCard = styled(Card)`
 
 const PositionSearch = styled(SelectField)`
   margin-bottom: 24px;
+
+  @media (max-width: 767px) {
+    margin-left: 8px;
+  }
 `
 
 const WeekSearch = styled(SelectField)`
   margin-left: 48px;
+
+  @media (max-width: 767px) {
+    margin-left: 8px;
+  }
+  
   margin-bottom: 24px;
 `
 
 const SearchBoxes = styled.div`
   display: flex;
+
+  @media (max-width: 767px) {
+    display: block;
+  }
+`
+
+const MobileHeaderCol = styled(TableHeaderColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
+const MobileTableCol = styled(TableRowColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
 `
 
 export class Advanced extends Component {
@@ -132,28 +157,28 @@ export class Advanced extends Component {
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
                   <TableHeaderColumn>Name</TableHeaderColumn>
-                  <TableHeaderColumn>Team</TableHeaderColumn>
+                  <MobileHeaderCol>Team</MobileHeaderCol>
                   <TableHeaderColumn>Carries</TableHeaderColumn>
                   <TableHeaderColumn>Touches</TableHeaderColumn>
                   <TableHeaderColumn>Rec</TableHeaderColumn>
-                  <TableHeaderColumn>Targets</TableHeaderColumn>
-                  <TableHeaderColumn>Rec %</TableHeaderColumn>
-                  <TableHeaderColumn>RZ Targets</TableHeaderColumn>
-                  <TableHeaderColumn>RZ Touches</TableHeaderColumn>
+                  <MobileHeaderCol>Targets</MobileHeaderCol>
+                  <MobileHeaderCol>Rec %</MobileHeaderCol>
+                  <MobileHeaderCol>RZ Targets</MobileHeaderCol>
+                  <MobileHeaderCol>RZ Touches</MobileHeaderCol>
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false}>
                 {advanced[this.state.position].map(player => (
                   <TableRow>
                     <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
-                    <TableRowColumn>{player.teamAbbr}</TableRowColumn>
+                    <MobileTableCol>{player.teamAbbr}</MobileTableCol>
                     <TableRowColumn>{player.stats.Carries}</TableRowColumn>
                     <TableRowColumn>{player.stats.Touches}</TableRowColumn>
                     <TableRowColumn>{player.stats.Receptions}</TableRowColumn>
-                    <TableRowColumn>{player.stats.Targets}</TableRowColumn>
-                    <TableRowColumn>{player.stats.ReceptionPercentage}</TableRowColumn>
-                    <TableRowColumn>{player.stats.RedzoneTargets}</TableRowColumn>
-                    <TableRowColumn>{player.stats.RedzoneTouches}</TableRowColumn>
+                    <MobileTableCol>{player.stats.Targets}</MobileTableCol>
+                    <MobileTableCol>{player.stats.ReceptionPercentage}</MobileTableCol>
+                    <MobileTableCol>{player.stats.RedzoneTargets}</MobileTableCol>
+                    <MobileTableCol>{player.stats.RedzoneTouches}</MobileTableCol>
                   </TableRow>
                 ))}
               </TableBody>
