@@ -1,21 +1,27 @@
 import React from 'react'
-import { Router, Route, Switch } from 'react-router-dom'
+import { Router, Redirect, Route, Switch } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import styled from 'styled-components'
 
 import history from '../../utils//history'
 
-import Homepage from '../Homepage'
-import Players from '../Players'
+import AutoCompleteBar from '../AutoCompleteBar'
+
+import Player from '../Player'
+
+const Wrapper = styled.div`
+  padding: 0.5rem 4rem;
+`
 
 export const App = () => (
   <Router history={history}>
     <MuiThemeProvider>
-      <div id='App'>
+      <Wrapper>
+        <AutoCompleteBar />
         <Switch>
-          <Route path='/players' component={Players} />
-          <Route path='/' component={Homepage} />
+          <Route path='/players/:playerId' component={Player} />
         </Switch>
-      </div>
+      </Wrapper>
     </MuiThemeProvider>
   </Router>
 )

@@ -2,15 +2,19 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import { Link, Route, Switch, withRouter } from 'react-router-dom'
+
+import Player from '../Player'
+
 import AutoComplete from 'material-ui/AutoComplete'
 
 import { fetchPlayers, selectPlayerNames } from '../../ducks/players'
 
 const Wrapper = styled.div`
-  padding: 0.5rem 4rem;
+  margin-bottom: 36px;
 `
 
-export class Homepage extends Component {
+export class AutoCompleteBar extends Component {
   componentDidMount() {
     this.props.fetchPlayers()
   }
@@ -21,6 +25,7 @@ export class Homepage extends Component {
 
   searchPlayer = (player) => {
     console.log(player)
+    this.props.history.push(`/players/${player.id}`)
   }
 
   render() {
@@ -49,4 +54,7 @@ export class Homepage extends Component {
 const mapStateToProps = state => ({
   players: selectPlayerNames(state),
 })
-export default connect(mapStateToProps, { fetchPlayers })(Homepage)
+
+const Connected = connect(mapStateToProps, { fetchPlayers })(AutoCompleteBar)
+
+export default withRouter(Connected)

@@ -3,8 +3,6 @@ import { createSelector } from 'reselect'
 // Action types
 
 const LIST = 'FETCH_PLAYER_LIST_SUCCESS'
-const FETCH_SINGLE = 'FETCH_PLAYER'
-const FETCH_SINGLE_SUCCESS = 'FETCH_PLAYER_SUCCESS'
 
 // Reducer
 
