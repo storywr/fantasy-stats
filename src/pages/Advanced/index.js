@@ -43,27 +43,39 @@ const SearchBoxes = styled.div`
 `
 
 export class Advanced extends Component {
-  componentDidMount() {
-    this.props.fetchAdvanced(this.state.week, this.state.position)
-  }
-
   state = {
     position: 'RB',
+    sort: 'touches',
     week: 'All Season'
+  }
+
+  componentDidMount() {
+    const params = this.state
+    this.props.fetchAdvanced(params)
   }
 
   handlePositionChange = (ev, idx, value) => {
     this.setState({
       position: value
     })
-    this.props.fetchAdvanced(this.state.week, value)
+    const params = { ...this.state, position: value }
+    this.props.fetchAdvanced(params)
+  }
+
+  handleSortChange = (ev, idx, value) => {
+    this.setState({
+      sort: value
+    })
+    const params = { ...this.state, sort: value }
+    this.props.fetchAdvanced(params)
   }
 
   handleWeekChange = (ev, idx, value) => {
     this.setState({
       week: value
     })
-    this.props.fetchAdvanced(value, this.state.position)
+    const params = { ...this.state, week: value }
+    this.props.fetchAdvanced(params)
   }
 
   weekBuilder = () => {
@@ -99,6 +111,19 @@ export class Advanced extends Component {
                 <MenuItem value={'QB'} primaryText="QB" />
                 <MenuItem value={'DEF'} primaryText="DEF" />
               </PositionSearch>
+              <WeekSearch
+                floatingLabelText="Sort By"
+                value={this.state.sort}
+                onChange={this.handleSortChange}
+              >
+                <MenuItem value={'carries'} primaryText="Carries" />
+                <MenuItem value={'touches'} primaryText="Touches" />
+                <MenuItem value={'receptions'} primaryText="Receptions" />
+                <MenuItem value={'targets'} primaryText="Targets" />
+                <MenuItem value={'receptionPercentage'} primaryText="Reception Percentage" />
+                <MenuItem value={'redzoneTargets'} primaryText="Redzone Targets" />
+                <MenuItem value={'redzoneTouches'} primaryText="Redzone Touches" />
+              </WeekSearch>
               <WeekSearch
                 floatingLabelText="Week"
                 value={this.state.week}

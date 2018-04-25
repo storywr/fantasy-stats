@@ -27,14 +27,14 @@ export default function (state = initialState, action) {
 
 // Action creators
 
-export const fetchAdvanced = (week, position) => {
+export const fetchAdvanced = params => {
   return dispatch => {
     dispatch({ type: BEGIN })
     return fetch(
-      week === 'All Season' ?
-      `http://api.fantasy.nfl.com/v1/players/advanced?season=2017&count=24&format=json&position=${position}&sort=touches`
+      params.week === 'All Season' ?
+      `http://api.fantasy.nfl.com/v1/players/advanced?season=2017&count=24&format=json&position=${params.position}&sort=${params.sort}`
       :
-      `http://api.fantasy.nfl.com/v1/players/advanced?season=2017&count=24&format=json&position=${position}&week=${week}&sort=touches`
+      `http://api.fantasy.nfl.com/v1/players/advanced?season=2017&count=24&format=json&position=${params.position}&week=${params.week}&sort=${params.sort}`
     )
       .then(response => response.json())
       .then(advanced => dispatch({ type: ADVANCED, advanced }))

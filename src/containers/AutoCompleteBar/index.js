@@ -40,7 +40,7 @@ export class AutoCompleteBar extends Component {
           filter={AutoComplete.caseInsensitiveFilter}
           dataSource={this.props.players}
           floatingLabelText="Search Players"
-          maxSearchResults={5}
+          maxSearchResults={10}
           fullWidth={true}
           onNewRequest={this.searchPlayer}
           dataSourceConfig={dataSourceConfig}
