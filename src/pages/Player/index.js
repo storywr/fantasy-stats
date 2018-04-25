@@ -9,6 +9,10 @@ import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails }
 
 const Wrapper = styled.div`
   margin: 0 20%;
+
+  @media (max-width: 767px) {
+    margin: 0;
+  }
 `
 
 const MaterialCard = styled(Card)`
