@@ -21,10 +21,6 @@ import {
 
 import { fetchAdvanced, selectIsLoading, selectAdvanced } from '../../ducks/advanced'
 
-const Wrapper = styled.div`
-  margin-top: 24px;
-`
-
 const MaterialCard = styled(Card)`
   margin: 40px 0;
 `
@@ -96,7 +92,7 @@ export class Advanced extends Component {
     const { isLoading, advanced } = this.props
     console.log(advanced)
     return (
-      <Wrapper>
+      <div>
         {!isLoading &&
           <div>
             <SearchBoxes>
@@ -164,7 +160,7 @@ export class Advanced extends Component {
             </Table>
           </div>
         }
-      </Wrapper>
+      </div>
     )
   }
 }

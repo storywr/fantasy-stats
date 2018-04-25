@@ -10,6 +10,10 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `
 
+const NavigationButton = styled(RaisedButton)`
+  margin-bottom: 32px;
+`
+
 export default class DrawerUndockedExample extends React.Component {
 
   constructor(props) {
@@ -24,7 +28,7 @@ export default class DrawerUndockedExample extends React.Component {
   render() {
     return (
       <div>
-        <RaisedButton
+        <NavigationButton
           label="Navigation"
           onClick={this.handleToggle}
         />

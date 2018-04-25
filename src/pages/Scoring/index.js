@@ -21,10 +21,6 @@ import {
 
 import { fetchScoring, selectIsLoading, selectScoring } from '../../ducks/scoring'
 
-const Wrapper = styled.div`
-  margin-top: 24px;
-`
-
 const MaterialCard = styled(Card)`
   margin: 40px 0;
 `
@@ -84,7 +80,7 @@ export class Draft extends Component {
     const { isLoading, scoring } = this.props
 
     return (
-      <Wrapper>
+      <div>
         {!isLoading &&
           <div>
             <SearchBoxes>
@@ -131,7 +127,7 @@ export class Draft extends Component {
             </Table>
           </div>
         }
-      </Wrapper>
+      </div>
     )
   }
 }
