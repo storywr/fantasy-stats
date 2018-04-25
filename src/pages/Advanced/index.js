@@ -19,7 +19,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
-import { fetchScoring, selectIsLoading, selectScoring } from '../../ducks/scoring'
+import { fetchAdvanced, selectIsLoading, selectAdvanced } from '../../ducks/advanced'
 
 const Wrapper = styled.div`
   margin-top: 24px;
@@ -42,9 +42,9 @@ const SearchBoxes = styled.div`
   display: flex;
 `
 
-export class Draft extends Component {
+export class Advanced extends Component {
   componentDidMount() {
-    this.props.fetchScoring(this.state.week, this.state.position)
+    this.props.fetchAdvanced(this.state.week, this.state.position)
   }
 
   state = {
@@ -56,14 +56,14 @@ export class Draft extends Component {
     this.setState({
       position: value
     })
-    this.props.fetchScoring(this.state.week, value)
+    this.props.fetchAdvanced(this.state.week, value)
   }
 
   handleWeekChange = (ev, idx, value) => {
     this.setState({
       week: value
     })
-    this.props.fetchScoring(value, this.state.position)
+    this.props.fetchAdvanced(value, this.state.position)
   }
 
   weekBuilder = () => {
@@ -76,13 +76,13 @@ export class Draft extends Component {
   }
 
   handleSelectPlayer = (idx) => {
-    const player = this.props.scoring[this.state.position][idx]
+    const player = this.props.advanced[this.state.position][idx]
     this.props.history.push(`/players/${player.id}`)
   }
 
   render() {
-    const { isLoading, scoring } = this.props
-
+    const { isLoading, advanced } = this.props
+    console.log(advanced)
     return (
       <Wrapper>
         {!isLoading &&
@@ -110,21 +110,29 @@ export class Draft extends Component {
             <Table onRowSelection={this.handleSelectPlayer}>
               <TableHeader>
                 <TableRow>
-                  <TableHeaderColumn>Rank</TableHeaderColumn>
                   <TableHeaderColumn>Name</TableHeaderColumn>
                   <TableHeaderColumn>Team</TableHeaderColumn>
-                  <TableHeaderColumn>Points</TableHeaderColumn>
-                  <TableHeaderColumn>Stat Line</TableHeaderColumn>
+                  <TableHeaderColumn>Carries</TableHeaderColumn>
+                  <TableHeaderColumn>Touches</TableHeaderColumn>
+                  <TableHeaderColumn>Receptions</TableHeaderColumn>
+                  <TableHeaderColumn>Targets</TableHeaderColumn>
+                  <TableHeaderColumn>Reception %</TableHeaderColumn>
+                  <TableHeaderColumn>RZone Targets</TableHeaderColumn>
+                  <TableHeaderColumn>RZone Touches</TableHeaderColumn>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {scoring[this.state.position].map(player => (
+                {advanced[this.state.position].map(player => (
                   <TableRow>
-                    <TableRowColumn>{player.rank}</TableRowColumn>
                     <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
                     <TableRowColumn>{player.teamAbbr}</TableRowColumn>
-                    <TableRowColumn>{player.pts}</TableRowColumn>
-                    <TableRowColumn>{player.statsLine}</TableRowColumn>
+                    <TableRowColumn>{player.stats.Carries}</TableRowColumn>
+                    <TableRowColumn>{player.stats.Touches}</TableRowColumn>
+                    <TableRowColumn>{player.stats.Receptions}</TableRowColumn>
+                    <TableRowColumn>{player.stats.Targets}</TableRowColumn>
+                    <TableRowColumn>{player.stats.ReceptionPercentage}</TableRowColumn>
+                    <TableRowColumn>{player.stats.RedzoneTargets}</TableRowColumn>
+                    <TableRowColumn>{player.stats.RedzoneTouches}</TableRowColumn>
                   </TableRow>
                 ))}
               </TableBody>
@@ -138,9 +146,9 @@ export class Draft extends Component {
 
 const mapStateToProps = state => ({
   isLoading: selectIsLoading(state),
-  scoring: selectScoring(state)
+  advanced: selectAdvanced(state)
 })
 
-const Connected = connect(mapStateToProps, { fetchScoring })(Draft)
+const Connected = connect(mapStateToProps, { fetchAdvanced })(Advanced)
 
 export default withRouter(Connected)

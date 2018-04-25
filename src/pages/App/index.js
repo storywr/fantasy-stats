@@ -8,12 +8,13 @@ import history from '../../utils//history'
 import AutoCompleteBar from '../../containers/AutoCompleteBar'
 import MaterialDrawer from '../../containers/MaterialDrawer'
 
+import Advanced from '../Advanced'
 import Draft from '../Draft'
 import Player from '../Player'
 import Scoring from '../Scoring'
 
 const Wrapper = styled.div`
-  padding: 0 10%;
+  padding: 0 5%;
 `
 
 export const App = () => (
@@ -24,6 +25,7 @@ export const App = () => (
         <MaterialDrawer />
         <Switch>
           <Route path='/players/:playerId' component={Player} />
+          <Route path='/advanced' component={Advanced} />
           <Route path='/draft' component={Draft} />
           <Route path='/scoring' component={Scoring} />
         </Switch>
