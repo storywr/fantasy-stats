@@ -46,4 +46,6 @@ export const fetchAdvanced = params => {
 
 export const selectAdvanced = state => state.advanced.advanced
 
+export const selectPosition = (state, position) => selectAdvanced(state)[position]
+
 export const selectIsLoading = state => state.advanced.isLoading

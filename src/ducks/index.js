@@ -6,6 +6,7 @@ import news from './news'
 import playerDetails from './playerDetails'
 import players from './players'
 import scoring from './scoring'
+import stats from './stats'
 
 export default combineReducers({
   advanced,
@@ -13,5 +14,6 @@ export default combineReducers({
   news,
   playerDetails,
   players,
-  scoring
+  scoring,
+  stats
 })

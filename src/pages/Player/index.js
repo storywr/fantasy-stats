@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
+import { fetchStats, selectPlayerStats } from '../../ducks/stats'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
 
 const Wrapper = styled.div`
@@ -21,6 +22,7 @@ const Text = styled(CardText)`
 
 export class Player extends Component {
   componentDidMount() {
+    this.props.fetchStats()
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
   }
 
@@ -31,8 +33,8 @@ export class Player extends Component {
   }
 
   render() {
-    const { isLoading, notes, playerDetails } = this.props
-
+    const { isLoading, notes, playerDetails, playerStats } = this.props
+    
     return (
       <Wrapper>
         {!isLoading &&
@@ -55,9 +57,10 @@ export class Player extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, props) => ({
   isLoading: selectIsLoading(state),
   notes: selectNotes(state),
+  playerStats: selectPlayerStats(state, props.match.params.playerId),
   playerDetails: selectPlayerDetails(state)
 })
-export default connect(mapStateToProps, { fetchPlayerDetails })(Player)
+export default connect(mapStateToProps, { fetchPlayerDetails, fetchStats })(Player)
