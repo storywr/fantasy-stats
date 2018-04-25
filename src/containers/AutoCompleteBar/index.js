@@ -4,7 +4,7 @@ import styled from 'styled-components'
 
 import { Link, Route, Switch, withRouter } from 'react-router-dom'
 
-import Player from '../Player'
+import Player from '../../pages/Player'
 
 import AutoComplete from 'material-ui/AutoComplete'
 

@@ -5,12 +5,13 @@ import styled from 'styled-components'
 
 import history from '../../utils//history'
 
-import AutoCompleteBar from '../AutoCompleteBar'
+import AutoCompleteBar from '../../containers/AutoCompleteBar'
+import MaterialDrawer from '../../containers/MaterialDrawer'
 
 import Player from '../Player'
 
 const Wrapper = styled.div`
-  padding: 0.5rem 4rem;
+  padding: 0 15%;
 `
 
 export const App = () => (
@@ -18,6 +19,7 @@ export const App = () => (
     <MuiThemeProvider>
       <Wrapper>
         <AutoCompleteBar />
+        <MaterialDrawer />
         <Switch>
           <Route path='/players/:playerId' component={Player} />
         </Switch>

@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `
 
 const MaterialCard = styled(Card)`
-  margin: 40px;
+  margin: 40px 0;
 `
 
 export class Player extends Component {
@@ -36,7 +36,7 @@ export class Player extends Component {
               <MaterialCard>
                 <CardHeader
                   title={playerDetails.name}
-                  subtitle={playerDetails.teamAbbr}
+                  subtitle={playerDetails.position}
                   avatar={playerDetails.videos[0].mediumPhotoUrl}  
                 />
                 <CardTitle title={note.body} subtitle={note.headline} />
