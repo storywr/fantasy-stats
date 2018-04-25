@@ -15,6 +15,10 @@ const MaterialCard = styled(Card)`
   margin: 40px 0;
 `
 
+const Text = styled(CardText)`
+  line-height: 200%;
+`
+
 export class Player extends Component {
   componentDidMount() {
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
@@ -41,7 +45,7 @@ export class Player extends Component {
                   avatar={playerDetails.videos[0].mediumPhotoUrl}  
                 />
                 <CardTitle title={note.body} subtitle={note.headline} />
-                <CardText>{note.analysis}</CardText>
+                <Text>{note.analysis}</Text>
               </MaterialCard>
             ))}
           </div>

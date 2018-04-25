@@ -10,6 +10,7 @@ import MaterialDrawer from '../../containers/MaterialDrawer'
 
 import Advanced from '../Advanced'
 import Draft from '../Draft'
+import News from '../News'
 import Player from '../Player'
 import Scoring from '../Scoring'
 
@@ -28,6 +29,7 @@ export const App = () => (
           <Route path='/advanced' component={Advanced} />
           <Route path='/draft' component={Draft} />
           <Route path='/scoring' component={Scoring} />
+          <Route component={News} />
         </Switch>
       </Wrapper>
     </MuiThemeProvider>
