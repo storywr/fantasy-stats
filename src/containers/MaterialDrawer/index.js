@@ -2,6 +2,13 @@ import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
+import styled from 'styled-components'
+
+import { Link } from 'react-router-dom'
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`
 
 export default class DrawerUndockedExample extends React.Component {
 
@@ -27,10 +34,10 @@ export default class DrawerUndockedExample extends React.Component {
           open={this.state.open}
           onRequestChange={(open) => this.setState({open})}
         >
-          <MenuItem onClick={this.handleClose}>Player News</MenuItem>
-          <MenuItem onClick={this.handleClose}>Single Player Stats</MenuItem>
-          <MenuItem onClick={this.handleClose}>Scoring Leaders</MenuItem>
-          <MenuItem onClick={this.handleClose}>Draft</MenuItem>
+          <StyledLink to='/test'><MenuItem onClick={this.handleClose}>Player News</MenuItem></StyledLink>
+          <StyledLink to='/test'><MenuItem onClick={this.handleClose}>Player Stats</MenuItem></StyledLink>
+          <StyledLink to='/test'><MenuItem onClick={this.handleClose}>Scoring Leaders</MenuItem></StyledLink>
+          <StyledLink to='/test'><MenuItem onClick={this.handleClose}>Draft</MenuItem></StyledLink>
         </Drawer>
       </div>
     );
