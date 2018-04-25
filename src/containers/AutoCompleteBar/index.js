@@ -24,7 +24,6 @@ export class AutoCompleteBar extends Component {
   }
 
   searchPlayer = (player) => {
-    console.log(player)
     this.props.history.push(`/players/${player.id}`)
   }
 

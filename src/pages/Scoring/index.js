@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import { withRouter } from 'react-router-dom'
+
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
@@ -73,9 +75,14 @@ export class Draft extends Component {
     return weeks
   }
 
+  handleSelectPlayer = (idx) => {
+    const player = this.props.scoring[this.state.position][idx]
+    this.props.history.push(`/players/${player.id}`)
+  }
+
   render() {
     const { isLoading, scoring } = this.props
-    console.log(this.weekBuilder())
+
     return (
       <Wrapper>
         {!isLoading &&
@@ -100,11 +107,12 @@ export class Draft extends Component {
                 {this.weekBuilder()}
               </WeekSearch>
             </SearchBoxes>
-            <Table multiSelectable>
+            <Table onRowSelection={this.handleSelectPlayer}>
               <TableHeader>
                 <TableRow>
                   <TableHeaderColumn>Rank</TableHeaderColumn>
                   <TableHeaderColumn>Name</TableHeaderColumn>
+                  <TableHeaderColumn>Team</TableHeaderColumn>
                   <TableHeaderColumn>Points</TableHeaderColumn>
                   <TableHeaderColumn>Stat Line</TableHeaderColumn>
                 </TableRow>
@@ -114,6 +122,7 @@ export class Draft extends Component {
                   <TableRow>
                     <TableRowColumn>{player.rank}</TableRowColumn>
                     <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
+                    <TableRowColumn>{player.teamAbbr}</TableRowColumn>
                     <TableRowColumn>{player.pts}</TableRowColumn>
                     <TableRowColumn>{player.statsLine}</TableRowColumn>
                   </TableRow>
@@ -131,4 +140,7 @@ const mapStateToProps = state => ({
   isLoading: selectIsLoading(state),
   scoring: selectScoring(state)
 })
-export default connect(mapStateToProps, { fetchScoring })(Draft)
+
+const Connected = connect(mapStateToProps, { fetchScoring })(Draft)
+
+export default withRouter(Connected)
