@@ -69,7 +69,7 @@ export class Draft extends Component {
     for (var index = 1; index < 17; index++) {
       weeks.push(<MenuItem value={`${index}`} primaryText={`${index}`} />)
     }
-    weeks.push(<MenuItem value='' primaryText='All Season' />)
+    weeks.push(<MenuItem value='All Season' primaryText='All Season' />)
     return weeks
   }
 
