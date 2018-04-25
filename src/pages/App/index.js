@@ -10,9 +10,10 @@ import MaterialDrawer from '../../containers/MaterialDrawer'
 
 import Draft from '../Draft'
 import Player from '../Player'
+import Scoring from '../Scoring'
 
 const Wrapper = styled.div`
-  padding: 0 15%;
+  padding: 0 10%;
 `
 
 export const App = () => (
@@ -24,6 +25,7 @@ export const App = () => (
         <Switch>
           <Route path='/players/:playerId' component={Player} />
           <Route path='/draft' component={Draft} />
+          <Route path='/scoring' component={Scoring} />
         </Switch>
       </Wrapper>
     </MuiThemeProvider>

@@ -8,6 +8,7 @@ import FlatButton from 'material-ui/FlatButton'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
 
 const Wrapper = styled.div`
+  margin: 5%;
 `
 
 const MaterialCard = styled(Card)`
