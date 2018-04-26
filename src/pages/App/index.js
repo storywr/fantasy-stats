@@ -7,6 +7,7 @@ import history from '../../utils//history'
 
 import AutoCompleteBar from '../../containers/AutoCompleteBar'
 import MaterialDrawer from '../../containers/MaterialDrawer'
+import NavigationBar from '../../components/NavigationBar'
 
 import Advanced from '../Advanced'
 import Draft from '../Draft'
@@ -21,8 +22,8 @@ const Wrapper = styled.div`
 export const App = () => (
   <Router history={history}>
     <MuiThemeProvider>
+      <NavigationBar />
       <Wrapper>
-        <MaterialDrawer />
         <AutoCompleteBar />
         <Switch>
           <Route path='/players/:playerId' component={Player} />
