@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import YouTube from 'react-youtube'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import Dialog from 'material-ui/Dialog';
+import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton'
 
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
@@ -27,7 +30,21 @@ const Text = styled(CardText)`
   line-height: 200%;
 `
 
+const HighlightsButton = styled.div`
+  margin-bottom: 32px;
+`
+
+const VideoPlayer = styled.iframe`
+  height: 50vh;
+  width: 50vw;
+  margin: 1%;
+`
+
 export class Player extends Component {
+  state = {
+    open: false
+  }
+
   componentDidMount() {
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
   }
@@ -38,13 +55,43 @@ export class Player extends Component {
     }
   }
 
+  handleOpen = () => {
+    this.setState({open: true});
+  }
+
+  handleClose = () => {
+    this.setState({open: false});
+  }
+
   render() {
     const { isLoading, notes, playerDetails } = this.props
+    const actions = [
+      <FlatButton
+        label="Close"
+        primary={true}
+        onClick={this.handleClose}
+      />
+    ]
 
     return (
       <Wrapper>
         {!isLoading &&
           <div>
+            <HighlightsButton>
+              <RaisedButton label="Watch Highlights" onClick={this.handleOpen} />
+              <Dialog
+                title="Watch Highlights"
+                actions={actions}
+                modal={false}
+                open={this.state.open}
+                onRequestClose={this.handleClose}
+              >
+                <VideoPlayer id="player" type="text/html"
+                  src={`https://www.youtube.com/embed?listType=search&list=${playerDetails.name}+highlights`}
+                  frameborder="0">
+                </VideoPlayer>
+              </Dialog>
+            </HighlightsButton>
             {notes.map(note => (
               <MaterialCard>
                 <CardHeader

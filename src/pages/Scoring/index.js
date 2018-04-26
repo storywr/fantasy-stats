@@ -38,6 +38,18 @@ const SearchBoxes = styled.div`
   display: flex;
 `
 
+const MobileHeaderCol = styled(TableHeaderColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
+const MobileTableCol = styled(TableRowColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
 export class Draft extends Component {
   componentDidMount() {
     this.props.fetchScoring(this.state.week, this.state.position)
@@ -106,9 +118,9 @@ export class Draft extends Component {
             <Table onRowSelection={this.handleSelectPlayer}>
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
-                  <TableHeaderColumn>Rank</TableHeaderColumn>
+                  <MobileHeaderCol>Rank</MobileHeaderCol>
                   <TableHeaderColumn>Name</TableHeaderColumn>
-                  <TableHeaderColumn>Team</TableHeaderColumn>
+                  <MobileHeaderCol>Team</MobileHeaderCol>
                   <TableHeaderColumn>Points</TableHeaderColumn>
                   <TableHeaderColumn>Stat Line</TableHeaderColumn>
                 </TableRow>
@@ -116,9 +128,9 @@ export class Draft extends Component {
               <TableBody displayRowCheckbox={false}>
                 {scoring[this.state.position].map(player => (
                   <TableRow>
-                    <TableRowColumn>{player.rank}</TableRowColumn>
+                    <MobileTableCol>{player.rank}</MobileTableCol>
                     <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
-                    <TableRowColumn>{player.teamAbbr}</TableRowColumn>
+                    <MobileTableCol>{player.teamAbbr}</MobileTableCol>
                     <TableRowColumn>{player.pts}</TableRowColumn>
                     <TableRowColumn>{player.statsLine}</TableRowColumn>
                   </TableRow>
