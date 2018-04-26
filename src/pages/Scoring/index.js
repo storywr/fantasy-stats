@@ -60,13 +60,17 @@ const StatCol = styled(TableHeaderColumn)`
   }
 `
 
-const MobileTableCol = styled(TableRowColumn)`
+const TableCol = styled(TableRowColumn)`
+  cursor: pointer;
+`
+
+const MobileTableCol = styled(TableCol)`
   @media (max-width: 767px) {
     display: none;
   }
 `
 
-const RankTableCol = styled(TableRowColumn)`
+const RankTableCol = styled(TableCol)`
   width: 10%;
 
   @media (max-width: 767px) {
@@ -157,23 +161,23 @@ export class Draft extends Component {
                   {this.state.week !== 'All Season' && <StatCol>Stat Line</StatCol>}
                 </TableRow>
               </TableHeader>
-              <TableBody displayRowCheckbox={false}>
+              <TableBody displayRowCheckbox={false} showRowHover>
                 {this.state.week === 'All Season' ?
                   scoring[this.state.position].map(player => (
                     <TableRow>
                       <RankTableCol>{player.rank}</RankTableCol>
-                      <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
+                      <TableCol>{player.firstName} {player.lastName}</TableCol>
                       <MobileTableCol>{player.teamAbbr}</MobileTableCol>
-                      <TableRowColumn>{player.pts}</TableRowColumn>
+                      <TableCol>{player.pts}</TableCol>
                     </TableRow>
                   ))
                 :
                   scoring[this.state.position].map(player => (
                     <TableRow>
                       <RankTableCol>{player.rank}</RankTableCol>
-                      <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
+                      <TableCol>{player.firstName} {player.lastName}</TableCol>
                       <MobileTableCol>{player.teamAbbr}</MobileTableCol>
-                      <TableRowColumn>{player.pts}</TableRowColumn>
+                      <TableCol>{player.pts}</TableCol>
                       <StatTableCol>{player.statsLine}</StatTableCol>
                     </TableRow>
                   ))

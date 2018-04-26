@@ -57,7 +57,11 @@ const MobileHeaderCol = styled(TableHeaderColumn)`
   }
 `
 
-const MobileTableCol = styled(TableRowColumn)`
+const TableCol = styled(TableRowColumn)`
+  cursor: pointer;
+`
+
+const MobileTableCol = styled(TableCol)`
   @media (max-width: 767px) {
     display: none;
   }
@@ -167,14 +171,14 @@ export class Advanced extends Component {
                   <MobileHeaderCol>RZ Touches</MobileHeaderCol>
                 </TableRow>
               </TableHeader>
-              <TableBody displayRowCheckbox={false}>
+              <TableBody displayRowCheckbox={false} showRowHover>
                 {advanced[this.state.position].map(player => (
                   <TableRow>
-                    <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
+                    <TableCol>{player.firstName} {player.lastName}</TableCol>
                     <MobileTableCol>{player.teamAbbr}</MobileTableCol>
-                    <TableRowColumn>{player.stats.Carries}</TableRowColumn>
+                    <TableCol>{player.stats.Carries}</TableCol>
                     <MobileTableCol>{player.stats.Touches}</MobileTableCol>
-                    <TableRowColumn>{player.stats.Receptions}</TableRowColumn>
+                    <TableCol>{player.stats.Receptions}</TableCol>
                     <MobileTableCol>{player.stats.Targets}</MobileTableCol>
                     <MobileTableCol>{player.stats.ReceptionPercentage}</MobileTableCol>
                     <MobileTableCol>{player.stats.RedzoneTargets}</MobileTableCol>
