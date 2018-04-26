@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 `
 
 const MaterialCard = styled(Card)`
-  margin-bottom: 80px;
+  margin-bottom: 50px;
 `
 
 const Text = styled(CardText)`
