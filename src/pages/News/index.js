@@ -29,6 +29,12 @@ export class News extends Component {
     this.props.fetchNews()
   }
 
+  getTitle = (story) => (
+    story.teamAbbr
+    ? `${story.firstName} ${story.lastName}, ${story.teamAbbr}`
+    : `${story.firstName} ${story.lastName}, FA`
+  )
+
   render() {
     const { isLoading, news } = this.props
 
@@ -39,7 +45,7 @@ export class News extends Component {
             {news.map(story => (
               <MaterialCard>
                 <CardHeader
-                  title={`${story.firstName} ${story.lastName}`}
+                  title={this.getTitle(story)}
                   subtitle={story.position}
                 />
                 <CardTitle title={story.headline} />

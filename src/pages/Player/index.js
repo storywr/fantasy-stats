@@ -64,6 +64,12 @@ export class Player extends Component {
     this.setState({open: false});
   }
 
+  getTitle = (playerDetails) => (
+    playerDetails.teamAbbr
+    ? `${playerDetails.name}, ${playerDetails.teamAbbr}`
+    : `${playerDetails.name}, FA`
+  )
+
   render() {
     const { isLoading, notes, playerDetails } = this.props
     const actions = [
@@ -96,8 +102,8 @@ export class Player extends Component {
             {notes.map(note => (
               <MaterialCard>
                 <CardHeader
-                  title={playerDetails.name}
-                  subtitle={playerDetails.position}
+                  title={this.getTitle(playerDetails)}
+                  subtitle={`${playerDetails.position}, #${playerDetails.jerseyNumber}`}
                   avatar={playerDetails.videos[0].mediumPhotoUrl}  
                 />
                 <CardTitle title={note.headline} />
