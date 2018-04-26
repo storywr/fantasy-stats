@@ -24,6 +24,18 @@ const MaterialCard = styled(Card)`
   margin: 40px 0;
 `
 
+const MobileHeaderCol = styled(TableHeaderColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
+const MobileTableCol = styled(TableRowColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
 export class Draft extends Component {
   componentDidMount() {
     this.props.fetchDraft()
@@ -40,20 +52,20 @@ export class Draft extends Component {
             <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>Rank</TableHeaderColumn>
-                <TableHeaderColumn>Auction</TableHeaderColumn>
+                <MobileHeaderCol>Auction</MobileHeaderCol>
                 <TableHeaderColumn>Name</TableHeaderColumn>
-                <TableHeaderColumn>Postion</TableHeaderColumn>
-                <TableHeaderColumn>Team</TableHeaderColumn>
+                <MobileHeaderCol>Postion</MobileHeaderCol>
+                <MobileHeaderCol>Team</MobileHeaderCol>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false}>
               {players.map(player => (
                 <TableRow>
                   <TableRowColumn>{player.rank}</TableRowColumn>
-                  <TableRowColumn>{player.auction}</TableRowColumn>
+                  <MobileTableCol>{player.auction}</MobileTableCol>
                   <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
-                  <TableRowColumn>{player.position}</TableRowColumn>
-                  <TableRowColumn>{player.teamAbbr}</TableRowColumn>
+                  <MobileTableCol>{player.position}</MobileTableCol>
+                  <MobileTableCol>{player.teamAbbr}</MobileTableCol>
                 </TableRow>
               ))}
             </TableBody>
