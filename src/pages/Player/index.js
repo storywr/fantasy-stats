@@ -107,7 +107,7 @@ export class Player extends Component {
                   avatar={playerDetails.videos[0].mediumPhotoUrl}  
                 />
                 <CardTitle title={note.headline} />
-                <Text>{note.body}</Text>
+                <Text><strong>{note.body}</strong></Text>
                 <Text>{note.analysis}</Text>
               </MaterialCard>
             ))}
