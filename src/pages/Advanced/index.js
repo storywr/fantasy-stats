@@ -39,7 +39,7 @@ const WeekSearch = styled(SelectField)`
   @media (max-width: 767px) {
     margin-left: 8px;
   }
-  
+
   margin-bottom: 24px;
 `
 
@@ -159,7 +159,7 @@ export class Advanced extends Component {
                   <TableHeaderColumn>Name</TableHeaderColumn>
                   <MobileHeaderCol>Team</MobileHeaderCol>
                   <TableHeaderColumn>Carries</TableHeaderColumn>
-                  <TableHeaderColumn>Touches</TableHeaderColumn>
+                  <MobileHeaderCol>Touches</MobileHeaderCol>
                   <TableHeaderColumn>Rec</TableHeaderColumn>
                   <MobileHeaderCol>Targets</MobileHeaderCol>
                   <MobileHeaderCol>Rec %</MobileHeaderCol>
@@ -173,7 +173,7 @@ export class Advanced extends Component {
                     <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
                     <MobileTableCol>{player.teamAbbr}</MobileTableCol>
                     <TableRowColumn>{player.stats.Carries}</TableRowColumn>
-                    <TableRowColumn>{player.stats.Touches}</TableRowColumn>
+                    <MobileTableCol>{player.stats.Touches}</MobileTableCol>
                     <TableRowColumn>{player.stats.Receptions}</TableRowColumn>
                     <MobileTableCol>{player.stats.Targets}</MobileTableCol>
                     <MobileTableCol>{player.stats.ReceptionPercentage}</MobileTableCol>
