@@ -41,7 +41,8 @@ export class News extends Component {
                   title={`${story.firstName} ${story.lastName}`}
                   subtitle={story.position}
                 />
-                <CardTitle title={story.body} subtitle={story.headline} />
+                <CardTitle title={story.headline} />
+                <Text>{story.body}</Text>
                 <Text>{story.analysis}</Text>
               </MaterialCard>
             ))}
