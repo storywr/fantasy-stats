@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 
 const MaterialCard = styled(Card)`
   margin-bottom: 80px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
 `
 
 const TableWrapper = styled.div`
