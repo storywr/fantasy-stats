@@ -22,8 +22,8 @@ export const App = () => (
   <Router history={history}>
     <MuiThemeProvider>
       <Wrapper>
-        <AutoCompleteBar />
         <MaterialDrawer />
+        <AutoCompleteBar />
         <Switch>
           <Route path='/players/:playerId' component={Player} />
           <Route path='/advanced' component={Advanced} />
