@@ -44,7 +44,39 @@ const MobileHeaderCol = styled(TableHeaderColumn)`
   }
 `
 
+const RankCol = styled(TableHeaderColumn)`
+  width: 10%;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
+const StatCol = styled(TableHeaderColumn)`
+  width: 35%;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
 const MobileTableCol = styled(TableRowColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
+const RankTableCol = styled(TableRowColumn)`
+  width: 10%;
+
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
+const StatTableCol = styled(TableRowColumn)`
+  width: 35%;
+
   @media (max-width: 767px) {
     display: none;
   }
@@ -118,23 +150,34 @@ export class Draft extends Component {
             <Table onRowSelection={this.handleSelectPlayer}>
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
-                  <MobileHeaderCol>Rank</MobileHeaderCol>
+                  <RankCol>Rank</RankCol>
                   <TableHeaderColumn>Name</TableHeaderColumn>
                   <MobileHeaderCol>Team</MobileHeaderCol>
                   <TableHeaderColumn>Points</TableHeaderColumn>
-                  <TableHeaderColumn>Stat Line</TableHeaderColumn>
+                  {this.state.week !== 'All Season' && <StatCol>Stat Line</StatCol>}
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false}>
-                {scoring[this.state.position].map(player => (
-                  <TableRow>
-                    <MobileTableCol>{player.rank}</MobileTableCol>
-                    <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
-                    <MobileTableCol>{player.teamAbbr}</MobileTableCol>
-                    <TableRowColumn>{player.pts}</TableRowColumn>
-                    <TableRowColumn>{player.statsLine}</TableRowColumn>
-                  </TableRow>
-                ))}
+                {this.state.week === 'All Season' ?
+                  scoring[this.state.position].map(player => (
+                    <TableRow>
+                      <RankTableCol>{player.rank}</RankTableCol>
+                      <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
+                      <MobileTableCol>{player.teamAbbr}</MobileTableCol>
+                      <TableRowColumn>{player.pts}</TableRowColumn>
+                    </TableRow>
+                  ))
+                :
+                  scoring[this.state.position].map(player => (
+                    <TableRow>
+                      <RankTableCol>{player.rank}</RankTableCol>
+                      <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
+                      <MobileTableCol>{player.teamAbbr}</MobileTableCol>
+                      <TableRowColumn>{player.pts}</TableRowColumn>
+                      <StatTableCol>{player.statsLine}</StatTableCol>
+                    </TableRow>
+                  ))
+                }
               </TableBody>
             </Table>
           </div>
