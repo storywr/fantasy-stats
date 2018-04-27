@@ -30,7 +30,11 @@ const MobileHeaderCol = styled(TableHeaderColumn)`
   }
 `
 
-const MobileTableCol = styled(TableRowColumn)`
+const TableCol = styled(TableRowColumn)`
+  cursor: pointer;
+`
+
+const MobileTableCol = styled(TableCol)`
   @media (max-width: 767px) {
     display: none;
   }
@@ -41,6 +45,11 @@ export class Draft extends Component {
     this.props.fetchDraft()
   }
 
+  handleSelectPlayer = (idx) => {
+    const player = this.props.players[idx]
+    this.props.history.push(`/players/${player.id}`)
+  }
+
   render() {
     const { isLoading, players } = this.props
     console.log(isLoading)
@@ -48,7 +57,7 @@ export class Draft extends Component {
     return (
       <Wrapper>
         {!isLoading &&
-          <Table multiSelectable>
+          <Table onRowSelection={this.handleSelectPlayer}>
             <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
                 <TableHeaderColumn>Rank</TableHeaderColumn>
@@ -58,12 +67,12 @@ export class Draft extends Component {
                 <MobileHeaderCol>Team</MobileHeaderCol>
               </TableRow>
             </TableHeader>
-            <TableBody displayRowCheckbox={false}>
+            <TableBody displayRowCheckbox={false} showRowHover>
               {players.map(player => (
                 <TableRow>
-                  <TableRowColumn>{player.rank}</TableRowColumn>
+                  <TableCol>{player.rank}</TableCol>
                   <MobileTableCol>{player.auction}</MobileTableCol>
-                  <TableRowColumn>{player.firstName} {player.lastName}</TableRowColumn>
+                  <TableCol>{player.firstName} {player.lastName}</TableCol>
                   <MobileTableCol>{player.position}</MobileTableCol>
                   <MobileTableCol>{player.teamAbbr}</MobileTableCol>
                 </TableRow>

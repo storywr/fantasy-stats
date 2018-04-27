@@ -11,6 +11,9 @@ import AutoComplete from 'material-ui/AutoComplete'
 import { fetchPlayers, selectPlayerNames } from '../../ducks/players'
 
 const Wrapper = styled.div`
+  body {
+    margin: 0px;
+  }
   margin-bottom: 42px;
 `
 
