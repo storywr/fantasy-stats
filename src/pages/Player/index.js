@@ -56,7 +56,6 @@ export class Player extends Component {
   componentDidMount() {
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
       .then((response) => {
-        console.log(response)
         this.props.fetchRedditPlayer(response.playerDetails.players[0].name)
       })
   }
@@ -64,6 +63,9 @@ export class Player extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.playerId !== this.props.match.params.playerId) {
       this.props.fetchPlayerDetails(nextProps.match.params.playerId)
+        .then((response) => {
+          this.props.fetchRedditPlayer(response.playerDetails.players[0].name)
+        })
     }
   }
 
