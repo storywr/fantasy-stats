@@ -20,9 +20,17 @@ const Wrapper = styled.div`
   }
 `
 
-const MaterialCard = styled(Card)`
+const RotoWireCard = styled(Card)`
   margin-bottom: 80px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
+`
+
+const RedditCard = styled(Card)`
+  margin-bottom: 50px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
+  &:hover{ 
+    background-color: rgba(0, 0, 0, 0.08) !important;
+  }
 `
 
 const TableWrapper = styled.div`
@@ -49,6 +57,7 @@ const Section = styled.div`
 
 export class Player extends Component {
   state = {
+    backgroundColor: 'transparent',
     open: false,
     value: 'a'
   }
@@ -125,7 +134,7 @@ export class Player extends Component {
               <Tab label="RotoWire" value="a">
                 <Section>
                   {notes.map(note => (
-                    <MaterialCard>
+                    <RotoWireCard>
                       <CardHeader
                         title={this.getTitle(playerDetails)}
                         subtitle={`${playerDetails.position}, #${playerDetails.jerseyNumber}`}
@@ -134,19 +143,19 @@ export class Player extends Component {
                       <CardTitle title={note.headline} />
                       <Text><strong>{note.body}</strong></Text>
                       <Text>{note.analysis}</Text>
-                    </MaterialCard>
+                    </RotoWireCard>
                   ))}
                 </Section>
               </Tab>
               <Tab label="Reddit" value="b">
                 <Section>
-                  {redditPlayer.map(post => (
-                    <MaterialCard>
+                  {redditPlayer.map((post, idx) => (
+                    <RedditCard>
                       <a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">
                         <CardTitle title={post.data.title} />
                       </a>
                       <Text>{post.data.selftext}</Text>
-                    </MaterialCard>
+                    </RedditCard>
                   ))}
                 </Section>
               </Tab>
