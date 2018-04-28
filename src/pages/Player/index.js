@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Tabs, Tab} from 'material-ui/Tabs'
 import YouTube from 'react-youtube'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
@@ -8,6 +9,7 @@ import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton'
 
+import { fetchRedditPlayer, selectRedditPlayer } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
 
 const Wrapper = styled.div`
@@ -41,13 +43,22 @@ const VideoPlayer = styled.iframe`
   margin: 1%;
 `
 
+const Section = styled.div`
+  margin-top: 24px;
+`
+
 export class Player extends Component {
   state = {
-    open: false
+    open: false,
+    value: 'a'
   }
 
   componentDidMount() {
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
+      .then((response) => {
+        console.log(response)
+        this.props.fetchRedditPlayer(response.playerDetails.players[0].name)
+      })
   }
 
   componentWillReceiveProps(nextProps) {
@@ -70,8 +81,14 @@ export class Player extends Component {
     : `${playerDetails.name}, FA`
   )
 
+  handleChange = (value) => {
+    this.setState({
+      value: value,
+    })
+  }
+
   render() {
-    const { isLoading, notes, playerDetails } = this.props
+    const { isLoading, notes, playerDetails, redditPlayer } = this.props
     const actions = [
       <FlatButton
         label="Close"
@@ -99,18 +116,39 @@ export class Player extends Component {
                 </VideoPlayer>
               </Dialog>
             </HighlightsButton>
-            {notes.map(note => (
-              <MaterialCard>
-                <CardHeader
-                  title={this.getTitle(playerDetails)}
-                  subtitle={`${playerDetails.position}, #${playerDetails.jerseyNumber}`}
-                  avatar={playerDetails.videos[0].mediumPhotoUrl}  
-                />
-                <CardTitle title={note.headline} />
-                <Text><strong>{note.body}</strong></Text>
-                <Text>{note.analysis}</Text>
-              </MaterialCard>
-            ))}
+            <Tabs
+              value={this.state.value}
+              onChange={this.handleChange}
+            >
+              <Tab label="RotoWire" value="a">
+                <Section>
+                  {notes.map(note => (
+                    <MaterialCard>
+                      <CardHeader
+                        title={this.getTitle(playerDetails)}
+                        subtitle={`${playerDetails.position}, #${playerDetails.jerseyNumber}`}
+                        avatar={playerDetails.videos[0].mediumPhotoUrl}  
+                      />
+                      <CardTitle title={note.headline} />
+                      <Text><strong>{note.body}</strong></Text>
+                      <Text>{note.analysis}</Text>
+                    </MaterialCard>
+                  ))}
+                </Section>
+              </Tab>
+              <Tab label="Reddit" value="b">
+                <Section>
+                  {redditPlayer.map(post => (
+                    <MaterialCard>
+                      <a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">
+                        <CardTitle title={post.data.title} />
+                      </a>
+                      <Text>{post.data.selftext}</Text>
+                    </MaterialCard>
+                  ))}
+                </Section>
+              </Tab>
+            </Tabs>
           </div>
         }
       </Wrapper>
@@ -121,6 +159,7 @@ export class Player extends Component {
 const mapStateToProps = (state, props) => ({
   isLoading: selectIsLoading(state),
   notes: selectNotes(state),
-  playerDetails: selectPlayerDetails(state)
+  playerDetails: selectPlayerDetails(state),
+  redditPlayer: selectRedditPlayer(state)
 })
-export default connect(mapStateToProps, { fetchPlayerDetails })(Player)
+export default connect(mapStateToProps, { fetchPlayerDetails, fetchRedditPlayer })(Player)
