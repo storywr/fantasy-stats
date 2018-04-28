@@ -28,9 +28,6 @@ const RotoWireCard = styled(Card)`
 const RedditCard = styled(Card)`
   margin-bottom: 50px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
-  &:hover{ 
-    background-color: rgba(0, 0, 0, 0.08) !important;
-  }
 `
 
 const TableWrapper = styled.div`
@@ -39,6 +36,17 @@ const TableWrapper = styled.div`
 
 const Text = styled(CardText)`
   line-height: 200%;
+`
+
+const TextLink = styled.a`
+  padding: 16px;
+  font-size: 14px;
+  line-height: 200%;
+  display: block;
+
+  &:hover{ 
+    background-color: rgba(0, 0, 0, 0.08) !important;
+  }
 `
 
 const HighlightsButton = styled.div`
@@ -156,9 +164,9 @@ export class Player extends Component {
                   {nfl.map(post => (
                     <RedditCard>
                       <CardTitle title={post.data.title} />
-                      <Text><a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">News Link</a></Text>
-                      <Text><a href={post.data.permalink} style={{ textDecoration: 'none' }} target="_blank">Reddit Link</a></Text>
-                      <Text>{post.data.selftext}</Text>
+                      <TextLink href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">News Story Link</TextLink>
+                      <TextLink href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">Reddit Post Link</TextLink>
+                      {post.data.selfText && <Text>{post.data.selftext}</Text>}
                     </RedditCard>
                   ))}
                 </Section>
@@ -168,9 +176,9 @@ export class Player extends Component {
                   {ff.map(post => (
                     <RedditCard>
                       <CardTitle title={post.data.title} />
-                      <Text><a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">News Link</a></Text>
-                      <Text><a href={post.data.permalink} style={{ textDecoration: 'none' }} target="_blank">Reddit Link</a></Text>
-                      <Text>{post.data.selftext}</Text>
+                      <TextLink href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">News Story Link</TextLink>
+                      <TextLink href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">Reddit Post Link</TextLink>
+                      {post.data.selfText && <Text>{post.data.selftext}</Text>}
                     </RedditCard>
                   ))}
                 </Section>
@@ -180,9 +188,9 @@ export class Player extends Component {
                   {dynasty.map(post => (
                     <RedditCard>
                       <CardTitle title={post.data.title} />
-                      <Text><a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">News Link</a></Text>
-                      <Text><a href={post.data.permalink} style={{ textDecoration: 'none' }} target="_blank">Reddit Link</a></Text>
-                      <Text>{post.data.selftext}</Text>
+                      <TextLink href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">News Story Link</TextLink>
+                      <TextLink href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">Reddit Post Link</TextLink>
+                      {post.data.selfText && <Text>{post.data.selftext}</Text>}
                     </RedditCard>
                   ))}
                 </Section>
