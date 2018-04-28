@@ -9,7 +9,7 @@ import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton'
 
-import { fetchRedditPlayer, selectRedditPlayer } from '../../ducks/redditPlayer'
+import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
 
 const Wrapper = styled.div`
@@ -65,15 +65,19 @@ export class Player extends Component {
   componentDidMount() {
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
       .then((response) => {
-        this.props.fetchRedditPlayer(response.playerDetails.players[0].name)
-      })
+        this.props.fetchNfl(response.playerDetails.players[0].name)
+        this.props.fetchFf(response.playerDetails.players[0].name)
+        this.props.fetchDynasty(response.playerDetails.players[0].name)
+    })
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.playerId !== this.props.match.params.playerId) {
       this.props.fetchPlayerDetails(nextProps.match.params.playerId)
         .then((response) => {
-          this.props.fetchRedditPlayer(response.playerDetails.players[0].name)
+          this.props.fetchNfl(response.playerDetails.players[0].name)
+          this.props.fetchFf(response.playerDetails.players[0].name)
+          this.props.fetchDynasty(response.playerDetails.players[0].name)
         })
     }
   }
@@ -99,7 +103,7 @@ export class Player extends Component {
   }
 
   render() {
-    const { isLoading, notes, playerDetails, redditPlayer } = this.props
+    const { isLoading, notes, playerDetails, nfl, ff, dynasty } = this.props
     const actions = [
       <FlatButton
         label="Close"
@@ -147,13 +151,37 @@ export class Player extends Component {
                   ))}
                 </Section>
               </Tab>
-              <Tab label="Reddit" value="b">
+              <Tab label="NFL Sub" value="b">
                 <Section>
-                  {redditPlayer.map((post, idx) => (
+                  {nfl.map(post => (
                     <RedditCard>
-                      <a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">
-                        <CardTitle title={post.data.title} />
-                      </a>
+                      <CardTitle title={post.data.title} />
+                      <Text><a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">News Link</a></Text>
+                      <Text><a href={post.data.permalink} style={{ textDecoration: 'none' }} target="_blank">Reddit Link</a></Text>
+                      <Text>{post.data.selftext}</Text>
+                    </RedditCard>
+                  ))}
+                </Section>
+              </Tab>
+              <Tab label="FF Sub" value="c">
+                <Section>
+                  {ff.map(post => (
+                    <RedditCard>
+                      <CardTitle title={post.data.title} />
+                      <Text><a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">News Link</a></Text>
+                      <Text><a href={post.data.permalink} style={{ textDecoration: 'none' }} target="_blank">Reddit Link</a></Text>
+                      <Text>{post.data.selftext}</Text>
+                    </RedditCard>
+                  ))}
+                </Section>
+              </Tab>
+              <Tab label="Dynasty Sub" value="d">
+                <Section>
+                  {dynasty.map(post => (
+                    <RedditCard>
+                      <CardTitle title={post.data.title} />
+                      <Text><a href={post.data.url} style={{ textDecoration: 'none' }} target="_blank">News Link</a></Text>
+                      <Text><a href={post.data.permalink} style={{ textDecoration: 'none' }} target="_blank">Reddit Link</a></Text>
                       <Text>{post.data.selftext}</Text>
                     </RedditCard>
                   ))}
@@ -171,6 +199,8 @@ const mapStateToProps = (state, props) => ({
   isLoading: selectIsLoading(state),
   notes: selectNotes(state),
   playerDetails: selectPlayerDetails(state),
-  redditPlayer: selectRedditPlayer(state)
+  nfl: selectNfl(state),
+  ff: selectFf(state),
+  dynasty: selectDynasty(state)
 })
-export default connect(mapStateToProps, { fetchPlayerDetails, fetchRedditPlayer })(Player)
+export default connect(mapStateToProps, { fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
