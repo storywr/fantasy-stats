@@ -27,7 +27,7 @@ export default class NavigationBar extends React.Component {
     return (
       <div>
         <AppBar
-          title="NFL Fantasy News and Stats"
+          title="Fantasy HQ"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           onLeftIconButtonClick={this.handleToggle}
         />
