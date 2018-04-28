@@ -5,6 +5,7 @@ import draft from './draft'
 import news from './news'
 import playerDetails from './playerDetails'
 import players from './players'
+import redditNews from './redditNews'
 import redditPlayer from './redditPlayer'
 import scoring from './scoring'
 import stats from './stats'
@@ -15,6 +16,7 @@ export default combineReducers({
   news,
   playerDetails,
   players,
+  redditNews,
   redditPlayer,
   scoring,
   stats
