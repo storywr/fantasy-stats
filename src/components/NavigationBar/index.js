@@ -8,6 +8,10 @@ import Menu from 'material-ui/svg-icons/navigation/menu'
 
 import { Link } from 'react-router-dom'
 
+const FantasyHqAppBar = styled(AppBar)`
+  padding-left: 7% !important;
+`
+
 const StyledLink = styled(Link)`
   text-decoration: none;
 `
@@ -26,7 +30,7 @@ export default class NavigationBar extends React.Component {
   render() {
     return (
       <div>
-        <AppBar
+        <FantasyHqAppBar
           title="Fantasy HQ"
           iconClassNameRight="muidocs-icon-navigation-expand-more"
           onLeftIconButtonClick={this.handleToggle}

@@ -16,7 +16,7 @@ import Player from '../Player'
 import Scoring from '../Scoring'
 
 const Wrapper = styled.div`
-  padding: 0 5%;
+  padding: 0 7%;
 `
 
 export const App = () => (
