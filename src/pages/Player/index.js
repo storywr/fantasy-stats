@@ -32,6 +32,10 @@ const Wrapper = styled.div`
   }
 `
 
+const PlayerName = styled(CardTitle)`
+  padding-left: 0 !important;
+`
+
 const SearchBoxes = styled.div`
   display: flex;
 
@@ -190,7 +194,7 @@ export class Player extends Component {
       <div>
         {!isLoading && stats.length > 0 &&
           <div>
-            <CardTitle title={playerDetails.name} />
+            <PlayerName title={playerDetails.name} />
             <HighlightsButton>
               <RaisedButton label="Watch Highlights" onClick={this.handleOpen} />
               <Dialog
