@@ -2,7 +2,7 @@
 
 App deployed here - http://ff-stat.herokuapp.com/
 
-Fantasy football app for aggregating player news and stats.
+Mobile Responsive Fantasy football app for aggregating player news and stats.
 
 Fantasy stats are pulled from NFL's fantasy football API.
 
