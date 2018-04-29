@@ -8,6 +8,7 @@ import players from './players'
 import redditNews from './redditNews'
 import redditPlayer from './redditPlayer'
 import scoring from './scoring'
+import sureStats from './sureStats'
 import stats from './stats'
 
 export default combineReducers({
@@ -19,5 +20,6 @@ export default combineReducers({
   redditNews,
   redditPlayer,
   scoring,
+  sureStats,
   stats
 })
