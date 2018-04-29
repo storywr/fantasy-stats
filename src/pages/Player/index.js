@@ -260,7 +260,7 @@ export class Player extends Component {
                       <MobileTableCol>{stats[0].rushing.attempt}</MobileTableCol>
                       <TableRowColumn>{stats[0].rushing.rushingYds}</TableRowColumn>
                       <TableRowColumn>{stats[0].rushing.tds}</TableRowColumn>
-                      <MobileTableCol>{(stats[0].rushing.rushingYds / stats[0].rushing.attempt).toFixed(2)}</MobileTableCol>
+                      <MobileTableCol>{stats[0].rushing.rushingYds ? (stats[0].rushing.rushingYds / stats[0].rushing.attempt).toFixed(2) : 0}</MobileTableCol>
                       <MobileTableCol>{stats[0].receiving.target}</MobileTableCol>
                       <MobileTableCol>{stats[0].receiving.rec}</MobileTableCol>
                       <TableRowColumn>{stats[0].receiving.receivingYds}</TableRowColumn>
