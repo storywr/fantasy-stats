@@ -14,7 +14,7 @@ const Wrapper = styled.div`
   body {
     margin: 0px;
   }
-  margin-bottom: 42px;
+  margin-bottom: 16px;
 `
 
 export class AutoCompleteBar extends Component {
