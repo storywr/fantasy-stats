@@ -122,7 +122,7 @@ export class Advanced extends Component {
     console.log(advanced)
     return (
       <div>
-        {!isLoading &&
+        {!isLoading && advanced[this.state.position] &&
           <div>
             <SearchBoxes>
               <PositionSearch
