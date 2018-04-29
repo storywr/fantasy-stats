@@ -1,5 +1,7 @@
 ## Fantasy HQ
 
+App hosted here - http://ff-stat.herokuapp.com/players/2557917
+
 Fantasy football app for aggregating player news and stats.
 
 Fantasy stats are pulled from NFL's fantasy football API.
