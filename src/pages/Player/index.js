@@ -50,6 +50,10 @@ const TextLink = styled.a`
 `
 
 const HighlightsButton = styled.div`
+  @media (max-width: 767px) {
+    display: none;
+  }
+
   margin-bottom: 32px;
 `
 
@@ -159,7 +163,7 @@ export class Player extends Component {
                   ))}
                 </Section>
               </Tab>
-              <Tab label="NFL Sub" value="b">
+              <Tab label="NFL" value="b">
                 <Section>
                   {nfl.map(post => (
                     <RedditCard>
@@ -171,7 +175,7 @@ export class Player extends Component {
                   ))}
                 </Section>
               </Tab>
-              <Tab label="FF Sub" value="c">
+              <Tab label="Fantasy" value="c">
                 <Section>
                   {ff.map(post => (
                     <RedditCard>
@@ -183,7 +187,7 @@ export class Player extends Component {
                   ))}
                 </Section>
               </Tab>
-              <Tab label="Dynasty Sub" value="d">
+              <Tab label="Dynasty" value="d">
                 <Section>
                   {dynasty.map(post => (
                     <RedditCard>
