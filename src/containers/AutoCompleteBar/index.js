@@ -41,7 +41,7 @@ export class AutoCompleteBar extends Component {
       <Wrapper>
         <AutoComplete
           ref={`autocomplete`}
-          hintText="Ex. Tom Brady"
+          hintText="Ex. Todd Gurley"
           filter={AutoComplete.caseInsensitiveFilter}
           dataSource={this.props.players}
           floatingLabelText="Search Players"
