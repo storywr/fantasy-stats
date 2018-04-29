@@ -89,6 +89,18 @@ const HighlightsButton = styled.div`
   margin-bottom: 32px;
 `
 
+const MobileHeaderCol = styled(TableHeaderColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
+const MobileTableCol = styled(TableRowColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+`
+
 const VideoPlayer = styled.iframe`
   height: 50vh;
   width: 50vw;
@@ -230,31 +242,31 @@ export class Player extends Component {
               <Table>
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
-                  <TableHeaderColumn>Att</TableHeaderColumn>
+                    <MobileHeaderCol>Att</MobileHeaderCol>
                     <TableHeaderColumn>Rush Yds</TableHeaderColumn>
                     <TableHeaderColumn>Rush TDs</TableHeaderColumn>
-                    <TableHeaderColumn>YPC</TableHeaderColumn>
-                    <TableHeaderColumn>Targets</TableHeaderColumn>
-                    <TableHeaderColumn>Rec</TableHeaderColumn>
+                    <MobileHeaderCol>YPC</MobileHeaderCol>
+                    <MobileHeaderCol>Targets</MobileHeaderCol>
+                    <MobileHeaderCol>Rec</MobileHeaderCol>
                     <TableHeaderColumn>Rec Yds</TableHeaderColumn>
                     <TableHeaderColumn>Rec Tds</TableHeaderColumn>
-                    <TableHeaderColumn>YAC</TableHeaderColumn>
-                    <TableHeaderColumn>Total Yds</TableHeaderColumn>
+                    <MobileHeaderCol>YAC</MobileHeaderCol>
+                    <MobileHeaderCol>Total Yds</MobileHeaderCol>
                   </TableRow>
                 </TableHeader>
                 {!statLoading &&
                   <TableBody displayRowCheckbox={false} showRowHover>
                     <TableRow>
-                      <TableRowColumn>{stats[0].rushing.attempt}</TableRowColumn>
+                      <MobileTableCol>{stats[0].rushing.attempt}</MobileTableCol>
                       <TableRowColumn>{stats[0].rushing.rushingYds}</TableRowColumn>
                       <TableRowColumn>{stats[0].rushing.tds}</TableRowColumn>
-                      <TableRowColumn>{(stats[0].rushing.rushingYds / stats[0].rushing.attempt).toFixed(2)}</TableRowColumn>
-                      <TableRowColumn>{stats[0].receiving.target}</TableRowColumn>
-                      <TableRowColumn>{stats[0].receiving.rec}</TableRowColumn>
+                      <MobileTableCol>{(stats[0].rushing.rushingYds / stats[0].rushing.attempt).toFixed(2)}</MobileTableCol>
+                      <MobileTableCol>{stats[0].receiving.target}</MobileTableCol>
+                      <MobileTableCol>{stats[0].receiving.rec}</MobileTableCol>
                       <TableRowColumn>{stats[0].receiving.receivingYds}</TableRowColumn>
                       <TableRowColumn>{stats[0].receiving.tds}</TableRowColumn>
-                      <TableRowColumn>{stats[0].receiving.yacYds}</TableRowColumn>
-                      <TableRowColumn>{stats[0].receiving.receivingYds + stats[0].rushing.rushingYds}</TableRowColumn>
+                      <MobileTableCol>{stats[0].receiving.yacYds}</MobileTableCol>
+                      <MobileTableCol>{stats[0].receiving.receivingYds + stats[0].rushing.rushingYds}</MobileTableCol>
                     </TableRow>
                   </TableBody>
                 }
