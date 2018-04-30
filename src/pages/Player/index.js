@@ -120,6 +120,16 @@ const PlayerCard = styled(Card)`
   padding: 8px 24px 16px;
 `
 
+const TabCol = styled(TableRowColumn)`
+  min-width: 32px;
+  width: 32px;
+`
+
+const TabHeadCol = styled(TableHeaderColumn)`
+  min-width: 32px;
+  width: 32px;
+`
+Table
 export class Player extends Component {
   state = {
     backgroundColor: 'transparent',
@@ -246,34 +256,34 @@ export class Player extends Component {
                   <MenuItem value={'2017'} primaryText="2017" />
                 </PositionSearch>
               </SearchBoxes>
-              <Table>
+              <Table bodyStyle={{overflow:'visible'}}>
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
-                    <MobileHeaderCol>Att</MobileHeaderCol>
-                    <TableHeaderColumn>Rush Yds</TableHeaderColumn>
-                    <TableHeaderColumn>Rush TDs</TableHeaderColumn>
-                    <MobileHeaderCol>YPC</MobileHeaderCol>
-                    <MobileHeaderCol>Targets</MobileHeaderCol>
-                    <MobileHeaderCol>Rec</MobileHeaderCol>
-                    <TableHeaderColumn>Rec Yds</TableHeaderColumn>
-                    <TableHeaderColumn>Rec Tds</TableHeaderColumn>
-                    <MobileHeaderCol>YAC</MobileHeaderCol>
-                    <MobileHeaderCol>Total Yds</MobileHeaderCol>
+                    <TabHeadCol>Att</TabHeadCol>
+                    <TabHeadCol>Rush Yds</TabHeadCol>
+                    <TabHeadCol>Rush TDs</TabHeadCol>
+                    <TabHeadCol>YPC</TabHeadCol>
+                    <TabHeadCol>Targets</TabHeadCol>
+                    <TabHeadCol>Rec</TabHeadCol>
+                    <TabHeadCol>Rec Yds</TabHeadCol>
+                    <TabHeadCol>Rec Tds</TabHeadCol>
+                    <TabHeadCol>YAC</TabHeadCol>
+                    <TabHeadCol>Total Yds</TabHeadCol>
                   </TableRow>
                 </TableHeader>
                 {!statLoading &&
                   <TableBody displayRowCheckbox={false} showRowHover>
                     <TableRow>
-                      <MobileTableCol>{stats[0].rushing.attempt}</MobileTableCol>
-                      <TableRowColumn>{stats[0].rushing.rushingYds}</TableRowColumn>
-                      <TableRowColumn>{stats[0].rushing.tds}</TableRowColumn>
-                      <MobileTableCol>{stats[0].rushing.rushingYds ? (stats[0].rushing.rushingYds / stats[0].rushing.attempt).toFixed(2) : 0}</MobileTableCol>
-                      <MobileTableCol>{stats[0].receiving.target}</MobileTableCol>
-                      <MobileTableCol>{stats[0].receiving.rec}</MobileTableCol>
-                      <TableRowColumn>{stats[0].receiving.receivingYds}</TableRowColumn>
-                      <TableRowColumn>{stats[0].receiving.tds}</TableRowColumn>
-                      <MobileTableCol>{stats[0].receiving.yacYds}</MobileTableCol>
-                      <MobileTableCol>{stats[0].receiving.receivingYds + stats[0].rushing.rushingYds}</MobileTableCol>
+                      <TabCol>{stats[0].rushing.attempt}</TabCol>
+                      <TabCol>{stats[0].rushing.rushingYds}</TabCol>
+                      <TabCol>{stats[0].rushing.tds}</TabCol>
+                      <TabCol>{stats[0].rushing.rushingYds ? (stats[0].rushing.rushingYds / stats[0].rushing.attempt).toFixed(2) : 0}</TabCol>
+                      <TabCol>{stats[0].receiving.target}</TabCol>
+                      <TabCol>{stats[0].receiving.rec}</TabCol>
+                      <TabCol>{stats[0].receiving.receivingYds}</TabCol>
+                      <TabCol>{stats[0].receiving.tds}</TabCol>
+                      <TabCol>{stats[0].receiving.yacYds}</TabCol>
+                      <TabCol>{stats[0].receiving.receivingYds + stats[0].rushing.rushingYds}</TabCol>
                     </TableRow>
                   </TableBody>
                 }
