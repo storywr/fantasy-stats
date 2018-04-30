@@ -163,7 +163,7 @@ export class Advanced extends Component {
                 {this.weekBuilder()}
               </WeekSearch>
             </SearchBoxes>
-            <Table fixedHeader={true} height='400px' onRowSelection={this.handleSelectPlayer}>
+            <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}} onRowSelection={this.handleSelectPlayer}>
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
                   <PlayTabHeadCol>Name</PlayTabHeadCol>
