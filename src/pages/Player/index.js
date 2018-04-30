@@ -315,9 +315,11 @@ export class Player extends Component {
                     {nfl.map(post => (
                       <RedditCard>
                         <CardTitle title={post.data.title} />
-                        <TextLink href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">News Story Link</TextLink>
-                        <TextLink href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">Reddit Post Link</TextLink>
                         {post.data.selfText && <Text>{post.data.selftext}</Text>}
+                        <CardActions>
+                          <FlatButton label="Article" href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
+                          <FlatButton label="Reddit Post" href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
+                        </CardActions>
                       </RedditCard>
                     ))}
                   </Section>
@@ -327,9 +329,11 @@ export class Player extends Component {
                     {ff.map(post => (
                       <RedditCard>
                         <CardTitle title={post.data.title} />
-                        <TextLink href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">News Story Link</TextLink>
-                        <TextLink href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">Reddit Post Link</TextLink>
                         {post.data.selfText && <Text>{post.data.selftext}</Text>}
+                        <CardActions>
+                          <FlatButton label="Article" href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
+                          <FlatButton label="Reddit Post" href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
+                        </CardActions>
                       </RedditCard>
                     ))}
                   </Section>
@@ -339,9 +343,11 @@ export class Player extends Component {
                     {dynasty.map(post => (
                       <RedditCard>
                         <CardTitle title={post.data.title} />
-                        <TextLink href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">News Story Link</TextLink>
-                        <TextLink href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank">Reddit Post Link</TextLink>
                         {post.data.selfText && <Text>{post.data.selftext}</Text>}
+                        <CardActions>
+                          <FlatButton label="Article" href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
+                          <FlatButton label="Reddit Post" href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
+                        </CardActions>
                       </RedditCard>
                     ))}
                   </Section>
