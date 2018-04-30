@@ -85,14 +85,18 @@ const HighlightsButton = styled.div`
   @media (max-width: 767px) {
     display: none;
   }
-
-  margin-bottom: 32px;
+  margin-left: auto;
 `
 
 const MobileHeaderCol = styled(TableHeaderColumn)`
   @media (max-width: 767px) {
     display: none;
   }
+`
+
+const Flex = styled.div`
+  display: flex;
+  align-items: center;
 `
 
 const MobileTableCol = styled(TableRowColumn)`
@@ -111,8 +115,9 @@ const Section = styled.div`
   margin-top: 24px;
 `
 
-const StatTable = styled.div`
-  margin-bottom: 48px;
+const PlayerCard = styled(Card)`
+  margin: 32px 0px 40px;
+  padding: 8px 24px 16px;
 `
 
 export class Player extends Component {
@@ -206,39 +211,41 @@ export class Player extends Component {
       <div>
         {!isLoading && stats.length > 0 &&
           <div>
-            <PlayerName title={playerDetails.name} />
-            <HighlightsButton>
-              <RaisedButton label="Watch Highlights" onClick={this.handleOpen} />
-              <Dialog
-                title="Watch Highlights"
-                actions={actions}
-                modal={false}
-                open={this.state.open}
-                onRequestClose={this.handleClose}
-              >
-                <VideoPlayer id="player" type="text/html"
-                  src={`https://www.youtube.com/embed?listType=search&list=${playerDetails.name}+highlights`}
-                  frameborder="0">
-                </VideoPlayer>
-              </Dialog>
-            </HighlightsButton>
-            <SearchBoxes>
-              <PositionSearch
-                floatingLabelText="Year"
-                value={this.state.year}
-                onChange={this.handleYearChange}
-              >
-                <MenuItem value={'2010'} primaryText="2010" />
-                <MenuItem value={'2011'} primaryText="2011" />
-                <MenuItem value={'2012'} primaryText="2012" />
-                <MenuItem value={'2013'} primaryText="2013" />
-                <MenuItem value={'2014'} primaryText="2014" />
-                <MenuItem value={'2015'} primaryText="2015" />
-                <MenuItem value={'2016'} primaryText="2016" />
-                <MenuItem value={'2017'} primaryText="2017" />
-              </PositionSearch>
-            </SearchBoxes>
-            <StatTable>
+            <PlayerCard>
+              <Flex>
+                <PlayerName title={playerDetails.name} />
+                <HighlightsButton>
+                  <RaisedButton label="Watch Highlights" onClick={this.handleOpen} />
+                  <Dialog
+                    title="Watch Highlights"
+                    actions={actions}
+                    modal={false}
+                    open={this.state.open}
+                    onRequestClose={this.handleClose}
+                  >
+                    <VideoPlayer id="player" type="text/html"
+                      src={`https://www.youtube.com/embed?listType=search&list=${playerDetails.name}+highlights`}
+                      frameborder="0">
+                    </VideoPlayer>
+                  </Dialog>
+                </HighlightsButton>
+              </Flex>
+              <SearchBoxes>
+                <PositionSearch
+                  floatingLabelText="Year"
+                  value={this.state.year}
+                  onChange={this.handleYearChange}
+                >
+                  <MenuItem value={'2010'} primaryText="2010" />
+                  <MenuItem value={'2011'} primaryText="2011" />
+                  <MenuItem value={'2012'} primaryText="2012" />
+                  <MenuItem value={'2013'} primaryText="2013" />
+                  <MenuItem value={'2014'} primaryText="2014" />
+                  <MenuItem value={'2015'} primaryText="2015" />
+                  <MenuItem value={'2016'} primaryText="2016" />
+                  <MenuItem value={'2017'} primaryText="2017" />
+                </PositionSearch>
+              </SearchBoxes>
               <Table>
                 <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
@@ -271,7 +278,7 @@ export class Player extends Component {
                   </TableBody>
                 }
               </Table>
-            </StatTable>
+            </PlayerCard>
             <Wrapper>
               <Tabs
                 value={this.state.value}
