@@ -30,14 +30,15 @@ const MobileHeaderCol = styled(TableHeaderColumn)`
   }
 `
 
-const TableCol = styled(TableRowColumn)`
+const TabCol = styled(TableRowColumn)`
   cursor: pointer;
+  min-width: 40px;
+  width: 40px;
 `
 
-const MobileTableCol = styled(TableCol)`
-  @media (max-width: 767px) {
-    display: none;
-  }
+const TabHeadCol = styled(TableHeaderColumn)`
+  min-width: 40px;
+  width: 40px;
 `
 
 export class Draft extends Component {
@@ -57,24 +58,24 @@ export class Draft extends Component {
     return (
       <Wrapper>
         {!isLoading &&
-          <Table onRowSelection={this.handleSelectPlayer}>
+          <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}} onRowSelection={this.handleSelectPlayer}>
             <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
               <TableRow>
-                <TableHeaderColumn>Rank</TableHeaderColumn>
-                <MobileHeaderCol>Auction</MobileHeaderCol>
-                <TableHeaderColumn>Name</TableHeaderColumn>
-                <MobileHeaderCol>Postion</MobileHeaderCol>
-                <MobileHeaderCol>Team</MobileHeaderCol>
+                <TabHeadCol>Rank</TabHeadCol>
+                <TabHeadCol>Auction</TabHeadCol>
+                <TabHeadCol>Name</TabHeadCol>
+                <TabHeadCol>Postion</TabHeadCol>
+                <TabHeadCol>Team</TabHeadCol>
               </TableRow>
             </TableHeader>
             <TableBody displayRowCheckbox={false} showRowHover>
               {players.map(player => (
                 <TableRow>
-                  <TableCol>{player.rank}</TableCol>
-                  <MobileTableCol>{player.auction}</MobileTableCol>
-                  <TableCol>{player.firstName} {player.lastName}</TableCol>
-                  <MobileTableCol>{player.position}</MobileTableCol>
-                  <MobileTableCol>{player.teamAbbr}</MobileTableCol>
+                  <TabCol>{player.rank}</TabCol>
+                  <TabCol>{player.auction}</TabCol>
+                  <TabCol>{player.firstName} {player.lastName}</TabCol>
+                  <TabCol>{player.position}</TabCol>
+                  <TabCol>{player.teamAbbr}</TabCol>
                 </TableRow>
               ))}
             </TableBody>
