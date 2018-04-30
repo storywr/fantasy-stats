@@ -129,7 +129,7 @@ const TabHeadCol = styled(TableHeaderColumn)`
   min-width: 32px;
   width: 32px;
 `
-Table
+
 export class Player extends Component {
   state = {
     backgroundColor: 'transparent',

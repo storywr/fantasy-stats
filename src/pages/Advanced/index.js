@@ -51,20 +51,26 @@ const SearchBoxes = styled.div`
   }
 `
 
-const MobileHeaderCol = styled(TableHeaderColumn)`
-  @media (max-width: 767px) {
-    display: none;
-  }
-`
-
-const TableCol = styled(TableRowColumn)`
+const PlayTabCol = styled(TableRowColumn)`
   cursor: pointer;
+  min-width: 104px;
+  width: 104px;
 `
 
-const MobileTableCol = styled(TableCol)`
-  @media (max-width: 767px) {
-    display: none;
-  }
+const TabCol = styled(TableRowColumn)`
+  cursor: pointer;
+  min-width: 40px;
+  width: 40px;
+`
+
+const PlayTabHeadCol = styled(TableHeaderColumn)`
+  min-width: 104px;
+  width: 104px;
+`
+
+const TabHeadCol = styled(TableHeaderColumn)`
+  min-width: 40px;
+  width: 40px;
 `
 
 export class Advanced extends Component {
@@ -157,32 +163,32 @@ export class Advanced extends Component {
                 {this.weekBuilder()}
               </WeekSearch>
             </SearchBoxes>
-            <Table onRowSelection={this.handleSelectPlayer}>
+            <Table bodyStyle={{overflow:'visible'}} onRowSelection={this.handleSelectPlayer}>
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
-                  <TableHeaderColumn>Name</TableHeaderColumn>
-                  <MobileHeaderCol>Team</MobileHeaderCol>
-                  <TableHeaderColumn>Carries</TableHeaderColumn>
-                  <MobileHeaderCol>Touches</MobileHeaderCol>
-                  <TableHeaderColumn>Rec</TableHeaderColumn>
-                  <MobileHeaderCol>Targets</MobileHeaderCol>
-                  <MobileHeaderCol>Rec %</MobileHeaderCol>
-                  <MobileHeaderCol>RZ Targets</MobileHeaderCol>
-                  <MobileHeaderCol>RZ Touches</MobileHeaderCol>
+                  <PlayTabHeadCol>Name</PlayTabHeadCol>
+                  <TabHeadCol>Team</TabHeadCol>
+                  <TabHeadCol>Carries</TabHeadCol>
+                  <TabHeadCol>Touches</TabHeadCol>
+                  <TabHeadCol>Rec</TabHeadCol>
+                  <TabHeadCol>Targets</TabHeadCol>
+                  <TabHeadCol>Rec %</TabHeadCol>
+                  <TabHeadCol>RZ Targets</TabHeadCol>
+                  <TabHeadCol>RZ Touches</TabHeadCol>
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false} showRowHover>
                 {advanced[this.state.position].map(player => (
                   <TableRow>
-                    <TableCol>{player.firstName} {player.lastName}</TableCol>
-                    <MobileTableCol>{player.teamAbbr}</MobileTableCol>
-                    <TableCol>{player.stats.Carries}</TableCol>
-                    <MobileTableCol>{player.stats.Touches}</MobileTableCol>
-                    <TableCol>{player.stats.Receptions}</TableCol>
-                    <MobileTableCol>{player.stats.Targets}</MobileTableCol>
-                    <MobileTableCol>{player.stats.ReceptionPercentage}</MobileTableCol>
-                    <MobileTableCol>{player.stats.RedzoneTargets}</MobileTableCol>
-                    <MobileTableCol>{player.stats.RedzoneTouches}</MobileTableCol>
+                    <PlayTabCol>{player.firstName} {player.lastName}</PlayTabCol>
+                    <TabCol>{player.teamAbbr}</TabCol>
+                    <TabCol>{player.stats.Carries}</TabCol>
+                    <TabCol>{player.stats.Touches}</TabCol>
+                    <TabCol>{player.stats.Receptions}</TabCol>
+                    <TabCol>{player.stats.Targets}</TabCol>
+                    <TabCol>{player.stats.ReceptionPercentage}</TabCol>
+                    <TabCol>{player.stats.RedzoneTargets}</TabCol>
+                    <TabCol>{player.stats.RedzoneTouches}</TabCol>
                   </TableRow>
                 ))}
               </TableBody>
