@@ -73,16 +73,27 @@ const TabHeadCol = styled(TableHeaderColumn)`
   width: 40px;
 `
 
+const RankHead = styled(TableHeaderColumn)`
+  min-width: 4%;
+  width: 4%;
+`
+
+const RankCol = styled(TableRowColumn)`
+  cursor: pointer;
+  min-width: 4%;
+  width: 4%;
+`
+
 export class Advanced extends Component {
   state = {
     position: 'RB',
     sort: 'touches',
+    year: '2017',
     week: 'All Season'
   }
 
   componentDidMount() {
-    const params = this.state
-    this.props.fetchAdvanced(params)
+    this.props.fetchAdvanced(this.state)
   }
 
   handlePositionChange = (ev, idx, value) => {
@@ -98,6 +109,14 @@ export class Advanced extends Component {
       sort: value
     })
     const params = { ...this.state, sort: value }
+    this.props.fetchAdvanced(params)
+  }
+
+  handleYearChange = (ev, idx, value) => {
+    this.setState({
+      year: value
+    })
+    const params = { ...this.state, year: value }
     this.props.fetchAdvanced(params)
   }
 
@@ -156,6 +175,20 @@ export class Advanced extends Component {
                 <MenuItem value={'redzoneTouches'} primaryText="Redzone Touches" />
               </WeekSearch>
               <WeekSearch
+                floatingLabelText="Year"
+                value={this.state.year}
+                onChange={this.handleYearChange}
+              >
+                <MenuItem value={'2010'} primaryText="2010" />
+                <MenuItem value={'2011'} primaryText="2011" />
+                <MenuItem value={'2012'} primaryText="2012" />
+                <MenuItem value={'2013'} primaryText="2013" />
+                <MenuItem value={'2014'} primaryText="2014" />
+                <MenuItem value={'2015'} primaryText="2015" />
+                <MenuItem value={'2016'} primaryText="2016" />
+                <MenuItem value={'2017'} primaryText="2017" />
+              </WeekSearch>
+              <WeekSearch
                 floatingLabelText="Week"
                 value={this.state.week}
                 onChange={this.handleWeekChange}
@@ -166,6 +199,7 @@ export class Advanced extends Component {
             <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}} onRowSelection={this.handleSelectPlayer}>
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
+                  <RankHead>Rank</RankHead>
                   <PlayTabHeadCol>Name</PlayTabHeadCol>
                   <TabHeadCol>Team</TabHeadCol>
                   <TabHeadCol>Carries</TabHeadCol>
@@ -178,8 +212,9 @@ export class Advanced extends Component {
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false} showRowHover>
-                {advanced[this.state.position].map(player => (
+                {advanced[this.state.position].map((player, idx) => (
                   <TableRow>
+                    <RankCol>{idx + 1}</RankCol>
                     <PlayTabCol>{player.firstName} {player.lastName}</PlayTabCol>
                     <TabCol>{player.teamAbbr}</TabCol>
                     <TabCol>{player.stats.Carries}</TabCol>
