@@ -128,7 +128,7 @@ export class Draft extends Component {
 
     return (
       <div>
-        {!isLoading &&
+        {!isLoading && scoring[this.state.position] &&
           <div>
             <SearchBoxes>
               <PositionSearch
