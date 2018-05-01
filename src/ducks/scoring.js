@@ -27,14 +27,14 @@ export default function (state = initialState, action) {
 
 // Action creators
 
-export const fetchScoring = (week, position) => {
+export const fetchScoring = params => {
   return dispatch => {
     dispatch({ type: BEGIN })
     return fetch(
-      week === 'All Season' ?
-      `http://api.fantasy.nfl.com/v1/players/scoringleaders?season=2017&format=json&position=${position}`
+      params.week === 'All Season' ?
+      `http://api.fantasy.nfl.com/v1/players/scoringleaders?season=${params.year}&format=json&position=${params.position}`
       :
-      `http://api.fantasy.nfl.com/v1/players/scoringleaders?season=2017&format=json&week=${week}&position=${position}`
+      `http://api.fantasy.nfl.com/v1/players/scoringleaders?season=${params.year}&format=json&week=${params.week}&position=${params.position}`
     )
       .then(response => response.json())
       .then(scoring => dispatch({ type: SCORING, scoring }))

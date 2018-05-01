@@ -44,14 +44,6 @@ const MobileHeaderCol = styled(TableHeaderColumn)`
   }
 `
 
-const RankCol = styled(TableHeaderColumn)`
-  width: 10%;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
-`
-
 const StatCol = styled(TableHeaderColumn)`
   width: 35%;
 
@@ -60,39 +52,36 @@ const StatCol = styled(TableHeaderColumn)`
   }
 `
 
-const TableCol = styled(TableRowColumn)`
+const TabCol = styled(TableRowColumn)`
   cursor: pointer;
+  min-width: 20px;
+  width: 20px;
 `
 
-const MobileTableCol = styled(TableCol)`
-  @media (max-width: 767px) {
-    display: none;
-  }
+const TabHeadCol = styled(TableHeaderColumn)`
+  min-width: 20px;
+  width: 20px;
 `
 
-const RankTableCol = styled(TableCol)`
-  width: 10%;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
+const RankHead = styled(TableHeaderColumn)`
+  min-width: 4%;
+  width: 4%;
 `
 
-const StatTableCol = styled(TableRowColumn)`
-  width: 35%;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
+const RankCol = styled(TableRowColumn)`
+  cursor: pointer;
+  min-width: 4%;
+  width: 4%;
 `
 
 export class Draft extends Component {
   componentDidMount() {
-    this.props.fetchScoring(this.state.week, this.state.position)
+    this.props.fetchScoring(this.state)
   }
 
   state = {
     position: 'RB',
+    year: '2017',
     week: 'All Season'
   }
 
@@ -100,14 +89,24 @@ export class Draft extends Component {
     this.setState({
       position: value
     })
-    this.props.fetchScoring(this.state.week, value)
+    const params = { ...this.state, position: value }
+    this.props.fetchScoring(params)
   }
 
   handleWeekChange = (ev, idx, value) => {
     this.setState({
       week: value
     })
-    this.props.fetchScoring(value, this.state.position)
+    const params = { ...this.state, week: value }
+    this.props.fetchScoring(params)
+  }
+
+  handleYearChange = (ev, idx, value) => {
+    this.setState({
+      year: value
+    })
+    const params = { ...this.state, year: value }
+    this.props.fetchScoring(params)
   }
 
   weekBuilder = () => {
@@ -144,6 +143,20 @@ export class Draft extends Component {
                 <MenuItem value={'DEF'} primaryText="DEF" />
               </PositionSearch>
               <WeekSearch
+                floatingLabelText="Year"
+                value={this.state.year}
+                onChange={this.handleYearChange}
+              >
+                <MenuItem value={'2010'} primaryText="2010" />
+                <MenuItem value={'2011'} primaryText="2011" />
+                <MenuItem value={'2012'} primaryText="2012" />
+                <MenuItem value={'2013'} primaryText="2013" />
+                <MenuItem value={'2014'} primaryText="2014" />
+                <MenuItem value={'2015'} primaryText="2015" />
+                <MenuItem value={'2016'} primaryText="2016" />
+                <MenuItem value={'2017'} primaryText="2017" />
+              </WeekSearch>
+              <WeekSearch
                 floatingLabelText="Week"
                 value={this.state.week}
                 onChange={this.handleWeekChange}
@@ -151,34 +164,31 @@ export class Draft extends Component {
                 {this.weekBuilder()}
               </WeekSearch>
             </SearchBoxes>
-            <Table onRowSelection={this.handleSelectPlayer}>
+            <Table fixedHeader={true} height='450px' bodyStyle={{overflowX:'visible'}} onRowSelection={this.handleSelectPlayer}>
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
-                  <RankCol>Rank</RankCol>
-                  <TableHeaderColumn>Name</TableHeaderColumn>
-                  <MobileHeaderCol>Team</MobileHeaderCol>
-                  <TableHeaderColumn>Points</TableHeaderColumn>
-                  {this.state.week !== 'All Season' && <StatCol>Stat Line</StatCol>}
+                  <RankHead>Rank</RankHead>
+                  <TabHeadCol>Name</TabHeadCol>
+                  <TabHeadCol>Points</TabHeadCol>
+                  {this.state.week !== 'All Season' && <TabHeadCol>Stat Line</TabHeadCol>}
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false} showRowHover>
                 {this.state.week === 'All Season' ?
                   scoring[this.state.position].map(player => (
                     <TableRow>
-                      <RankTableCol>{player.rank}</RankTableCol>
-                      <TableCol>{player.firstName} {player.lastName}</TableCol>
-                      <MobileTableCol>{player.teamAbbr}</MobileTableCol>
-                      <TableCol>{player.pts}</TableCol>
+                      <RankCol>{player.rank}</RankCol>
+                      <TabCol>{player.firstName} {player.lastName}</TabCol>
+                      <TabCol>{player.pts}</TabCol>
                     </TableRow>
                   ))
                 :
                   scoring[this.state.position].map(player => (
                     <TableRow>
-                      <RankTableCol>{player.rank}</RankTableCol>
-                      <TableCol>{player.firstName} {player.lastName}</TableCol>
-                      <MobileTableCol>{player.teamAbbr}</MobileTableCol>
-                      <TableCol>{player.pts}</TableCol>
-                      <StatTableCol>{player.statsLine}</StatTableCol>
+                      <RankCol>{player.rank}</RankCol>
+                      <TabCol>{player.firstName} {player.lastName}</TabCol>
+                      <TabCol>{player.pts}</TabCol>
+                      <TabCol>{player.statsLine}</TabCol>
                     </TableRow>
                   ))
                 }
