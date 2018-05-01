@@ -5,6 +5,7 @@ import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import styled from 'styled-components'
 import Menu from 'material-ui/svg-icons/navigation/menu'
+import Divider from 'material-ui/Divider';
 
 import { Link } from 'react-router-dom'
 
@@ -45,6 +46,10 @@ export default class NavigationBar extends React.Component {
           <StyledLink to='/advanced'><MenuItem onClick={this.handleClose}>Player Stats</MenuItem></StyledLink>
           <StyledLink to='/scoring'><MenuItem onClick={this.handleClose}>Scoring Leaders</MenuItem></StyledLink>
           <StyledLink to='/draft'><MenuItem onClick={this.handleClose}>Draft</MenuItem></StyledLink>
+          <Divider />
+          <a style={{ textDecoration: 'none' }} href='https://github.com/storywr/fantasy-stats' target='_blank'>
+            <MenuItem onClick={this.handleClose}>GitHub Repo</MenuItem>
+          </a>
         </Drawer>
       </div>
     )
