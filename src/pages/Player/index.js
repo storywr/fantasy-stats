@@ -4,6 +4,7 @@ import YouTube from 'react-youtube'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import CircularProgress from 'material-ui/CircularProgress'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import Dialog from 'material-ui/Dialog';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -53,7 +54,7 @@ const PositionSearch = styled(SelectField)`
 `
 
 const RotoWireCard = styled(Card)`
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
 `
 
@@ -128,6 +129,11 @@ const TabCol = styled(TableRowColumn)`
 const TabHeadCol = styled(TableHeaderColumn)`
   min-width: 32px;
   width: 32px;
+`
+
+const Progress = styled.div`
+  width: 64px;
+  margin: 10% auto auto auto;
 `
 
 export class Player extends Component {
@@ -219,7 +225,7 @@ export class Player extends Component {
 
     return (
       <div>
-        {!isLoading && stats.length > 0 &&
+        {!isLoading && stats.length > 0 && !statLoading ?
           <div>
             <PlayerCard>
               <Flex>
@@ -355,6 +361,8 @@ export class Player extends Component {
               </Tabs>
             </Wrapper>
           </div>
+        :
+          <Progress><CircularProgress size={150} thickness={10} /></Progress>
         }
       </div>
     )

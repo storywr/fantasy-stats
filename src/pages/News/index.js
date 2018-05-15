@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
+import CircularProgress from 'material-ui/CircularProgress'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import {Tabs, Tab} from 'material-ui/Tabs'
@@ -18,12 +19,12 @@ const Wrapper = styled.div`
 `
 
 const RotoWireCard = styled(Card)`
-  margin-bottom: 80px;
+  margin-bottom: 40px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
 `
 
 const RedditCard = styled(Card)`
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
 `
 
@@ -48,6 +49,11 @@ const TextLink = styled.a`
 
 const Section = styled.div`
   margin-top: 24px;
+`
+
+const Progress = styled.div`
+  width: 64px;
+  margin: 30% auto auto auto;
 `
 
 export class News extends Component {
@@ -79,7 +85,7 @@ export class News extends Component {
 
     return (
       <Wrapper>
-        {!isLoading &&
+        {!isLoading ?
           <div>
             <Tabs
               value={this.state.value}
@@ -144,6 +150,8 @@ export class News extends Component {
               </Tab>
             </Tabs>
           </div>
+        :
+          <Progress><CircularProgress size={150} thickness={10} /></Progress>
         }
       </Wrapper>
     )
