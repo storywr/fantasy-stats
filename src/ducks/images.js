@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
 export const fetchImages = (params) => {
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`https://www.googleapis.com/customsearch/v1?key=AIzaSyDi9tWvq-lbRUGanHzC8PbnQ7M2iKZJ7Wg&cx=003905045504128695374:kvyyjlgiz4g&q=${params.firstName}+${params.lastName}&searchType=image&fileType=jpg&alt=json&num=1`)
+    return fetch(`https://www.googleapis.com/customsearch/v1?key=&q=${params.firstName}+${params.lastName}&searchType=image&fileType=jpg&alt=json&num=1`)
       .then(response => response.json())
       .then(images => dispatch({ type: IMAGES, images }))
       .catch(console.log)
