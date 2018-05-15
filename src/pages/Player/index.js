@@ -225,7 +225,7 @@ export class Player extends Component {
 
     return (
       <div>
-        {!isLoading && stats.length > 0 && !statLoading ?
+        {!isLoading && stats.length > 0 ?
           <div>
             <PlayerCard>
               <Flex>
