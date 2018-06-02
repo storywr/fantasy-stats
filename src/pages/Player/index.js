@@ -132,8 +132,10 @@ const TabHeadCol = styled(TableHeaderColumn)`
 `
 
 const Progress = styled.div`
-  width: 64px;
-  margin: 10% auto auto auto;
+  width: 100px;
+  margin-top: 15%;
+  margin-left: auto !important;
+  margin-right: auto !important;
 `
 
 export class Player extends Component {
@@ -362,7 +364,7 @@ export class Player extends Component {
             </Wrapper>
           </div>
         :
-          <Progress><CircularProgress size={150} thickness={10} /></Progress>
+          <Progress><CircularProgress size={100} thickness={10} /></Progress>
         }
       </div>
     )
