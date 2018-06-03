@@ -23,6 +23,7 @@ import {
 
 import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
+import { fetchSportsFeed, selectSportsFeed } from '../../ducks/sportsFeed'
 import { selectIsLoading as selectIsLoadingStat, fetchSureStats, selectSureStats } from '../../ducks/sureStats'
 
 const Wrapper = styled.div`
@@ -147,6 +148,7 @@ export class Player extends Component {
   }
 
   componentDidMount() {
+    this.props.fetchSportsFeed()
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
       .then((response) => {
         const names = response.playerDetails.players[0].name.split(' ')
@@ -381,4 +383,4 @@ const mapStateToProps = (state, props) => ({
   ff: selectFf(state),
   dynasty: selectDynasty(state)
 })
-export default connect(mapStateToProps, { fetchSureStats, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
+export default connect(mapStateToProps, { fetchSureStats, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
