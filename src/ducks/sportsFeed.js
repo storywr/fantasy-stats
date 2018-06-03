@@ -31,7 +31,6 @@ export default function (state = initialState, action) {
 // Action creators
 
 export function fetchSportsFeed(params) {
-  console.log(API_USERNAME)
   const request = {
     method: 'GET',
     headers: {
