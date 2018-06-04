@@ -23,8 +23,7 @@ import {
 
 import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
-import { fetchSportsFeed, selectSportsFeed } from '../../ducks/sportsFeed'
-import { selectIsLoading as selectIsLoadingStat, fetchSureStats, selectSureStats } from '../../ducks/sureStats'
+import { fetchSportsFeed, selectSportsFeed, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
 
 const Wrapper = styled.div`
   margin: 0 20%;
@@ -72,6 +71,10 @@ const Text = styled(CardText)`
   line-height: 200%;
 `
 
+const TableText = styled(CardTitle)`
+  font-weight: 500;
+`
+
 const TextLink = styled.a`
   padding: 16px;
   font-size: 14px;
@@ -108,8 +111,8 @@ const MobileTableCol = styled(TableRowColumn)`
 `
 
 const VideoPlayer = styled.iframe`
-  height: 50vh;
-  width: 50vw;
+  height: 45vh;
+  width: 45vw;
   margin: 1%;
 `
 
@@ -148,7 +151,6 @@ export class Player extends Component {
   }
 
   componentDidMount() {
-    this.props.fetchSportsFeed()
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
       .then((response) => {
         const names = response.playerDetails.players[0].name.split(' ')
@@ -157,7 +159,7 @@ export class Player extends Component {
           lastName: names[1],
           year: 2017
         }
-        this.props.fetchSureStats(params)
+        this.props.fetchSportsFeed(params)
         this.props.fetchNfl(response.playerDetails.players[0].name)
         this.props.fetchFf(response.playerDetails.players[0].name)
         this.props.fetchDynasty(response.playerDetails.players[0].name)
@@ -175,7 +177,7 @@ export class Player extends Component {
             lastName: names[1],
             year: 2017
           }
-          this.props.fetchSureStats(params)  
+          this.props.fetchSportsFeed(params) 
           this.props.fetchNfl(response.playerDetails.players[0].name)
           this.props.fetchFf(response.playerDetails.players[0].name)
           this.props.fetchDynasty(response.playerDetails.players[0].name)
@@ -214,11 +216,11 @@ export class Player extends Component {
       lastName: names[1],
       year: value
     }
-    this.props.fetchSureStats(params)  
+    this.props.fetchSportsFeed(params)  
   }
 
   render() {
-    const { isLoading, notes, playerDetails, nfl, ff, dynasty, stats, statLoading } = this.props
+    const { isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
     const actions = [
       <FlatButton
         label="Close"
@@ -256,48 +258,90 @@ export class Player extends Component {
                   value={this.state.year}
                   onChange={this.handleYearChange}
                 >
-                  <MenuItem value={'2010'} primaryText="2010" />
-                  <MenuItem value={'2011'} primaryText="2011" />
-                  <MenuItem value={'2012'} primaryText="2012" />
-                  <MenuItem value={'2013'} primaryText="2013" />
                   <MenuItem value={'2014'} primaryText="2014" />
                   <MenuItem value={'2015'} primaryText="2015" />
                   <MenuItem value={'2016'} primaryText="2016" />
                   <MenuItem value={'2017'} primaryText="2017" />
                 </PositionSearch>
               </SearchBoxes>
-              <Table bodyStyle={{overflow:'visible'}}>
-                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                  <TableRow>
-                    <TabHeadCol>Att</TabHeadCol>
-                    <TabHeadCol>Rush Yds</TabHeadCol>
-                    <TabHeadCol>Rush TDs</TabHeadCol>
-                    <TabHeadCol>YPC</TabHeadCol>
-                    <TabHeadCol>Targets</TabHeadCol>
-                    <TabHeadCol>Rec</TabHeadCol>
-                    <TabHeadCol>Rec Yds</TabHeadCol>
-                    <TabHeadCol>Rec Tds</TabHeadCol>
-                    <TabHeadCol>YAC</TabHeadCol>
-                    <TabHeadCol>Total Yds</TabHeadCol>
-                  </TableRow>
-                </TableHeader>
-                {!statLoading &&
-                  <TableBody displayRowCheckbox={false} showRowHover>
-                    <TableRow>
-                      <TabCol>{stats[0].rushing.attempt}</TabCol>
-                      <TabCol>{stats[0].rushing.rushingYds}</TabCol>
-                      <TabCol>{stats[0].rushing.tds}</TabCol>
-                      <TabCol>{stats[0].rushing.rushingYds ? (stats[0].rushing.rushingYds / stats[0].rushing.attempt).toFixed(2) : 0}</TabCol>
-                      <TabCol>{stats[0].receiving.target}</TabCol>
-                      <TabCol>{stats[0].receiving.rec}</TabCol>
-                      <TabCol>{stats[0].receiving.receivingYds}</TabCol>
-                      <TabCol>{stats[0].receiving.tds}</TabCol>
-                      <TabCol>{stats[0].receiving.yacYds}</TabCol>
-                      <TabCol>{stats[0].receiving.receivingYds + stats[0].rushing.rushingYds}</TabCol>
-                    </TableRow>
-                  </TableBody>
-                }
-              </Table>
+              {feedStats && feedStats.playerstatsentry && feedStats.playerstatsentry[0].player.Position === 'RB' &&
+                <div>
+                  <TableText>RUSHING</TableText>
+                  <Table bodyStyle={{overflow:'visible'}}>
+                    <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                      <TableRow>
+                        <TabHeadCol>Att</TabHeadCol>
+                        <TabHeadCol>Yds</TabHeadCol>
+                        <TabHeadCol>YPC</TabHeadCol>
+                        <TabHeadCol>TD</TabHeadCol>
+                        <TabHeadCol>1st Downs</TabHeadCol>
+                        <TabHeadCol>1st Down %</TabHeadCol>
+                        <TabHeadCol>20 YD Plus</TabHeadCol>
+                        <TabHeadCol>40 YD Plus</TabHeadCol>
+                        <TabHeadCol>Long</TabHeadCol>
+                        <TabHeadCol>Fumbles</TabHeadCol>
+                        <TabHeadCol>2 Pt Conv</TabHeadCol>
+                      </TableRow>
+                    </TableHeader>
+                    {!feedLoading && feedStats.playerstatsentry &&
+                      <TableBody displayRowCheckbox={false} showRowHover>
+                        <TableRow>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RushAttempts["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RushYards["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RushAverage["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RushTD["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Rush1stDowns["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Rush1stDownsPct["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Rush20Plus["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Rush40Plus["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RushLng["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RushFumbles["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.TwoPtRushMade["#text"]}</TabCol>
+                        </TableRow>
+                      </TableBody>
+                    }
+                  </Table>
+                </div>
+              }
+              {feedStats && feedStats.playerstatsentry &&
+                <div>
+                  <TableText>RECEIVING</TableText>
+                  <Table bodyStyle={{overflow:'visible'}}>
+                    <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                      <TableRow>
+                        <TabHeadCol>Rec</TabHeadCol>
+                        <TabHeadCol>Yds</TabHeadCol>
+                        <TabHeadCol>YPC</TabHeadCol>
+                        <TabHeadCol>TD</TabHeadCol>
+                        <TabHeadCol>1st Downs</TabHeadCol>
+                        <TabHeadCol>1st Down %</TabHeadCol>
+                        <TabHeadCol>20 YD Plus</TabHeadCol>
+                        <TabHeadCol>40 YD Plus</TabHeadCol>
+                        <TabHeadCol>Long</TabHeadCol>
+                        <TabHeadCol>Fumbles</TabHeadCol>
+                        <TabHeadCol>Targets</TabHeadCol>
+                      </TableRow>
+                    </TableHeader>
+                    {!feedLoading && feedStats.playerstatsentry &&
+                      <TableBody displayRowCheckbox={false} showRowHover>
+                        <TableRow>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Receptions["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RecYards["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RecAverage["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RecTD["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Rec1stDowns["#text"]}</TabCol>
+                          <TabCol>{((feedStats.playerstatsentry[0].stats.Rec1stDowns["#text"] / feedStats.playerstatsentry[0].stats.Targets["#text"]) * 100).toFixed(1)}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Rec20Plus["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Rec40Plus["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RecLng["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.RecFumbles["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.Targets["#text"]}</TabCol>
+                        </TableRow>
+                      </TableBody>
+                    }
+                  </Table>
+                </div>
+              }
             </PlayerCard>
             <Wrapper>
               <Tabs
@@ -374,13 +418,13 @@ export class Player extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
+  feedLoading: feedLoading(state),
   isLoading: selectIsLoading(state),
-  statLoading: selectIsLoadingStat(state),
   notes: selectNotes(state),
   playerDetails: selectPlayerDetails(state),
-  stats: selectSureStats(state),
+  feedStats: selectSportsFeed(state),
   nfl: selectNfl(state),
   ff: selectFf(state),
   dynasty: selectDynasty(state)
 })
-export default connect(mapStateToProps, { fetchSureStats, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
+export default connect(mapStateToProps, { fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)

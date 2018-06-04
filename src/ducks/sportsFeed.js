@@ -40,7 +40,7 @@ export function fetchSportsFeed(params) {
 
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch('https://api.mysportsfeeds.com/v1.2/pull/nfl/2017-regular/cumulative_player_stats.json?player=todd-gurley', request)
+    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/cumulative_player_stats.json?player=${params.firstName}-${params.lastName}`, request)
       .then(response => response.json())
       .then(sportsFeed => dispatch({ type: SPORTS_FEED, sportsFeed }))
       .catch(console.log)
@@ -49,6 +49,6 @@ export function fetchSportsFeed(params) {
 
 // Selectors
 
-export const selectSportsFeed = state => state.sportsFeed.sportsFeed
+export const selectSportsFeed = state => state.sportsFeed.sportsFeed.cumulativeplayerstats
 
 export const selectIsLoading = state => state.sportsFeed.isLoading
