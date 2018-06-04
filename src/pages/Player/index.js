@@ -279,8 +279,7 @@ export class Player extends Component {
                         <TabHeadCol>20 YD Plus</TabHeadCol>
                         <TabHeadCol>40 YD Plus</TabHeadCol>
                         <TabHeadCol>Long</TabHeadCol>
-                        <TabHeadCol>Fumbles</TabHeadCol>
-                        <TabHeadCol>2 Pt Conv</TabHeadCol>
+                        <TabHeadCol>Fumbles Lost</TabHeadCol>
                       </TableRow>
                     </TableHeader>
                     {!feedLoading && feedStats.playerstatsentry &&
@@ -295,8 +294,7 @@ export class Player extends Component {
                           <TabCol>{feedStats.playerstatsentry[0].stats.Rush20Plus["#text"]}</TabCol>
                           <TabCol>{feedStats.playerstatsentry[0].stats.Rush40Plus["#text"]}</TabCol>
                           <TabCol>{feedStats.playerstatsentry[0].stats.RushLng["#text"]}</TabCol>
-                          <TabCol>{feedStats.playerstatsentry[0].stats.RushFumbles["#text"]}</TabCol>
-                          <TabCol>{feedStats.playerstatsentry[0].stats.TwoPtRushMade["#text"]}</TabCol>
+                          <TabCol>{feedStats.playerstatsentry[0].stats.FumLost["#text"]}</TabCol>
                         </TableRow>
                       </TableBody>
                     }
@@ -318,7 +316,6 @@ export class Player extends Component {
                         <TabHeadCol>20 YD Plus</TabHeadCol>
                         <TabHeadCol>40 YD Plus</TabHeadCol>
                         <TabHeadCol>Long</TabHeadCol>
-                        <TabHeadCol>Fumbles</TabHeadCol>
                         <TabHeadCol>Targets</TabHeadCol>
                       </TableRow>
                     </TableHeader>
@@ -334,7 +331,6 @@ export class Player extends Component {
                           <TabCol>{feedStats.playerstatsentry[0].stats.Rec20Plus["#text"]}</TabCol>
                           <TabCol>{feedStats.playerstatsentry[0].stats.Rec40Plus["#text"]}</TabCol>
                           <TabCol>{feedStats.playerstatsentry[0].stats.RecLng["#text"]}</TabCol>
-                          <TabCol>{feedStats.playerstatsentry[0].stats.RecFumbles["#text"]}</TabCol>
                           <TabCol>{feedStats.playerstatsentry[0].stats.Targets["#text"]}</TabCol>
                         </TableRow>
                       </TableBody>
