@@ -26,7 +26,7 @@ import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails }
 import { fetchGameFeed, fetchSportsFeed, selectGameFeed, selectSportsFeed, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
 
 const Wrapper = styled.div`
-  margin: 0 20%;
+  margin: 0 0%;
 
   @media (max-width: 767px) {
     margin: 0;
@@ -60,6 +60,14 @@ const RotoWireCard = styled(Card)`
 
 const RedditCard = styled(Card)`
   margin-bottom: 50px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
+`
+
+const StatCard = styled(Card)`
+  margin-bottom: 50px;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-bottom: 16px;
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
 `
 
@@ -143,7 +151,6 @@ const Progress = styled.div`
 `
 
 const CardSection = styled.div`
-  padding: 8px;
 `
 
 export class Player extends Component {
@@ -238,7 +245,7 @@ export class Player extends Component {
     console.log(gameFeed)
     return (
       <div>
-        {!isLoading ?
+        {!isLoading && !feedLoading ?
           <div>
             <PlayerCard>
               <Flex>
@@ -371,7 +378,7 @@ export class Player extends Component {
                   {gameFeed &&
                     <Section>
                       {gameFeed.gamelogs.map((game, idx) => (
-                        <RedditCard>
+                        <StatCard>
                           <CardTitle title={`Week ${idx + 1}: ${game.game.awayTeam.Name} at ${game.game.homeTeam.Name}`} />
                           <CardSection>
                             <div>
@@ -441,7 +448,7 @@ export class Player extends Component {
                               </Table>
                             </div>
                           </CardSection>
-                        </RedditCard>
+                        </StatCard>
                       ))}
                     </Section>
                   }
