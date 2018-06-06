@@ -23,7 +23,7 @@ import {
 
 import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
-import { fetchSportsFeed, selectSportsFeed, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
+import { fetchGameFeed, fetchSportsFeed, selectGameFeed, selectSportsFeed, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
 
 const Wrapper = styled.div`
   margin: 0 20%;
@@ -142,6 +142,10 @@ const Progress = styled.div`
   margin-right: auto !important;
 `
 
+const CardSection = styled.div`
+  padding: 8px;
+`
+
 export class Player extends Component {
   state = {
     backgroundColor: 'transparent',
@@ -160,6 +164,7 @@ export class Player extends Component {
           year: 2017
         }
         this.props.fetchSportsFeed(params)
+        this.props.fetchGameFeed(params)
         this.props.fetchNfl(response.playerDetails.players[0].name)
         this.props.fetchFf(response.playerDetails.players[0].name)
         this.props.fetchDynasty(response.playerDetails.players[0].name)
@@ -178,6 +183,7 @@ export class Player extends Component {
             year: 2017
           }
           this.props.fetchSportsFeed(params) 
+          this.props.fetchGameFeed(params) 
           this.props.fetchNfl(response.playerDetails.players[0].name)
           this.props.fetchFf(response.playerDetails.players[0].name)
           this.props.fetchDynasty(response.playerDetails.players[0].name)
@@ -217,10 +223,11 @@ export class Player extends Component {
       year: value
     }
     this.props.fetchSportsFeed(params)  
+    this.props.fetchGameFeed(params) 
   }
 
   render() {
-    const { isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
+    const { gameFeed, isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
     const actions = [
       <FlatButton
         label="Close"
@@ -228,7 +235,7 @@ export class Player extends Component {
         onClick={this.handleClose}
       />
     ]
-
+    console.log(gameFeed)
     return (
       <div>
         {!isLoading ?
@@ -360,7 +367,86 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="NFL" value="b">
+                <Tab label="Game Stats" value="b">
+                  {gameFeed &&
+                    <Section>
+                      {gameFeed.gamelogs.map((game, idx) => (
+                        <RedditCard>
+                          <CardTitle title={`Week ${idx + 1}: ${game.game.awayTeam.Name} at ${game.game.homeTeam.Name}`} />
+                          <CardSection>
+                            <div>
+                              <TableText>RUSHING</TableText>
+                              <Table bodyStyle={{overflow:'visible'}}>
+                                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                                  <TableRow>
+                                    <TabHeadCol>Att</TabHeadCol>
+                                    <TabHeadCol>Yds</TabHeadCol>
+                                    <TabHeadCol>YPC</TabHeadCol>
+                                    <TabHeadCol>TD</TabHeadCol>
+                                    <TabHeadCol>1st Downs</TabHeadCol>
+                                    <TabHeadCol>1st Down %</TabHeadCol>
+                                    <TabHeadCol>20 YD Plus</TabHeadCol>
+                                    <TabHeadCol>40 YD Plus</TabHeadCol>
+                                    <TabHeadCol>Long</TabHeadCol>
+                                    <TabHeadCol>Fumbles Lost</TabHeadCol>
+                                  </TableRow>
+                                </TableHeader>
+                                <TableBody displayRowCheckbox={false} showRowHover>
+                                  <TableRow>
+                                    <TabCol>{game.stats.RushAttempts["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RushYards["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RushAverage["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RushTD["#text"]}</TabCol>
+                                    <TabCol>{game.stats.Rush1stDowns["#text"]}</TabCol>
+                                    <TabCol>{game.stats.Rush1stDownsPct["#text"]}</TabCol>
+                                    <TabCol>{game.stats.Rush20Plus["#text"]}</TabCol>
+                                    <TabCol>{game.stats.Rush40Plus["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RushLng["#text"]}</TabCol>
+                                    <TabCol>{game.stats.FumLost["#text"]}</TabCol>
+                                  </TableRow>
+                                </TableBody>
+                              </Table>
+                            </div>
+                            <div>
+                              <TableText>RECEIVING</TableText>
+                              <Table bodyStyle={{overflow:'visible'}}>
+                                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                                  <TableRow>
+                                    <TabHeadCol>Rec</TabHeadCol>
+                                    <TabHeadCol>Yds</TabHeadCol>
+                                    <TabHeadCol>YPC</TabHeadCol>
+                                    <TabHeadCol>TD</TabHeadCol>
+                                    <TabHeadCol>1st Downs</TabHeadCol>
+                                    <TabHeadCol>1st Down %</TabHeadCol>
+                                    <TabHeadCol>20 YD Plus</TabHeadCol>
+                                    <TabHeadCol>40 YD Plus</TabHeadCol>
+                                    <TabHeadCol>Long</TabHeadCol>
+                                    <TabHeadCol>Targets</TabHeadCol>
+                                  </TableRow>
+                                </TableHeader>
+                                <TableBody displayRowCheckbox={false} showRowHover>
+                                  <TableRow>
+                                    <TabCol>{game.stats.Receptions["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RecYards["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RecAverage["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RecTD["#text"]}</TabCol>
+                                    <TabCol>{game.stats.Rec1stDowns["#text"]}</TabCol>
+                                    <TabCol>{((game.stats.Rec1stDowns["#text"] / feedStats.playerstatsentry[0].stats.Targets["#text"]) * 100).toFixed(1)}</TabCol>
+                                    <TabCol>{game.stats.Rec20Plus["#text"]}</TabCol>
+                                    <TabCol>{game.stats.Rec40Plus["#text"]}</TabCol>
+                                    <TabCol>{game.stats.RecLng["#text"]}</TabCol>
+                                    <TabCol>{game.stats.Targets["#text"]}</TabCol>
+                                  </TableRow>
+                                </TableBody>
+                              </Table>
+                            </div>
+                          </CardSection>
+                        </RedditCard>
+                      ))}
+                    </Section>
+                  }
+                </Tab>
+                <Tab label="NFL" value="c">
                   <Section>
                     {nfl.map(post => (
                       <RedditCard>
@@ -374,7 +460,7 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="Fantasy" value="c">
+                <Tab label="Fantasy" value="d">
                   <Section>
                     {ff.map(post => (
                       <RedditCard>
@@ -388,7 +474,7 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="Dynasty" value="d">
+                <Tab label="Dynasty" value="e">
                   <Section>
                     {dynasty.map(post => (
                       <RedditCard>
@@ -415,6 +501,7 @@ export class Player extends Component {
 
 const mapStateToProps = (state, props) => ({
   feedLoading: feedLoading(state),
+  gameFeed: selectGameFeed(state),
   isLoading: selectIsLoading(state),
   notes: selectNotes(state),
   playerDetails: selectPlayerDetails(state),
@@ -423,4 +510,4 @@ const mapStateToProps = (state, props) => ({
   ff: selectFf(state),
   dynasty: selectDynasty(state)
 })
-export default connect(mapStateToProps, { fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
+export default connect(mapStateToProps, { fetchGameFeed, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)

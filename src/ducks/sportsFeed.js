@@ -7,11 +7,13 @@ const API_PASSWORD = process.env.REACT_APP_PASSWORD
 
 const BEGIN = 'BEGIN_SPORTS_FEED_FETCH'
 const SPORTS_FEED = 'FETCH_SPORTS_FEED_SUCCESS'
+const GAME_FEED = 'FETCH_GAME_FEED_SUCCESS'
 
 // Reducer
 
 const initialState = {
   sportsFeed: [],
+  gameFeed: [],
   isLoading: true
 }
 
@@ -22,6 +24,9 @@ export default function (state = initialState, action) {
 
     case SPORTS_FEED:
       return { ...state, sportsFeed: action.sportsFeed, isLoading: false }
+
+    case GAME_FEED:
+      return { ...state, gameFeed: action.gameFeed, isLoading: false }
 
     default:
       return state
@@ -47,8 +52,27 @@ export function fetchSportsFeed(params) {
   }
 }
 
+export function fetchGameFeed(params) {
+  const request = {
+    method: 'GET',
+    headers: {
+      "Authorization": "Basic " + btoa(API_USERNAME + ":" + API_PASSWORD)
+    }
+  };
+
+  return dispatch => {
+    dispatch({ type: BEGIN })
+    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/player_gamelogs.json?player=${params.firstName}-${params.lastName}`, request)
+      .then(response => response.json())
+      .then(gameFeed => dispatch({ type: GAME_FEED, gameFeed }))
+      .catch(console.log)
+  }
+}
+
 // Selectors
 
 export const selectSportsFeed = state => state.sportsFeed.sportsFeed.cumulativeplayerstats
+
+export const selectGameFeed = state => state.sportsFeed.gameFeed.playergamelogs
 
 export const selectIsLoading = state => state.sportsFeed.isLoading
