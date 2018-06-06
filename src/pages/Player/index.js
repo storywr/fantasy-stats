@@ -173,7 +173,7 @@ export class Player extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.playerId !== this.props.match.params.playerId) {
-      this.setState({ year: '2017' })
+      this.setState({ value: 'a', year: '2017' })
       this.props.fetchPlayerDetails(nextProps.match.params.playerId)
         .then((response) => {
           const names = response.playerDetails.players[0].name.split(' ')
