@@ -52,8 +52,10 @@ const Section = styled.div`
 `
 
 const Progress = styled.div`
-  width: 64px;
-  margin: 30% auto auto auto;
+  width: 100px;
+  margin-top: 15%;
+  margin-left: auto !important;
+  margin-right: auto !important;
 `
 
 export class News extends Component {
@@ -151,7 +153,7 @@ export class News extends Component {
             </Tabs>
           </div>
         :
-          <Progress><CircularProgress size={150} thickness={10} /></Progress>
+          <Progress><CircularProgress size={100} thickness={10} /></Progress>
         }
       </Wrapper>
     )
