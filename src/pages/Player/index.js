@@ -83,6 +83,11 @@ const TableText = styled(CardTitle)`
   font-weight: 500;
 `
 
+const PositionText = styled(CardTitle)`
+  font-weight: 500;
+  padding: 0px 0px 8px 0px !important;
+`
+
 const TextLink = styled.a`
   padding: 16px;
   font-size: 14px;
@@ -131,6 +136,7 @@ const Section = styled.div`
 const PlayerCard = styled(Card)`
   margin: 32px 0px 40px;
   padding: 8px 24px 16px;
+  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
 `
 
 const TabCol = styled(TableRowColumn)`
@@ -266,6 +272,7 @@ export class Player extends Component {
                   </Dialog>
                 </HighlightsButton>
               </Flex>
+              <PositionText>{`${feedStats.playerstatsentry[0].team.City} ${feedStats.playerstatsentry[0].team.Name}, ${feedStats.playerstatsentry[0].player.Position} #${feedStats.playerstatsentry[0].player.JerseyNumber}`}</PositionText>
               <SearchBoxes>
                 <PositionSearch
                   floatingLabelText="Year"
