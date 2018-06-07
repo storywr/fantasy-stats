@@ -10,6 +10,10 @@ import Divider from 'material-ui/Divider';
 import { Link } from 'react-router-dom'
 
 const FantasyHqAppBar = styled(AppBar)`
+  @media (max-width: 767px) {
+    padding: 0 3%;
+  }
+
   padding-left: 7% !important;
 `
 

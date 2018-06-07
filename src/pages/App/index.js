@@ -16,6 +16,10 @@ import Player from '../Player'
 import Scoring from '../Scoring'
 
 const Wrapper = styled.div`
+  @media (max-width: 767px) {
+    padding: 0 3%;
+  }
+
   padding: 0 7%;
 `
 

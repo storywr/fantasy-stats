@@ -365,7 +365,7 @@ export class Player extends Component {
                 value={this.state.value}
                 onChange={this.handleChange}
               >
-                <Tab label="RotoWire" value="a">
+                <Tab label="Roto" value="a">
                   <Section>
                     {notes.map(note => (
                       <RotoWireCard>
@@ -381,7 +381,7 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="Game Stats" value="b">
+                <Tab label="Stats" value="b">
                   {gameFeed &&
                     <Section>
                       {gameFeed.gamelogs.map((game, idx) => (
