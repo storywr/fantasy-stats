@@ -261,6 +261,7 @@ export class Player extends Component {
       />
     ]
     console.log(dfsStats)
+    debugger;
     return (
       <div>
         {!isLoading && !feedLoading ?
@@ -396,7 +397,7 @@ export class Player extends Component {
                   </Section>
                 </Tab>
                 <Tab label="Stats" value="b">
-                  {gameFeed &&
+                  {gameFeed && feedStats &&
                     <Section>
                       {gameFeed.gamelogs.map((game, idx) => (
                         <StatCard>
@@ -486,17 +487,14 @@ export class Player extends Component {
                           </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false} showRowHover>
-                          {dfsStats.dfsEntries[0].dfsRows.map((week, idx) => {
-                            if (week.player) {
-                              return (
-                                <TableRow>
-                                  <TabCol>{(idx / 2) + 1}</TabCol>
-                                  <TabCol>${week.salary}</TabCol>
-                                  <TabCol>{week.fantasyPoints}</TabCol>
-                                </TableRow>
-                              )
-                            }
-                          })}
+                          {dfsStats.dfsEntries[0].dfsRows.filter((week, idx) => ( idx % 2 === 0 )).map((week, idx) => (
+                              <TableRow>
+                                <TabCol>{idx + 1}</TabCol>
+                                <TabCol>${week.salary}</TabCol>
+                                <TabCol>{week.fantasyPoints}</TabCol>
+                              </TableRow>
+                            )
+                          )}
                         </TableBody>
                       </Table>
                     </DfsTable>
