@@ -481,8 +481,8 @@ export class Player extends Component {
                         <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                           <TableRow>
                             <TabHeadCol>Week</TabHeadCol>
-                            <TabHeadCol>FanDuel Salary</TabHeadCol>
-                            <TabHeadCol>FanDuel Fantasy Points</TabHeadCol>
+                            <TabHeadCol>Salary</TabHeadCol>
+                            <TabHeadCol>Pts</TabHeadCol>
                           </TableRow>
                         </TableHeader>
                         <TableBody displayRowCheckbox={false} showRowHover>
@@ -516,7 +516,7 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="Fantasy" value="e">
+                <Tab label="FF" value="e">
                   <Section>
                     {ff.map(post => (
                       <RedditCard>
@@ -530,7 +530,7 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="Dynasty" value="f">
+                <Tab label="DFF" value="f">
                   <Section>
                     {dynasty.map(post => (
                       <RedditCard>
