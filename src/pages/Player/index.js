@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
-import YouTube from 'react-youtube'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
@@ -23,7 +22,7 @@ import {
 
 import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
-import { fetchGameFeed, fetchSportsFeed, selectGameFeed, selectSportsFeed, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
+import { fetchDfsStats, fetchGameFeed, fetchSportsFeed, selectGameFeed, selectSportsFeed, selectDfsStats, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
 
 const Wrapper = styled.div`
   margin: 0 0%;
@@ -159,6 +158,10 @@ const Progress = styled.div`
 const CardSection = styled.div`
 `
 
+const DfsTable = styled.div`
+  margin-bottom: 32px;
+`
+
 export class Player extends Component {
   state = {
     backgroundColor: 'transparent',
@@ -171,11 +174,14 @@ export class Player extends Component {
     this.props.fetchPlayerDetails(this.props.match.params.playerId)
       .then((response) => {
         const names = response.playerDetails.players[0].name.split(' ')
+        const teamName = response.playerDetails.players[0].teamAbbr
         const params = {
           firstName: names[0],
           lastName: names[1],
-          year: 2017
+          year: 2017,
+          teamName
         }
+        this.props.fetchDfsStats(params)
         this.props.fetchSportsFeed(params)
         this.props.fetchGameFeed(params)
         this.props.fetchNfl(response.playerDetails.players[0].name)
@@ -190,11 +196,14 @@ export class Player extends Component {
       this.props.fetchPlayerDetails(nextProps.match.params.playerId)
         .then((response) => {
           const names = response.playerDetails.players[0].name.split(' ')
+          const teamName = response.playerDetails.players[0].teamAbbr
           const params = {
             firstName: names[0],
             lastName: names[1],
-            year: 2017
+            year: 2017,
+            teamName
           }
+          this.props.fetchDfsStats(params)
           this.props.fetchSportsFeed(params) 
           this.props.fetchGameFeed(params) 
           this.props.fetchNfl(response.playerDetails.players[0].name)
@@ -230,17 +239,20 @@ export class Player extends Component {
     })
 
     const names = this.props.playerDetails.name.split(' ')
+    const teamName = this.props.playerDetails.teamAbbr
     const params = {
       firstName: names[0],
       lastName: names[1],
-      year: value
+      year: value,
+      teamName
     }
+    this.props.fetchDfsStats(params)
     this.props.fetchSportsFeed(params)  
     this.props.fetchGameFeed(params) 
   }
 
   render() {
-    const { gameFeed, isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
+    const { dfsStats, gameFeed, isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
     const actions = [
       <FlatButton
         label="Close"
@@ -248,7 +260,7 @@ export class Player extends Component {
         onClick={this.handleClose}
       />
     ]
-    console.log(gameFeed)
+    console.log(dfsStats)
     return (
       <div>
         {!isLoading && !feedLoading ?
@@ -272,7 +284,9 @@ export class Player extends Component {
                   </Dialog>
                 </HighlightsButton>
               </Flex>
-              <PositionText>{`${feedStats.playerstatsentry[0].team.City} ${feedStats.playerstatsentry[0].team.Name}, ${feedStats.playerstatsentry[0].player.Position} #${feedStats.playerstatsentry[0].player.JerseyNumber}`}</PositionText>
+              {feedStats &&
+                <PositionText>{`${feedStats.playerstatsentry[0].team.City} ${feedStats.playerstatsentry[0].team.Name}, ${feedStats.playerstatsentry[0].player.Position} #${feedStats.playerstatsentry[0].player.JerseyNumber}`}</PositionText>
+              }  
               <SearchBoxes>
                 <PositionSearch
                   floatingLabelText="Year"
@@ -460,7 +474,35 @@ export class Player extends Component {
                     </Section>
                   }
                 </Tab>
-                <Tab label="NFL" value="c">
+                <Tab label="DFS" value="c">
+                  {dfsStats &&
+                    <DfsTable>
+                      <Table>
+                        <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                          <TableRow>
+                            <TabHeadCol>Week</TabHeadCol>
+                            <TabHeadCol>FanDuel Salary</TabHeadCol>
+                            <TabHeadCol>FanDuel Fantasy Points</TabHeadCol>
+                          </TableRow>
+                        </TableHeader>
+                        <TableBody displayRowCheckbox={false} showRowHover>
+                          {dfsStats.dfsEntries[0].dfsRows.map((week, idx) => {
+                            if (week.player) {
+                              return (
+                                <TableRow>
+                                  <TabCol>{(idx / 2) + 1}</TabCol>
+                                  <TabCol>${week.salary}</TabCol>
+                                  <TabCol>{week.fantasyPoints}</TabCol>
+                                </TableRow>
+                              )
+                            }
+                          })}
+                        </TableBody>
+                      </Table>
+                    </DfsTable>
+                  }
+                </Tab>
+                <Tab label="NFL" value="d">
                   <Section>
                     {nfl.map(post => (
                       <RedditCard>
@@ -474,7 +516,7 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="Fantasy" value="d">
+                <Tab label="Fantasy" value="e">
                   <Section>
                     {ff.map(post => (
                       <RedditCard>
@@ -488,7 +530,7 @@ export class Player extends Component {
                     ))}
                   </Section>
                 </Tab>
-                <Tab label="Dynasty" value="e">
+                <Tab label="Dynasty" value="f">
                   <Section>
                     {dynasty.map(post => (
                       <RedditCard>
@@ -522,6 +564,7 @@ const mapStateToProps = (state, props) => ({
   feedStats: selectSportsFeed(state),
   nfl: selectNfl(state),
   ff: selectFf(state),
-  dynasty: selectDynasty(state)
+  dynasty: selectDynasty(state),
+  dfsStats: selectDfsStats(state)
 })
-export default connect(mapStateToProps, { fetchGameFeed, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
+export default connect(mapStateToProps, { fetchDfsStats, fetchGameFeed, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
