@@ -23,7 +23,7 @@ import {
 
 import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
-import { fetchDfsStats, fetchGameFeed, fetchSportsFeed, selectGameFeed, selectSportsFeed, selectDfsStats, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
+import { fetchPlayerFeed, fetchDfsStats, fetchGameFeed, fetchSportsFeed, selectGameFeed, selectSportsFeed, selectDfsStats, selectPlayerFeed, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
 
 const Wrapper = styled.div`
   margin: 0 0%;
@@ -202,6 +202,7 @@ export class Player extends Component {
           year: 2017,
           teamName
         }
+        this.props.fetchPlayerFeed(params)
         this.props.fetchDfsStats(params)
         this.props.fetchSportsFeed(params)
         this.props.fetchGameFeed(params)
@@ -224,6 +225,7 @@ export class Player extends Component {
             year: 2017,
             teamName
           }
+          this.props.fetchPlayerFeed(params)
           this.props.fetchDfsStats(params)
           this.props.fetchSportsFeed(params) 
           this.props.fetchGameFeed(params) 
@@ -273,7 +275,7 @@ export class Player extends Component {
   }
 
   render() {
-    const { dfsStats, gameFeed, isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
+    const { playerFeed, dfsStats, gameFeed, isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
     const actions = [
       <FlatButton
         label="Close"
@@ -313,8 +315,11 @@ export class Player extends Component {
                   </Dialog>
                 </HighlightsButton>
               </Flex>
-              {feedStats &&
-                <PositionText>{`${feedStats.playerstatsentry[0].team.City} ${feedStats.playerstatsentry[0].team.Name}, ${feedStats.playerstatsentry[0].player.Position} #${feedStats.playerstatsentry[0].player.JerseyNumber}`}</PositionText>
+              {feedStats && playerFeed &&
+                <div>
+                  <PositionText>{`${feedStats.playerstatsentry[0].team.City} ${feedStats.playerstatsentry[0].team.Name} | ${feedStats.playerstatsentry[0].player.Position} | #${feedStats.playerstatsentry[0].player.JerseyNumber}`}</PositionText>
+                  <PositionText>{playerFeed.playerentry[0].player.BirthDate} ({playerFeed.playerentry[0].player.Age}) | {playerFeed.playerentry[0].player.Height} | {playerFeed.playerentry[0].player.Weight}</PositionText>
+                </div>
               }  
               <SearchBoxes>
                 <PositionSearch
@@ -598,6 +603,7 @@ export class Player extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
+  playerFeed: selectPlayerFeed(state),
   feedLoading: feedLoading(state),
   gameFeed: selectGameFeed(state),
   isLoading: selectIsLoading(state),
@@ -609,4 +615,4 @@ const mapStateToProps = (state, props) => ({
   dynasty: selectDynasty(state),
   dfsStats: selectDfsStats(state)
 })
-export default connect(mapStateToProps, { fetchDfsStats, fetchGameFeed, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
+export default connect(mapStateToProps, { fetchPlayerFeed, fetchDfsStats, fetchGameFeed, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
