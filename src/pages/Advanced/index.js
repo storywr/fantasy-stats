@@ -9,6 +9,7 @@ import MenuItem from 'material-ui/MenuItem';
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
+import CircularProgress from 'material-ui/CircularProgress'
 
 import {
   Table,
@@ -84,6 +85,13 @@ const RankCol = styled(TableRowColumn)`
   width: 4%;
 `
 
+const Progress = styled.div`
+  width: 100px;
+  margin-top: 15%;
+  margin-left: auto !important;
+  margin-right: auto !important;
+`
+
 export class Advanced extends Component {
   state = {
     position: 'RB',
@@ -147,7 +155,7 @@ export class Advanced extends Component {
     console.log(advanced)
     return (
       <div>
-        {!isLoading && advanced[this.state.position] &&
+        {!isLoading && advanced[this.state.position] ?
           <div>
             <SearchBoxes>
               <PositionSearch
@@ -229,6 +237,8 @@ export class Advanced extends Component {
               </TableBody>
             </Table>
           </div>
+        :
+          <Progress><CircularProgress size={100} thickness={10} /></Progress>
         }
       </div>
     )
