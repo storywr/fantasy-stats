@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Tabs, Tab} from 'material-ui/Tabs'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 import CircularProgress from 'material-ui/CircularProgress'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
@@ -162,6 +163,26 @@ const DfsTable = styled.div`
   margin-bottom: 32px;
 `
 
+const DfsChart = styled.div`
+  margin-top: 32px;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+`
+
+const Dfs = styled.div`
+  @media (max-width: 767px) {
+    display: none;
+  }
+
+  margin-top: 32px;
+  height: 100%;
+  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
+`
+
 export class Player extends Component {
   state = {
     backgroundColor: 'transparent',
@@ -260,8 +281,15 @@ export class Player extends Component {
         onClick={this.handleClose}
       />
     ]
-    console.log(dfsStats)
-    debugger;
+
+    if (dfsStats) {
+      const data = dfsStats.dfsEntries[0].dfsRows.filter((week, idx) => ( week.player ))
+      var chartData = []
+      data.map((week, idx) => { 
+        chartData.push({ name: (idx + 1), salary: parseFloat(week.salary), fantasyPoints: parseFloat(week.fantasyPoints) })
+      })
+    }
+    
     return (
       <div>
         {!isLoading && !feedLoading ?
@@ -397,7 +425,7 @@ export class Player extends Component {
                   </Section>
                 </Tab>
                 <Tab label="Stats" value="b">
-                  {gameFeed && feedStats &&
+                  {gameFeed && gameFeed.gamelogs && feedStats &&
                     <Section>
                       {gameFeed.gamelogs.map((game, idx) => (
                         <StatCard>
@@ -476,28 +504,44 @@ export class Player extends Component {
                   }
                 </Tab>
                 <Tab label="DFS" value="c">
-                  {dfsStats &&
-                    <DfsTable>
-                      <Table>
-                        <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                          <TableRow>
-                            <TabHeadCol>Week</TabHeadCol>
-                            <TabHeadCol>Salary</TabHeadCol>
-                            <TabHeadCol>Pts</TabHeadCol>
-                          </TableRow>
-                        </TableHeader>
-                        <TableBody displayRowCheckbox={false} showRowHover>
-                          {dfsStats.dfsEntries[0].dfsRows.filter((week, idx) => ( idx % 2 === 0 )).map((week, idx) => (
-                              <TableRow>
-                                <TabCol>{idx + 1}</TabCol>
-                                <TabCol>${week.salary}</TabCol>
-                                <TabCol>{week.fantasyPoints}</TabCol>
-                              </TableRow>
-                            )
-                          )}
-                        </TableBody>
-                      </Table>
-                    </DfsTable>
+                  {dfsStats && chartData &&
+                    <DfsChart>
+                      <Dfs>
+                        <ResponsiveContainer width='100%' aspect={2}>
+                          <LineChart data={chartData} margin={{top: 20, right: 20, bottom: 40, left: 20}}>
+                            <Tooltip />
+                            <Legend />
+                            <XAxis dataKey="name" tickCount={16} />
+                            <YAxis yAxisId="right" orientation='right' name='salary' label={{ value: 'Salary', angle: -90, position: 'right' }} />
+                            <YAxis yAxisId="left" orientation='left' name='fantasy points' label={{ value: 'Fantasy Points', angle: -90, position: 'insideLeft' }} />
+                            <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
+                            <Line yAxisId="right" type="monotone" dataKey="salary" stroke="#00bcd4" strokeWidth={2} />
+                            <Line yAxisId="left" type="monotone" dataKey="fantasyPoints" stroke="#fc4482" strokeWidth={2} />
+                          </LineChart>
+                        </ResponsiveContainer>
+                      </Dfs>
+                      <DfsTable>
+                        <Table>
+                          <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                            <TableRow>
+                              <TabHeadCol>Week</TabHeadCol>
+                              <TabHeadCol>Salary</TabHeadCol>
+                              <TabHeadCol>Pts</TabHeadCol>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody displayRowCheckbox={false} showRowHover>
+                            {dfsStats.dfsEntries[0].dfsRows.filter((week, idx) => ( week.player )).map((week, idx) => (
+                                <TableRow>
+                                  <TabCol>{idx + 1}</TabCol>
+                                  <TabCol>${week.salary}</TabCol>
+                                  <TabCol>{week.fantasyPoints}</TabCol>
+                                </TableRow>
+                              )
+                            )}
+                          </TableBody>
+                        </Table>
+                      </DfsTable>
+                    </DfsChart>
                   }
                 </Tab>
                 <Tab label="NFL" value="d">
