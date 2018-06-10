@@ -286,7 +286,7 @@ export class Player extends Component {
       const data = dfsStats.dfsEntries[0].dfsRows.filter((week, idx) => ( week.player ))
       var chartData = []
       data.map((week, idx) => { 
-        chartData.push({ name: (idx + 1), salary: parseFloat(week.salary), fantasyPoints: parseFloat(week.fantasyPoints) })
+        chartData.push({ name: (idx + 1), Salary: parseFloat(week.salary), FantasyPoints: parseFloat(week.fantasyPoints) })
       })
     }
     
@@ -512,11 +512,11 @@ export class Player extends Component {
                             <Tooltip />
                             <Legend />
                             <XAxis dataKey="name" tickCount={16} />
-                            <YAxis yAxisId="right" orientation='right' name='salary' label={{ value: 'Salary', angle: -90, position: 'right' }} />
+                            <YAxis yAxisId="right" orientation='right' name='salary' label={{ value: 'Salary', angle: -90, position: 'right' }} domain={["dataMin", "dataMax"]} />
                             <YAxis yAxisId="left" orientation='left' name='fantasy points' label={{ value: 'Fantasy Points', angle: -90, position: 'insideLeft' }} />
                             <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
-                            <Line yAxisId="right" type="monotone" dataKey="salary" stroke="#00bcd4" strokeWidth={2} />
-                            <Line yAxisId="left" type="monotone" dataKey="fantasyPoints" stroke="#fc4482" strokeWidth={2} />
+                            <Line yAxisId="right" type="monotone" dataKey="Salary" stroke="#00bcd4" strokeWidth={2} />
+                            <Line yAxisId="left" type="monotone" dataKey="FantasyPoints" stroke="#fc4482" strokeWidth={2} />
                           </LineChart>
                         </ResponsiveContainer>
                       </Dfs>
@@ -524,7 +524,7 @@ export class Player extends Component {
                         <Table>
                           <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                             <TableRow>
-                              <TabHeadCol>Week</TabHeadCol>
+                              <TabHeadCol>Game</TabHeadCol>
                               <TabHeadCol>Salary</TabHeadCol>
                               <TabHeadCol>Pts</TabHeadCol>
                             </TableRow>
