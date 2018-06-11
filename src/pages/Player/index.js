@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import {Tabs, Tab} from 'material-ui/Tabs'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
 
 import PlayerCard from './PlayerCard'
+import PlayerTabs from './PlayerTabs'
 
 import CircularProgress from 'material-ui/CircularProgress'
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
@@ -35,148 +35,11 @@ const Wrapper = styled.div`
   }
 `
 
-const PlayerName = styled(CardTitle)`
-  padding-left: 0 !important;
-`
-
-const SearchBoxes = styled.div`
-  display: flex;
-
-  @media (max-width: 767px) {
-    display: block;
-  }
-`
-
-const PositionSearch = styled(SelectField)`
-  margin-bottom: 24px;
-
-  @media (max-width: 767px) {
-    margin-left: 8px;
-  }
-`
-
-const RotoWireCard = styled(Card)`
-  margin-bottom: 50px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
-`
-
-const RedditCard = styled(Card)`
-  margin-bottom: 50px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
-`
-
-const StatCard = styled(Card)`
-  margin-bottom: 50px;
-  padding-left: 16px;
-  padding-right: 16px;
-  padding-bottom: 16px;
-  box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
-`
-
-const TableWrapper = styled.div`
-  margin-bottom: 80px;
-`
-
-const Text = styled(CardText)`
-  line-height: 200%;
-`
-
-const TableText = styled(CardTitle)`
-  font-weight: 500;
-`
-
-const PositionText = styled(CardTitle)`
-  font-weight: 500;
-  padding: 0px 0px 8px 0px !important;
-`
-
-const TextLink = styled.a`
-  padding: 16px;
-  font-size: 14px;
-  line-height: 200%;
-  display: block;
-
-  &:hover{ 
-    background-color: rgba(0, 0, 0, 0.08) !important;
-  }
-`
-
-const HighlightsButton = styled.div`
-  @media (max-width: 767px) {
-    display: none;
-  }
-  margin-left: auto;
-`
-
-const MobileHeaderCol = styled(TableHeaderColumn)`
-  @media (max-width: 767px) {
-    display: none;
-  }
-`
-
-const Flex = styled.div`
-  display: flex;
-  align-items: center;
-`
-
-const MobileTableCol = styled(TableRowColumn)`
-  @media (max-width: 767px) {
-    display: none;
-  }
-`
-
-const VideoPlayer = styled.iframe`
-  height: 45vh;
-  width: 45vw;
-  margin: 1%;
-`
-
-const Section = styled.div`
-  margin-top: 24px;
-`
-
-const TabCol = styled(TableRowColumn)`
-  min-width: 32px;
-  width: 32px;
-`
-
-const TabHeadCol = styled(TableHeaderColumn)`
-  min-width: 32px;
-  width: 32px;
-`
-
 const Progress = styled.div`
   width: 100px;
   margin-top: 15%;
   margin-left: auto !important;
   margin-right: auto !important;
-`
-
-const CardSection = styled.div`
-`
-
-const DfsTable = styled.div`
-  margin-bottom: 32px;
-`
-
-const DfsChart = styled.div`
-  margin-top: 32px;
-  height: 100%;
-  width: 100%;
-  min-height: 100%;
-  min-width: 100%;
-`
-
-const Dfs = styled.div`
-  @media (max-width: 767px) {
-    display: none;
-  }
-
-  margin-top: 32px;
-  height: 100%;
-  width: 100%;
-  min-height: 100%;
-  min-width: 100%;
 `
 
 export class Player extends Component {
@@ -305,189 +168,20 @@ export class Player extends Component {
               feedLoading={feedLoading}
             />
             <Wrapper>
-              <Tabs
+              <PlayerTabs 
                 value={this.state.value}
-                onChange={this.handleChange}
-              >
-                <Tab label="Roto" value="a">
-                  <Section>
-                    {notes.map(note => (
-                      <RotoWireCard>
-                        <CardHeader
-                          title={this.getTitle(playerDetails)}
-                          subtitle={`${playerDetails.position}, #${playerDetails.jerseyNumber}`}
-                          avatar={playerDetails.videos[0].mediumPhotoUrl}  
-                        />
-                        <CardTitle title={note.headline} />
-                        <Text><strong>{note.body}</strong></Text>
-                        <Text>{note.analysis}</Text>
-                      </RotoWireCard>
-                    ))}
-                  </Section>
-                </Tab>
-                <Tab label="Stats" value="b">
-                  {gameFeed && gameFeed.gamelogs && feedStats &&
-                    <Section>
-                      {gameFeed.gamelogs.map((game, idx) => (
-                        <StatCard>
-                          <CardTitle title={`Week ${idx + 1}: ${game.game.awayTeam.Name} at ${game.game.homeTeam.Name}`} />
-                          <CardSection>
-                            <div>
-                              <TableText>RUSHING</TableText>
-                              <Table bodyStyle={{overflow:'visible'}}>
-                                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                                  <TableRow>
-                                    <TabHeadCol>Att</TabHeadCol>
-                                    <TabHeadCol>Yds</TabHeadCol>
-                                    <TabHeadCol>YPC</TabHeadCol>
-                                    <TabHeadCol>TD</TabHeadCol>
-                                    <TabHeadCol>1st Downs</TabHeadCol>
-                                    <TabHeadCol>1st Down %</TabHeadCol>
-                                    <TabHeadCol>20 YD Plus</TabHeadCol>
-                                    <TabHeadCol>40 YD Plus</TabHeadCol>
-                                    <TabHeadCol>Long</TabHeadCol>
-                                    <TabHeadCol>Fumbles Lost</TabHeadCol>
-                                  </TableRow>
-                                </TableHeader>
-                                <TableBody displayRowCheckbox={false} showRowHover>
-                                  <TableRow>
-                                    <TabCol>{game.stats.RushAttempts["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RushYards["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RushAverage["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RushTD["#text"]}</TabCol>
-                                    <TabCol>{game.stats.Rush1stDowns["#text"]}</TabCol>
-                                    <TabCol>{game.stats.Rush1stDownsPct["#text"]}</TabCol>
-                                    <TabCol>{game.stats.Rush20Plus["#text"]}</TabCol>
-                                    <TabCol>{game.stats.Rush40Plus["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RushLng["#text"]}</TabCol>
-                                    <TabCol>{game.stats.FumLost["#text"]}</TabCol>
-                                  </TableRow>
-                                </TableBody>
-                              </Table>
-                            </div>
-                            <div>
-                              <TableText>RECEIVING</TableText>
-                              <Table bodyStyle={{overflow:'visible'}}>
-                                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                                  <TableRow>
-                                    <TabHeadCol>Rec</TabHeadCol>
-                                    <TabHeadCol>Yds</TabHeadCol>
-                                    <TabHeadCol>YPC</TabHeadCol>
-                                    <TabHeadCol>TD</TabHeadCol>
-                                    <TabHeadCol>1st Downs</TabHeadCol>
-                                    <TabHeadCol>1st Down %</TabHeadCol>
-                                    <TabHeadCol>20 YD Plus</TabHeadCol>
-                                    <TabHeadCol>40 YD Plus</TabHeadCol>
-                                    <TabHeadCol>Long</TabHeadCol>
-                                    <TabHeadCol>Targets</TabHeadCol>
-                                  </TableRow>
-                                </TableHeader>
-                                <TableBody displayRowCheckbox={false} showRowHover>
-                                  <TableRow>
-                                    <TabCol>{game.stats.Receptions["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RecYards["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RecAverage["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RecTD["#text"]}</TabCol>
-                                    <TabCol>{game.stats.Rec1stDowns["#text"]}</TabCol>
-                                    <TabCol>{((game.stats.Rec1stDowns["#text"] / feedStats.playerstatsentry[0].stats.Targets["#text"]) * 100).toFixed(1)}</TabCol>
-                                    <TabCol>{game.stats.Rec20Plus["#text"]}</TabCol>
-                                    <TabCol>{game.stats.Rec40Plus["#text"]}</TabCol>
-                                    <TabCol>{game.stats.RecLng["#text"]}</TabCol>
-                                    <TabCol>{game.stats.Targets["#text"]}</TabCol>
-                                  </TableRow>
-                                </TableBody>
-                              </Table>
-                            </div>
-                          </CardSection>
-                        </StatCard>
-                      ))}
-                    </Section>
-                  }
-                </Tab>
-                <Tab label="DFS" value="c">
-                  {dfsStats && chartData &&
-                    <DfsChart>
-                      <Dfs>
-                        <ResponsiveContainer width='100%' aspect={2}>
-                          <LineChart data={chartData} margin={{top: 20, right: 20, bottom: 40, left: 20}}>
-                            <Tooltip />
-                            <Legend />
-                            <XAxis dataKey="name" tickCount={16} />
-                            <YAxis yAxisId="right" orientation='right' name='salary' label={{ value: 'Salary', angle: -90, position: 'right' }} domain={["dataMin", "dataMax"]} />
-                            <YAxis yAxisId="left" orientation='left' name='fantasy points' label={{ value: 'Fantasy Points', angle: -90, position: 'insideLeft' }} />
-                            <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
-                            <Line yAxisId="right" type="monotone" dataKey="Salary" stroke="#00bcd4" strokeWidth={2} />
-                            <Line yAxisId="left" type="monotone" dataKey="FantasyPoints" stroke="#fc4482" strokeWidth={2} />
-                          </LineChart>
-                        </ResponsiveContainer>
-                      </Dfs>
-                      <DfsTable>
-                        <Table>
-                          <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                            <TableRow>
-                              <TabHeadCol>Game</TabHeadCol>
-                              <TabHeadCol>Salary</TabHeadCol>
-                              <TabHeadCol>Pts</TabHeadCol>
-                            </TableRow>
-                          </TableHeader>
-                          <TableBody displayRowCheckbox={false} showRowHover>
-                            {dfsStats.dfsEntries[0].dfsRows.filter((week, idx) => ( week.player )).map((week, idx) => (
-                                <TableRow>
-                                  <TabCol>{idx + 1}</TabCol>
-                                  <TabCol>${week.salary}</TabCol>
-                                  <TabCol>{week.fantasyPoints}</TabCol>
-                                </TableRow>
-                              )
-                            )}
-                          </TableBody>
-                        </Table>
-                      </DfsTable>
-                    </DfsChart>
-                  }
-                </Tab>
-                <Tab label="NFL" value="d">
-                  <Section>
-                    {nfl.map(post => (
-                      <RedditCard>
-                        <CardTitle title={post.data.title} />
-                        {post.data.selfText && <Text>{post.data.selftext}</Text>}
-                        <CardActions>
-                          <FlatButton label="Article" href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
-                          <FlatButton label="Reddit Post" href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
-                        </CardActions>
-                      </RedditCard>
-                    ))}
-                  </Section>
-                </Tab>
-                <Tab label="FF" value="e">
-                  <Section>
-                    {ff.map(post => (
-                      <RedditCard>
-                        <CardTitle title={post.data.title} />
-                        {post.data.selfText && <Text>{post.data.selftext}</Text>}
-                        <CardActions>
-                          <FlatButton label="Article" href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
-                          <FlatButton label="Reddit Post" href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
-                        </CardActions>
-                      </RedditCard>
-                    ))}
-                  </Section>
-                </Tab>
-                <Tab label="DFF" value="f">
-                  <Section>
-                    {dynasty.map(post => (
-                      <RedditCard>
-                        <CardTitle title={post.data.title} />
-                        {post.data.selfText && <Text>{post.data.selftext}</Text>}
-                        <CardActions>
-                          <FlatButton label="Article" href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
-                          <FlatButton label="Reddit Post" href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
-                        </CardActions>
-                      </RedditCard>
-                    ))}
-                  </Section>
-                </Tab>
-              </Tabs>
+                handleChange={this.handleChange}
+                notes={notes}
+                getTitle={this.getTitle}
+                playerDetails={playerDetails}
+                gameFeed={gameFeed}
+                feedStats={feedStats}
+                chartData={chartData}
+                dfsStats={dfsStats}
+                nfl={nfl}
+                ff={ff}
+                dynasty={dynasty}
+              />
             </Wrapper>
           </div>
         :
