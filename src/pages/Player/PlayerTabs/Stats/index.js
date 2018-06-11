@@ -43,7 +43,7 @@ const CardSection = styled.div`
 
 export const Stats = ({ gameFeed, feedStats }) => (
   <div>
-    {gameFeed && gameFeed.gamelogs && feedStats &&
+    {gameFeed && gameFeed.gamelogs && feedStats && feedStats.playerstatsentry &&
       <Section>
         {gameFeed.gamelogs.map((game, idx) => (
           <StatCard>
