@@ -64,6 +64,16 @@ const TabCol = styled(TableRowColumn)`
   width: 40px;
 `
 
+const CatTab = styled(TableRowColumn)`
+  @media (max-width: 767px) {
+    display: ${p => p.sort !== p.value && 'none'}
+  }
+
+  cursor: pointer;
+  min-width: 40px;
+  width: 40px;
+`
+
 const PlayTabHeadCol = styled(TableHeaderColumn)`
   min-width: 104px;
   width: 104px;
@@ -74,12 +84,29 @@ const TabHeadCol = styled(TableHeaderColumn)`
   width: 40px;
 `
 
+const CatCol = styled(TableHeaderColumn)`
+  @media (max-width: 767px) {
+    display: ${p => p.sort !== p.value && 'none'}
+  }
+
+  min-width: 40px;
+  width: 40px;
+`
+
 const RankHead = styled(TableHeaderColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+
   min-width: 4%;
   width: 4%;
 `
 
 const RankCol = styled(TableRowColumn)`
+  @media (max-width: 767px) {
+    display: none;
+  }
+
   cursor: pointer;
   min-width: 4%;
   width: 4%;
@@ -152,7 +179,7 @@ export class Advanced extends Component {
 
   render() {
     const { isLoading, advanced } = this.props
-    console.log(advanced)
+
     return (
       <div>
         {!isLoading && advanced[this.state.position] ?
@@ -210,13 +237,13 @@ export class Advanced extends Component {
                   <RankHead>Rank</RankHead>
                   <PlayTabHeadCol>Name</PlayTabHeadCol>
                   <TabHeadCol>Team</TabHeadCol>
-                  <TabHeadCol>Carries</TabHeadCol>
-                  <TabHeadCol>Touches</TabHeadCol>
-                  <TabHeadCol>Rec</TabHeadCol>
-                  <TabHeadCol>Targets</TabHeadCol>
-                  <TabHeadCol>Rec %</TabHeadCol>
-                  <TabHeadCol>RZ Targets</TabHeadCol>
-                  <TabHeadCol>RZ Touches</TabHeadCol>
+                  <CatCol sort={this.state.sort} value='carries'>Carries</CatCol>
+                  <CatCol sort={this.state.sort} value='touches'>Touches</CatCol>
+                  <CatCol sort={this.state.sort} value='receptions'>Rec</CatCol>
+                  <CatCol sort={this.state.sort} value='targets'>Targets</CatCol>
+                  <CatCol sort={this.state.sort} value='receptionPercentage'>Rec %</CatCol>
+                  <CatCol sort={this.state.sort} value='redzoneTargets'>RZ Targets</CatCol>
+                  <CatCol sort={this.state.sort} value='redzoneTouches'>RZ Touches</CatCol>
                 </TableRow>
               </TableHeader>
               <TableBody displayRowCheckbox={false} showRowHover>
@@ -225,13 +252,13 @@ export class Advanced extends Component {
                     <RankCol>{idx + 1}</RankCol>
                     <PlayTabCol>{player.firstName} {player.lastName}</PlayTabCol>
                     <TabCol>{player.teamAbbr}</TabCol>
-                    <TabCol>{player.stats.Carries}</TabCol>
-                    <TabCol>{player.stats.Touches}</TabCol>
-                    <TabCol>{player.stats.Receptions}</TabCol>
-                    <TabCol>{player.stats.Targets}</TabCol>
-                    <TabCol>{player.stats.ReceptionPercentage}</TabCol>
-                    <TabCol>{player.stats.RedzoneTargets}</TabCol>
-                    <TabCol>{player.stats.RedzoneTouches}</TabCol>
+                    <CatTab sort={this.state.sort} value='carries'>{player.stats.Carries}</CatTab>
+                    <CatTab sort={this.state.sort} value='touches'>{player.stats.Touches}</CatTab>
+                    <CatTab sort={this.state.sort} value='receptions'>{player.stats.Receptions}</CatTab>
+                    <CatTab sort={this.state.sort} value='targets'>{player.stats.Targets}</CatTab>
+                    <CatTab sort={this.state.sort} value='receptionPercentage'>{player.stats.ReceptionPercentage}</CatTab>
+                    <CatTab sort={this.state.sort} value='redzoneTargets'>{player.stats.RedzoneTargets}</CatTab>
+                    <CatTab sort={this.state.sort} value='redzoneTouches'>{player.stats.RedzoneTouches}</CatTab>
                   </TableRow>
                 ))}
               </TableBody>
