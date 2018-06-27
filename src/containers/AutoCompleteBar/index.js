@@ -20,6 +20,7 @@ const Wrapper = styled.div`
 export class AutoCompleteBar extends Component {
   componentDidMount() {
     this.props.fetchPlayers()
+    this.refs['autocomplete'].focus()
   }
 
   state = {

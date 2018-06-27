@@ -11,7 +11,7 @@ import { fetchNews, selectNews } from '../../ducks/news'
 import { fetchNfl, fetchFf, fetchDynasty, selectIsLoading, selectNfl, selectFf, selectDynasty } from '../../ducks/redditNews'
 
 const Wrapper = styled.div`
-  margin: 0 20%;
+  margin: 0 0%;
 
   @media (max-width: 767px) {
     margin: 0;
