@@ -10,6 +10,7 @@ import MaterialDrawer from '../../containers/MaterialDrawer'
 import NavigationBar from '../../components/NavigationBar'
 
 import Advanced from '../Advanced'
+import BaseStats from '../BaseStats'
 import Draft from '../Draft'
 import News from '../News'
 import Player from '../Player'
@@ -32,6 +33,7 @@ export const App = () => (
         <Switch>
           <Route path='/players/:playerId' component={Player} />
           <Route path='/advanced' component={Advanced} />
+          <Route path='/stats' component={BaseStats} />
           <Route path='/draft' component={Draft} />
           <Route path='/scoring' component={Scoring} />
           <Route component={News} />

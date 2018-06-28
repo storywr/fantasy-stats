@@ -10,6 +10,7 @@ const SPORTS_FEED = 'FETCH_SPORTS_FEED_SUCCESS'
 const GAME_FEED = 'FETCH_GAME_FEED_SUCCESS'
 const DFS_FEED = 'FETCH_DFS_FEED_SUCCESS'
 const PLAYER_FEED = 'FETCH_PLAYER_FEED_SUCCESS'
+const CUMULATIVE_FEED = 'FETCH_CUMULATIVE_FEED_SUCCESS'
 
 // Reducer
 
@@ -18,6 +19,7 @@ const initialState = {
   gameFeed: [],
   dfsFeed: [],
   playerFeed: [],
+  cumulativeFeed: [],
   isLoading: true
 }
 
@@ -37,6 +39,9 @@ export default function (state = initialState, action) {
 
     case PLAYER_FEED:
       return { ...state, playerFeed: action.playerFeed, isLoading: false }
+
+    case CUMULATIVE_FEED:
+      return { ...state, cumulativeFeed: action.cumulativeFeed, isLoading: false }
 
     default:
       return state
@@ -113,6 +118,23 @@ export function fetchPlayerFeed(params) {
   }
 }
 
+export function fetchCumulativeFeed(params) {
+  const request = {
+    method: 'GET',
+    headers: {
+      "Authorization": "Basic " + btoa(API_USERNAME + ":" + API_PASSWORD)
+    }
+  };
+
+  return dispatch => {
+    dispatch({ type: BEGIN })
+    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/cumulative_player_stats.json?position=${params.position}&sort=stats.${params.category}-${params.abbr}.d&limit=40`, request)
+      .then(response => response.json())
+      .then(cumulativeFeed => dispatch({ type: CUMULATIVE_FEED, cumulativeFeed }))
+      .catch(console.log)
+  }
+}
+
 // Selectors
 
 export const selectSportsFeed = state => state.sportsFeed.sportsFeed.cumulativeplayerstats
@@ -122,5 +144,7 @@ export const selectGameFeed = state => state.sportsFeed.gameFeed.playergamelogs
 export const selectDfsStats = state => state.sportsFeed.dfsFeed.dailydfs
 
 export const selectPlayerFeed = state => state.sportsFeed.playerFeed.rosterplayers
+
+export const selectCumulativeFeed = state => state.sportsFeed.cumulativeFeed.cumulativeplayerstats
 
 export const selectIsLoading = state => state.sportsFeed.isLoading

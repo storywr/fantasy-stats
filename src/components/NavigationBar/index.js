@@ -47,7 +47,8 @@ export default class NavigationBar extends React.Component {
           onRequestChange={(open) => this.setState({open})}
         >
           <StyledLink to='/'><MenuItem onClick={this.handleClose}>Player News</MenuItem></StyledLink>
-          <StyledLink to='/advanced'><MenuItem onClick={this.handleClose}>Player Stats</MenuItem></StyledLink>
+          <StyledLink to='/stats'><MenuItem onClick={this.handleClose}>Base Player Stats</MenuItem></StyledLink>
+          <StyledLink to='/advanced'><MenuItem onClick={this.handleClose}>Advanced Player Stats</MenuItem></StyledLink>
           <StyledLink to='/scoring'><MenuItem onClick={this.handleClose}>Scoring Leaders</MenuItem></StyledLink>
           <StyledLink to='/draft'><MenuItem onClick={this.handleClose}>Draft</MenuItem></StyledLink>
           <Divider />
