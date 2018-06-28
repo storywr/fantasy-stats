@@ -170,7 +170,7 @@ export class BaseStats extends Component {
 
     return (
       <div>
-        {!isLoading && cumulative.playerstatsentry ?
+        {!isLoading && cumulative && cumulative.playerstatsentry ?
           <div>
             <SearchBoxes>
               <PositionSearch
