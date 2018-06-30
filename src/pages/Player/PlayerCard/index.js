@@ -106,7 +106,7 @@ export const PlayerCard = ({ playerDetails, handleOpen, actions, open, handleClo
     {feedStats && feedStats.playerstatsentry && playerFeed &&
       <div>
         <PositionText>{`${feedStats.playerstatsentry[0].team.City} ${feedStats.playerstatsentry[0].team.Name} | ${feedStats.playerstatsentry[0].player.Position} | #${feedStats.playerstatsentry[0].player.JerseyNumber}`}</PositionText>
-        <PositionText>{playerFeed.playerentry[0].player.BirthDate} ({playerFeed.playerentry[0].player.Age}) | {playerFeed.playerentry[0].player.Height} | {playerFeed.playerentry[0].player.Weight}</PositionText>
+        <PositionText>{playerFeed.playerentry[0].player.BirthDate} {playerFeed.playerentry[0].player.Age && `| ${playerFeed.playerentry[0].player.Age} |`} {playerFeed.playerentry[0].player.Height} | {playerFeed.playerentry[0].player.Weight}</PositionText>
       </div>
     }  
     <SearchBoxes>
