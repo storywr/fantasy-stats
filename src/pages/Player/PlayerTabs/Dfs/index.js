@@ -54,9 +54,9 @@ export const Dfs = ({ dfsStats, chartData }) => (
             <LineChart data={chartData} margin={{top: 20, right: 20, bottom: 40, left: 20}}>
               <Tooltip />
               <Legend />
-              <XAxis dataKey="name" tickCount={16} />
-              <YAxis yAxisId="right" orientation='right' name='salary' label={{ value: 'Salary', angle: -90, position: 'right' }} domain={["dataMin", "dataMax"]} />
-              <YAxis yAxisId="left" orientation='left' name='fantasy points' label={{ value: 'Fantasy Points', angle: -90, position: 'insideLeft' }} />
+              <XAxis tick={{ fill: 'white' }} dataKey="name" tickCount={16} />
+              <YAxis tick={{ fill: 'white' }} yAxisId="right" orientation='right' name='salary' label={{ value: 'Salary', angle: -90, position: 'right', fill: 'white' }} domain={["dataMin", "dataMax"]} />
+              <YAxis tick={{ fill: 'white' }} yAxisId="left" orientation='left' name='fantasy points' label={{ value: 'Fantasy Points', angle: -90, position: 'insideLeft', fill: 'white' }} />
               <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
               <Line yAxisId="right" type="monotone" dataKey="Salary" stroke="#00bcd4" strokeWidth={2} />
               <Line yAxisId="left" type="monotone" dataKey="FantasyPoints" stroke="#fc4482" strokeWidth={2} />

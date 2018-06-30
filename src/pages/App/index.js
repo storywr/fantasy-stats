@@ -1,6 +1,8 @@
 import React from 'react'
 import { Router, Redirect, Route, Switch } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import styled from 'styled-components'
 
 import history from '../../utils//history'
@@ -21,12 +23,15 @@ const Wrapper = styled.div`
     padding: 0 3%;
   }
 
+  background-color: #424242;
+  min-height: 100vh;
+
   padding: 0 7%;
 `
 
 export const App = () => (
   <Router history={history}>
-    <MuiThemeProvider>
+    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
       <NavigationBar />
       <Wrapper>
         <AutoCompleteBar />

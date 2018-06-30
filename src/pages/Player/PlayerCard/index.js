@@ -87,7 +87,7 @@ export const PlayerCard = ({ playerDetails, handleOpen, actions, open, handleClo
   <Player>
     <Flex>
       <PlayerName title={playerDetails.name} />
-      <HighlightsButton>
+      {/* <HighlightsButton>
         <RaisedButton label="Watch Highlights" onClick={handleOpen} />
         <Dialog
           title="Watch Highlights"
@@ -101,7 +101,7 @@ export const PlayerCard = ({ playerDetails, handleOpen, actions, open, handleClo
             frameborder="0">
           </VideoPlayer>
         </Dialog>
-      </HighlightsButton>
+      </HighlightsButton> */}
     </Flex>
     {feedStats && feedStats.playerstatsentry && playerFeed &&
       <div>
