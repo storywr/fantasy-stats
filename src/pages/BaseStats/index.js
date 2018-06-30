@@ -67,7 +67,6 @@ const TabCol = styled(TableRowColumn)`
 const CatTab = styled(TableRowColumn)`
   display: ${p => p.category !== p.value && 'none'}
 
-  cursor: pointer;
   min-width: 40px;
   width: 40px;
 `
@@ -160,11 +159,6 @@ export class BaseStats extends Component {
     this.props.fetchCumulativeFeed(params)
   }
 
-  handleSelectPlayer = (idx) => {
-    const player = this.props.advanced[this.state.position][idx]
-    this.props.history.push(`/players/${player.id}`)
-  }
-
   render() {
     const { isLoading, cumulative } = this.props
 
@@ -212,7 +206,7 @@ export class BaseStats extends Component {
                 <MenuItem value={'2017'} primaryText="2017" />
               </WeekSearch>
             </SearchBoxes>
-            <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}} onRowSelection={this.handleSelectPlayer}>
+            <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}}>
               <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                 <TableRow>
                   <RankHead>Rank</RankHead>
