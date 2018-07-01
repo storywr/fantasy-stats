@@ -26,6 +26,7 @@ import {
 import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
 import { fetchPlayerFeed, fetchDfsStats, fetchGameFeed, fetchSportsFeed, selectGameFeed, selectSportsFeed, selectDfsStats, selectPlayerFeed, selectIsLoading as feedLoading } from '../../ducks/sportsFeed'
+import { fetchBing, selectBing } from '../../ducks/bing'
 
 const Wrapper = styled.div`
   margin: 0 0%;
@@ -61,6 +62,7 @@ export class Player extends Component {
           year: 2017,
           teamName
         }
+        this.props.fetchBing(params)
         this.props.fetchPlayerFeed(params)
         this.props.fetchDfsStats(params)
         this.props.fetchSportsFeed(params)
@@ -84,6 +86,7 @@ export class Player extends Component {
             year: 2017,
             teamName
           }
+          this.props.fetchBing(params)
           this.props.fetchPlayerFeed(params)
           this.props.fetchDfsStats(params)
           this.props.fetchSportsFeed(params) 
@@ -134,7 +137,7 @@ export class Player extends Component {
   }
 
   render() {
-    const { playerFeed, dfsStats, gameFeed, isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
+    const { bing, playerFeed, dfsStats, gameFeed, isLoading, feedLoading, feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading } = this.props
     const actions = [
       <FlatButton
         label="Close"
@@ -156,6 +159,7 @@ export class Player extends Component {
         {!isLoading && !feedLoading ?
           <div>
             <PlayerCard
+              bing={bing}
               playerDetails={playerDetails}
               onClick={this.handleOpen}
               actions={actions}
@@ -193,6 +197,7 @@ export class Player extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
+  bing: selectBing(state),
   playerFeed: selectPlayerFeed(state),
   feedLoading: feedLoading(state),
   gameFeed: selectGameFeed(state),
@@ -205,4 +210,4 @@ const mapStateToProps = (state, props) => ({
   dynasty: selectDynasty(state),
   dfsStats: selectDfsStats(state)
 })
-export default connect(mapStateToProps, { fetchPlayerFeed, fetchDfsStats, fetchGameFeed, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
+export default connect(mapStateToProps, { fetchBing, fetchPlayerFeed, fetchDfsStats, fetchGameFeed, fetchSportsFeed, fetchPlayerDetails, fetchNfl, fetchFf, fetchDynasty })(Player)
