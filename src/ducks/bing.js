@@ -39,7 +39,7 @@ export function fetchBing(params) {
 
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=${params.firstName}-${params.lastName}&count=10`, request)
+    return fetch(`https://api.cognitive.microsoft.com/bing/v7.0/images/search?q=${params.firstName}-${params.lastName}&count=20`, request)
       .then(response => response.json())
       .then(imageSearch => dispatch({ type: IMAGE_SEARCH, imageSearch }))
       .catch(console.log)
