@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
 import Dialog from 'material-ui/Dialog';
+import {GridList, GridTile} from 'material-ui/GridList';
 import MenuItem from 'material-ui/MenuItem';
 import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
@@ -84,15 +85,25 @@ const Flex = styled.div`
 `
 
 const PlayerImg = styled(CardMedia)`
-  height: 30%;
-  width: 30%;
-  max-height: 30%;
-  min-height: 30%;
-  max-width: 30%;
-  min-width: 30%;
   margin-top: 16px;
   margin-bottom: 16px;
 `
+
+const styles = {
+  root: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'space-around',
+  },
+  gridList: {
+    display: 'flex',
+    flexWrap: 'nowrap',
+    overflowX: 'auto',
+  },
+  titleStyle: {
+    color: 'rgb(0, 188, 212)',
+  },
+}
 
 export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, handleClose, feedStats, playerFeed, year, handleYearChange, feedLoading }) => (
   <div>
@@ -123,7 +134,16 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
       }  
       {bing && bing.value &&
         <PlayerImg>
-          <img src={bing.value[0].thumbnailUrl} />
+          <GridList style={styles.gridList}>
+            {bing.value.map((tile) => (
+              <GridTile
+                key={tile.img}
+                titleBackground="linear-gradient(to top, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.3) 70%,rgba(0,0,0,0) 100%)"
+              >
+                <img src={tile.thumbnailUrl} />
+              </GridTile>
+            ))}
+          </GridList>
         </PlayerImg>
       }
     </Player>
