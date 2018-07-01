@@ -2,10 +2,9 @@ import React from 'react';
 import AppBar from 'material-ui/AppBar';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
 import styled from 'styled-components'
-import Menu from 'material-ui/svg-icons/navigation/menu'
 import Divider from 'material-ui/Divider';
+import Toggle from 'material-ui/Toggle';
 
 import { Link } from 'react-router-dom'
 
@@ -21,11 +20,14 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `
 
+const ToggleWrapper = styled.div`
+  padding: 0px 16px;
+`
+
 export default class NavigationBar extends React.Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {open: false};
+  state = {
+    open: false
   }
 
   handleToggle = () => this.setState({open: !this.state.open});
@@ -55,6 +57,13 @@ export default class NavigationBar extends React.Component {
           <a style={{ textDecoration: 'none' }} href='https://github.com/storywr/fantasy-stats' target='_blank'>
             <MenuItem onClick={this.handleClose}>GitHub Repo</MenuItem>
           </a>
+          <ToggleWrapper>
+            <Toggle
+              label='Night Theme'
+              toggled={this.props.nightMode}
+              onToggle={this.props.onToggle}
+            />
+          </ToggleWrapper>
         </Drawer>
       </div>
     )

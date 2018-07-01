@@ -1,5 +1,5 @@
-import React from 'react'
-import { Router, Redirect, Route, Switch } from 'react-router-dom'
+import React, { Component } from 'react'
+import { Router, Route, Switch } from 'react-router-dom'
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -8,7 +8,6 @@ import styled from 'styled-components'
 import history from '../../utils//history'
 
 import AutoCompleteBar from '../../containers/AutoCompleteBar'
-import MaterialDrawer from '../../containers/MaterialDrawer'
 import NavigationBar from '../../components/NavigationBar'
 
 import Advanced from '../Advanced'
@@ -23,29 +22,41 @@ const Wrapper = styled.div`
     padding: 0 3%;
   }
 
-  background-color: #424242;
+  background-color: ${p => p.nightMode ? '#424242' : '#F5F5F5'}
   min-height: 100vh;
 
   padding: 0 7%;
 `
 
-export const App = () => (
-  <Router history={history}>
-    <MuiThemeProvider muiTheme={getMuiTheme(darkBaseTheme)}>
-      <NavigationBar />
-      <Wrapper>
-        <AutoCompleteBar />
-        <Switch>
-          <Route path='/players/:playerId' component={Player} />
-          <Route path='/advanced' component={Advanced} />
-          <Route path='/stats' component={BaseStats} />
-          <Route path='/draft' component={Draft} />
-          <Route path='/scoring' component={Scoring} />
-          <Route component={News} />
-        </Switch>
-      </Wrapper>
-    </MuiThemeProvider>
-  </Router>
-)
+export default class App extends Component {
 
-export default App
+  state = {
+    nightMode: true
+  }
+
+  onToggle = () => this.setState({ nightMode: !this.state.nightMode })
+
+  render() {
+    return (
+      <Router history={history}>
+        <MuiThemeProvider muiTheme={this.state.nightMode && getMuiTheme(darkBaseTheme)}>
+          <NavigationBar
+            nightMode={this.state.nightMode}
+            onToggle={this.onToggle}
+          />
+          <Wrapper nightMode={this.state.nightMode}>
+            <AutoCompleteBar />
+            <Switch>
+              <Route path='/players/:playerId' component={Player} />
+              <Route path='/advanced' component={Advanced} />
+              <Route path='/stats' component={BaseStats} />
+              <Route path='/draft' component={Draft} />
+              <Route path='/scoring' component={Scoring} />
+              <Route component={News} />
+            </Switch>
+          </Wrapper>
+        </MuiThemeProvider>
+      </Router>
+    )
+  }
+}
