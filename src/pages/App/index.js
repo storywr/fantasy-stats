@@ -45,7 +45,7 @@ export default class App extends Component {
             onToggle={this.onToggle}
           />
           <Wrapper nightMode={this.state.nightMode}>
-            <AutoCompleteBar />
+            <AutoCompleteBar muiTheme={this.state.nightMode && getMuiTheme(darkBaseTheme)}/>
             <Switch>
               <Route path='/players/:playerId' component={Player} />
               <Route path='/advanced' component={Advanced} />
