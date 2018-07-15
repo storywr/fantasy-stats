@@ -12,7 +12,13 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
+const Flex = styled.div`
+  display: flex;
+  margin-top: 1rem;
+`
+
 const TableText = styled(CardTitle)`
+  width: 50%;
   font-weight: 500;
 `
 
@@ -45,79 +51,46 @@ export const Stats = ({ gameFeed, feedStats }) => (
   <div>
     {gameFeed && gameFeed.gamelogs && feedStats && feedStats.playerstatsentry &&
       <Section>
-        {gameFeed.gamelogs.map((game, idx) => (
-          <StatCard>
-            <CardTitle title={`Week ${idx + 1}: ${game.game.awayTeam.Name} at ${game.game.homeTeam.Name}`} />
-            <CardSection>
-              <div>
-                <TableText>RUSHING</TableText>
-                <Table bodyStyle={{overflow:'visible'}}>
-                  <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+        <StatCard>
+          <CardSection>
+            <Flex>
+              <TableText>RUSHING</TableText>
+              <TableText>RECEIVING</TableText>
+            </Flex>
+            <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}}>
+              <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
+                <TableRow>
+                  <TabHeadCol>Wk</TabHeadCol>
+                  <TabHeadCol>Att</TabHeadCol>
+                  <TabHeadCol>Yds</TabHeadCol>
+                  <TabHeadCol>YPC</TabHeadCol>
+                  <TabHeadCol>TD</TabHeadCol>
+                  <TabHeadCol>Rec</TabHeadCol>
+                  <TabHeadCol>Yds</TabHeadCol>
+                  <TabHeadCol>YPC</TabHeadCol>
+                  <TabHeadCol>TD</TabHeadCol>
+                  <TabHeadCol>Targets</TabHeadCol>
+                </TableRow>
+              </TableHeader>
+                <TableBody displayRowCheckbox={false} showRowHover>
+                  {gameFeed.gamelogs.map((game, idx) => (
                     <TableRow>
-                      <TabHeadCol>Att</TabHeadCol>
-                      <TabHeadCol>Yds</TabHeadCol>
-                      <TabHeadCol>YPC</TabHeadCol>
-                      <TabHeadCol>TD</TabHeadCol>
-                      <TabHeadCol>1st Downs</TabHeadCol>
-                      <TabHeadCol>1st Down %</TabHeadCol>
-                      <TabHeadCol>20 YD Plus</TabHeadCol>
-                      <TabHeadCol>40 YD Plus</TabHeadCol>
-                      <TabHeadCol>Long</TabHeadCol>
-                      <TabHeadCol>Fumbles Lost</TabHeadCol>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody displayRowCheckbox={false} showRowHover>
-                    <TableRow>
+                      <TabCol>{idx + 1}</TabCol>
                       <TabCol>{game.stats.RushAttempts["#text"]}</TabCol>
                       <TabCol>{game.stats.RushYards["#text"]}</TabCol>
                       <TabCol>{game.stats.RushAverage["#text"]}</TabCol>
                       <TabCol>{game.stats.RushTD["#text"]}</TabCol>
-                      <TabCol>{game.stats.Rush1stDowns["#text"]}</TabCol>
-                      <TabCol>{game.stats.Rush1stDownsPct["#text"]}</TabCol>
-                      <TabCol>{game.stats.Rush20Plus["#text"]}</TabCol>
-                      <TabCol>{game.stats.Rush40Plus["#text"]}</TabCol>
-                      <TabCol>{game.stats.RushLng["#text"]}</TabCol>
-                      <TabCol>{game.stats.FumLost["#text"]}</TabCol>
-                    </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-              <div>
-                <TableText>RECEIVING</TableText>
-                <Table bodyStyle={{overflow:'visible'}}>
-                  <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                    <TableRow>
-                      <TabHeadCol>Rec</TabHeadCol>
-                      <TabHeadCol>Yds</TabHeadCol>
-                      <TabHeadCol>YPC</TabHeadCol>
-                      <TabHeadCol>TD</TabHeadCol>
-                      <TabHeadCol>1st Downs</TabHeadCol>
-                      <TabHeadCol>1st Down %</TabHeadCol>
-                      <TabHeadCol>20 YD Plus</TabHeadCol>
-                      <TabHeadCol>40 YD Plus</TabHeadCol>
-                      <TabHeadCol>Long</TabHeadCol>
-                      <TabHeadCol>Targets</TabHeadCol>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody displayRowCheckbox={false} showRowHover>
-                    <TableRow>
                       <TabCol>{game.stats.Receptions["#text"]}</TabCol>
                       <TabCol>{game.stats.RecYards["#text"]}</TabCol>
                       <TabCol>{game.stats.RecAverage["#text"]}</TabCol>
                       <TabCol>{game.stats.RecTD["#text"]}</TabCol>
-                      <TabCol>{game.stats.Rec1stDowns["#text"]}</TabCol>
-                      <TabCol>{((game.stats.Rec1stDowns["#text"] / feedStats.playerstatsentry[0].stats.Targets["#text"]) * 100).toFixed(1)}</TabCol>
-                      <TabCol>{game.stats.Rec20Plus["#text"]}</TabCol>
-                      <TabCol>{game.stats.Rec40Plus["#text"]}</TabCol>
-                      <TabCol>{game.stats.RecLng["#text"]}</TabCol>
                       <TabCol>{game.stats.Targets["#text"]}</TabCol>
                     </TableRow>
-                  </TableBody>
-                </Table>
-              </div>
-            </CardSection>
-          </StatCard>
-        ))}
+                  ))}
+                </TableBody>
+            </Table>
+          </CardSection>
+        </StatCard>
       </Section>
     }
   </div>

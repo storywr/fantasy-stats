@@ -119,6 +119,10 @@ const Progress = styled.div`
   margin-right: auto !important;
 `
 
+const StatCard = styled(Card)`
+  padding: 8px 16px 16px 16px;
+`
+
 export class Advanced extends Component {
   state = {
     position: 'RB',
@@ -231,38 +235,40 @@ export class Advanced extends Component {
                 {this.weekBuilder()}
               </WeekSearch>
             </SearchBoxes>
-            <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}} onRowSelection={this.handleSelectPlayer}>
-              <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                <TableRow>
-                  <RankHead>Rank</RankHead>
-                  <PlayTabHeadCol>Name</PlayTabHeadCol>
-                  <TabHeadCol>Team</TabHeadCol>
-                  <CatCol sort={this.state.sort} value='carries'>Carries</CatCol>
-                  <CatCol sort={this.state.sort} value='touches'>Touches</CatCol>
-                  <CatCol sort={this.state.sort} value='receptions'>Rec</CatCol>
-                  <CatCol sort={this.state.sort} value='targets'>Targets</CatCol>
-                  <CatCol sort={this.state.sort} value='receptionPercentage'>Rec %</CatCol>
-                  <CatCol sort={this.state.sort} value='redzoneTargets'>RZ Targets</CatCol>
-                  <CatCol sort={this.state.sort} value='redzoneTouches'>RZ Touches</CatCol>
-                </TableRow>
-              </TableHeader>
-              <TableBody displayRowCheckbox={false} showRowHover>
-                {advanced[this.state.position].map((player, idx) => (
+            <StatCard>
+              <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}} onRowSelection={this.handleSelectPlayer}>
+                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
-                    <RankCol>{idx + 1}</RankCol>
-                    <PlayTabCol>{player.firstName} {player.lastName}</PlayTabCol>
-                    <TabCol>{player.teamAbbr}</TabCol>
-                    <CatTab sort={this.state.sort} value='carries'>{player.stats.Carries}</CatTab>
-                    <CatTab sort={this.state.sort} value='touches'>{player.stats.Touches}</CatTab>
-                    <CatTab sort={this.state.sort} value='receptions'>{player.stats.Receptions}</CatTab>
-                    <CatTab sort={this.state.sort} value='targets'>{player.stats.Targets}</CatTab>
-                    <CatTab sort={this.state.sort} value='receptionPercentage'>{player.stats.ReceptionPercentage}</CatTab>
-                    <CatTab sort={this.state.sort} value='redzoneTargets'>{player.stats.RedzoneTargets}</CatTab>
-                    <CatTab sort={this.state.sort} value='redzoneTouches'>{player.stats.RedzoneTouches}</CatTab>
+                    <RankHead>Rank</RankHead>
+                    <PlayTabHeadCol>Name</PlayTabHeadCol>
+                    <TabHeadCol>Team</TabHeadCol>
+                    <CatCol sort={this.state.sort} value='carries'>Carries</CatCol>
+                    <CatCol sort={this.state.sort} value='touches'>Touches</CatCol>
+                    <CatCol sort={this.state.sort} value='receptions'>Rec</CatCol>
+                    <CatCol sort={this.state.sort} value='targets'>Targets</CatCol>
+                    <CatCol sort={this.state.sort} value='receptionPercentage'>Rec %</CatCol>
+                    <CatCol sort={this.state.sort} value='redzoneTargets'>RZ Targets</CatCol>
+                    <CatCol sort={this.state.sort} value='redzoneTouches'>RZ Touches</CatCol>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody displayRowCheckbox={false} showRowHover>
+                  {advanced[this.state.position].map((player, idx) => (
+                    <TableRow>
+                      <RankCol>{idx + 1}</RankCol>
+                      <PlayTabCol>{player.firstName} {player.lastName}</PlayTabCol>
+                      <TabCol>{player.teamAbbr}</TabCol>
+                      <CatTab sort={this.state.sort} value='carries'>{player.stats.Carries}</CatTab>
+                      <CatTab sort={this.state.sort} value='touches'>{player.stats.Touches}</CatTab>
+                      <CatTab sort={this.state.sort} value='receptions'>{player.stats.Receptions}</CatTab>
+                      <CatTab sort={this.state.sort} value='targets'>{player.stats.Targets}</CatTab>
+                      <CatTab sort={this.state.sort} value='receptionPercentage'>{player.stats.ReceptionPercentage}</CatTab>
+                      <CatTab sort={this.state.sort} value='redzoneTargets'>{player.stats.RedzoneTargets}</CatTab>
+                      <CatTab sort={this.state.sort} value='redzoneTouches'>{player.stats.RedzoneTouches}</CatTab>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </StatCard>
           </div>
         :
           <Progress><CircularProgress size={100} thickness={10} /></Progress>

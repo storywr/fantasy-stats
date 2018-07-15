@@ -114,6 +114,10 @@ const Progress = styled.div`
   margin-right: auto !important;
 `
 
+const StatCard = styled(Card)`
+  padding: 8px 16px 16px 16px;
+`
+
 export class BaseStats extends Component {
   state = {
     position: 'RB',
@@ -206,42 +210,44 @@ export class BaseStats extends Component {
                 <MenuItem value={'2017'} primaryText="2017" />
               </WeekSearch>
             </SearchBoxes>
-            <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}}>
-              <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
-                <TableRow>
-                  <RankHead>Rank</RankHead>
-                  <CatCol>Name</CatCol>
-                  <CatCol category={this.state.category} value='rushing'>Yards</CatCol>
-                  <CatCol category={this.state.category} value='receiving'>Yards</CatCol>
-                  <CatCol category={this.state.category} value='rushing'>TD</CatCol>
-                  <CatCol category={this.state.category} value='receiving'>TD</CatCol>
-                  <CatCol category={this.state.category} value='rushing'>Avg</CatCol>
-                  <CatCol category={this.state.category} value='receiving'>Avg</CatCol>
-                  <CatCol category={this.state.category} value='rushing'>1st Downs</CatCol>
-                  <CatCol category={this.state.category} value='receiving'>1st Downs</CatCol>
-                  <CatCol category={this.state.category} value='rushing'>Carries</CatCol>
-                  <CatCol category={this.state.category} value='receiving'>Rec</CatCol>
-                </TableRow>
-              </TableHeader>
-              <TableBody displayRowCheckbox={false} showRowHover>
-                {cumulative.playerstatsentry.map((player, idx) => (
+            <StatCard>
+              <Table fixedHeader={true} height='400px' bodyStyle={{overflowX:'visible'}}>
+                <TableHeader adjustForCheckbox={false} displaySelectAll={false}>
                   <TableRow>
-                    <RankCol>{idx + 1}</RankCol>
-                    <CatTab>{player.player.FirstName} {player.player.LastName}</CatTab>
-                    <CatTab category={this.state.category} value='rushing'>{player.stats.RushYards["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='receiving'>{player.stats.RecYards["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='rushing'>{player.stats.RushTD["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='receiving'>{player.stats.RecTD["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='rushing'>{player.stats.RushAverage["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='receiving'>{player.stats.RecAverage["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='rushing'>{player.stats.Rush1stDowns["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='receiving'>{player.stats.Rec1stDowns["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='rushing'>{player.stats.RushAttempts["#text"]}</CatTab>
-                    <CatTab category={this.state.category} value='receiving'>{player.stats.Receptions["#text"]}</CatTab>
+                    <RankHead>Rank</RankHead>
+                    <CatCol>Name</CatCol>
+                    <CatCol category={this.state.category} value='rushing'>Yards</CatCol>
+                    <CatCol category={this.state.category} value='receiving'>Yards</CatCol>
+                    <CatCol category={this.state.category} value='rushing'>TD</CatCol>
+                    <CatCol category={this.state.category} value='receiving'>TD</CatCol>
+                    <CatCol category={this.state.category} value='rushing'>Avg</CatCol>
+                    <CatCol category={this.state.category} value='receiving'>Avg</CatCol>
+                    <CatCol category={this.state.category} value='rushing'>1st Downs</CatCol>
+                    <CatCol category={this.state.category} value='receiving'>1st Downs</CatCol>
+                    <CatCol category={this.state.category} value='rushing'>Carries</CatCol>
+                    <CatCol category={this.state.category} value='receiving'>Rec</CatCol>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody displayRowCheckbox={false} showRowHover>
+                  {cumulative.playerstatsentry.map((player, idx) => (
+                    <TableRow>
+                      <RankCol>{idx + 1}</RankCol>
+                      <CatTab>{player.player.FirstName} {player.player.LastName}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushYards["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{player.stats.RecYards["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushTD["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{player.stats.RecTD["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushAverage["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{player.stats.RecAverage["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{player.stats.Rush1stDowns["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{player.stats.Rec1stDowns["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushAttempts["#text"]}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{player.stats.Receptions["#text"]}</CatTab>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </StatCard>
           </div>
         :
           <Progress><CircularProgress size={100} thickness={10} /></Progress>
