@@ -10,7 +10,10 @@ import Nfl from './Nfl'
 import Ff from './Ff'
 import Dff from './Dff'
 
-export const PlayerTabs = ({ value, handleChange, notes, getTitle, playerDetails, gameFeed, feedStats, chartData, dfsStats, nfl, ff, dynasty }) => (
+export const PlayerTabs = ({
+  value, handleChange, notes, getTitle, playerDetails,
+  gameFeed, feedStats, chartData, dfsStats, nfl, ff, dynasty
+}) => (
   <Tabs value={value} onChange={handleChange}>
     <Tab label='Roto' value='a'>
       <Roto notes={notes} getTitle={getTitle} playerDetails={playerDetails} />
