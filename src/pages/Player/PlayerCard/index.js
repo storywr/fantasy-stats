@@ -170,8 +170,6 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                 <TabHeadCol>Yds</TabHeadCol>
                 <TabHeadCol>YPC</TabHeadCol>
                 <TabHeadCol>TD</TabHeadCol>
-                <TabHeadCol>1st Downs</TabHeadCol>
-                <TabHeadCol>1st Down %</TabHeadCol>
                 <TabHeadCol>20 YD Plus</TabHeadCol>
                 <TabHeadCol>40 YD Plus</TabHeadCol>
                 <TabHeadCol>Long</TabHeadCol>
@@ -185,8 +183,6 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                   <TabCol>{feedStats.playerstatsentry[0].stats.RushYards["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.RushAverage["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.RushTD["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Rush1stDowns["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Rush1stDownsPct["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.Rush20Plus["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.Rush40Plus["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.RushLng["#text"]}</TabCol>
@@ -207,8 +203,6 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                 <TabHeadCol>Yds</TabHeadCol>
                 <TabHeadCol>YPC</TabHeadCol>
                 <TabHeadCol>TD</TabHeadCol>
-                <TabHeadCol>1st Downs</TabHeadCol>
-                <TabHeadCol>1st Down %</TabHeadCol>
                 <TabHeadCol>20 YD Plus</TabHeadCol>
                 <TabHeadCol>40 YD Plus</TabHeadCol>
                 <TabHeadCol>Long</TabHeadCol>
@@ -222,8 +216,6 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                   <TabCol>{feedStats.playerstatsentry[0].stats.RecYards["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.RecAverage["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.RecTD["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Rec1stDowns["#text"]}</TabCol>
-                  <TabCol>{((feedStats.playerstatsentry[0].stats.Rec1stDowns["#text"] / feedStats.playerstatsentry[0].stats.Targets["#text"]) * 100).toFixed(1)}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.Rec20Plus["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.Rec40Plus["#text"]}</TabCol>
                   <TabCol>{feedStats.playerstatsentry[0].stats.RecLng["#text"]}</TabCol>
