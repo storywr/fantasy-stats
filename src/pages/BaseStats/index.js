@@ -222,8 +222,6 @@ export class BaseStats extends Component {
                     <CatCol category={this.state.category} value='receiving'>TD</CatCol>
                     <CatCol category={this.state.category} value='rushing'>Avg</CatCol>
                     <CatCol category={this.state.category} value='receiving'>Avg</CatCol>
-                    <CatCol category={this.state.category} value='rushing'>1st Downs</CatCol>
-                    <CatCol category={this.state.category} value='receiving'>1st Downs</CatCol>
                     <CatCol category={this.state.category} value='rushing'>Carries</CatCol>
                     <CatCol category={this.state.category} value='receiving'>Rec</CatCol>
                   </TableRow>
@@ -239,8 +237,6 @@ export class BaseStats extends Component {
                       <CatTab category={this.state.category} value='receiving'>{player.stats.RecTD["#text"]}</CatTab>
                       <CatTab category={this.state.category} value='rushing'>{player.stats.RushAverage["#text"]}</CatTab>
                       <CatTab category={this.state.category} value='receiving'>{player.stats.RecAverage["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='rushing'>{player.stats.Rush1stDowns["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='receiving'>{player.stats.Rec1stDowns["#text"]}</CatTab>
                       <CatTab category={this.state.category} value='rushing'>{player.stats.RushAttempts["#text"]}</CatTab>
                       <CatTab category={this.state.category} value='receiving'>{player.stats.Receptions["#text"]}</CatTab>
                     </TableRow>
