@@ -60,7 +60,7 @@ export function fetchSportsFeed(params) {
 
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/cumulative_player_stats.json?player=${params.firstName}-${params.lastName}`, request)
+    return fetch(`https://api.mysportsfeeds.com/v2.0/pull/nfl/${params.year}-regular/player_stats_totals.json?player=${params.firstName}-${params.lastName}`, request)
       .then(response => response.json())
       .then(sportsFeed => dispatch({ type: SPORTS_FEED, sportsFeed }))
       .catch(console.log)
@@ -77,7 +77,7 @@ export function fetchGameFeed(params) {
 
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/player_gamelogs.json?player=${params.firstName}-${params.lastName}`, request)
+    return fetch(`https://api.mysportsfeeds.com/v2.0/pull/nfl/${params.year}-regular/player_gamelogs.json?player=${params.firstName}-${params.lastName}`, request)
       .then(response => response.json())
       .then(gameFeed => dispatch({ type: GAME_FEED, gameFeed }))
       .catch(console.log)
@@ -94,7 +94,7 @@ export function fetchDfsStats(params) {
 
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/daily_dfs.json?player=${params.firstName}-${params.lastName}&team=${params.teamName}`, request)
+    return fetch(`https://api.mysportsfeeds.com/v2.0/pull/nfl/${params.year}-regular/dfs.json?player=${params.firstName}-${params.lastName}&team=${params.teamName}`, request)
       .then(response => response.json())
       .then(dfsFeed => dispatch({ type: DFS_FEED, dfsFeed }))
       .catch(console.log)
@@ -111,7 +111,7 @@ export function fetchPlayerFeed(params) {
 
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/roster_players.json?player=${params.firstName}-${params.lastName}`, request)
+    return fetch(`https://api.mysportsfeeds.com/v2.0/pull/nfl/players.json?player=${params.firstName}-${params.lastName}`, request)
       .then(response => response.json())
       .then(playerFeed => dispatch({ type: PLAYER_FEED, playerFeed }))
       .catch(console.log)
@@ -128,7 +128,7 @@ export function fetchCumulativeFeed(params) {
 
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`https://api.mysportsfeeds.com/v1.2/pull/nfl/${params.year}-regular/cumulative_player_stats.json?position=${params.position}&sort=stats.${params.category}-${params.abbr}.d&limit=40`, request)
+    return fetch(`https://api.mysportsfeeds.com/v2.0/pull/nfl/${params.year}-regular/player_stats_totals.json?position=${params.position}&sort=stats.${params.category}-${params.abbr}.d&limit=40`, request)
       .then(response => response.json())
       .then(cumulativeFeed => dispatch({ type: CUMULATIVE_FEED, cumulativeFeed }))
       .catch(console.log)
@@ -137,14 +137,14 @@ export function fetchCumulativeFeed(params) {
 
 // Selectors
 
-export const selectSportsFeed = state => state.sportsFeed.sportsFeed.cumulativeplayerstats
+export const selectSportsFeed = state => state.sportsFeed.sportsFeed
 
-export const selectGameFeed = state => state.sportsFeed.gameFeed.playergamelogs
+export const selectGameFeed = state => state.sportsFeed.gameFeed
 
-export const selectDfsStats = state => state.sportsFeed.dfsFeed.dailydfs
+export const selectDfsStats = state => state.sportsFeed.dfsFeed
 
 export const selectPlayerFeed = state => state.sportsFeed.playerFeed.rosterplayers
 
-export const selectCumulativeFeed = state => state.sportsFeed.cumulativeFeed.cumulativeplayerstats
+export const selectCumulativeFeed = state => state.sportsFeed.cumulativeFeed
 
 export const selectIsLoading = state => state.sportsFeed.isLoading

@@ -156,7 +156,7 @@ export class Player extends Component {
       />
     ]
 
-    if (dfsStats && dfsStats.dfsEntries[0].dfsRows) {
+    if (dfsStats && dfsStats.dfsEntries && dfsStats.dfsEntries[0].dfsRows) {
       const data = dfsStats.dfsEntries[0].dfsRows.filter((week, idx) => ( week.player ))
       var chartData = []
       data.map((week, idx) => { 

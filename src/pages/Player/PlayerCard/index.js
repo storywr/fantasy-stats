@@ -126,10 +126,10 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
           </Dialog>
         </HighlightsButton> */}
       </Flex>
-      {feedStats && feedStats.playerstatsentry && playerFeed &&
+      {feedStats && feedStats.references &&
         <div>
-          <PositionText>{`${feedStats.playerstatsentry[0].team.City} ${feedStats.playerstatsentry[0].team.Name} | ${feedStats.playerstatsentry[0].player.Position} | #${feedStats.playerstatsentry[0].player.JerseyNumber}`}</PositionText>
-          <PositionText>{playerFeed.playerentry[0].player.BirthDate} {playerFeed.playerentry[0].player.Age && `| ${playerFeed.playerentry[0].player.Age} |`} {playerFeed.playerentry[0].player.Height} | {playerFeed.playerentry[0].player.Weight}</PositionText>
+          <PositionText>{`${feedStats.references.teamReferences[0].city} ${feedStats.references.teamReferences[0].name} | ${feedStats.references.playerReferences[0].position} | #${feedStats.references.playerReferences[0].jerseyNumber}`}</PositionText>
+          <PositionText>{`${feedStats.references.playerReferences[0].birthDate} ${feedStats.references.playerReferences[0].age} | ${feedStats.references.playerReferences[0].height} | ${feedStats.references.playerReferences[0].weight}`}</PositionText>
         </div>
       }  
       {bing && bing.value &&
@@ -160,7 +160,7 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
           <MenuItem value={'2017'} primaryText="2017" />
         </PositionSearch>
       </SearchBoxes>
-      {feedStats && feedStats.playerstatsentry && feedStats.playerstatsentry[0].player.Position === 'RB' &&
+      {feedStats && feedStats.references && feedStats.references.playerReferences[0].position === 'RB' &&
         <div>
           <TableText>RUSHING</TableText>
           <Table bodyStyle={{overflow:'visible'}}>
@@ -170,30 +170,34 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                 <TabHeadCol>Yds</TabHeadCol>
                 <TabHeadCol>YPC</TabHeadCol>
                 <TabHeadCol>TD</TabHeadCol>
-                <TabHeadCol>20 YD Plus</TabHeadCol>
-                <TabHeadCol>40 YD Plus</TabHeadCol>
+                <TabHeadCol>20 YD+</TabHeadCol>
+                <TabHeadCol>40 YD+</TabHeadCol>
                 <TabHeadCol>Long</TabHeadCol>
+                <TabHeadCol>1st Downs</TabHeadCol>
+                <TabHeadCol>1st Down %</TabHeadCol>
                 <TabHeadCol>Fumbles Lost</TabHeadCol>
               </TableRow>
             </TableHeader>
-            {!feedLoading && feedStats.playerstatsentry &&
+            {!feedLoading && feedStats.playerStatsTotals &&
               <TableBody displayRowCheckbox={false} showRowHover>
                 <TableRow>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RushAttempts["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RushYards["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RushAverage["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RushTD["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Rush20Plus["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Rush40Plus["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RushLng["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.FumLost["#text"]}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rushAttempts}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rushYards}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rushAverage}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rushTD}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rush20Plus}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rush40Plus}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rushLng}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rush1stDowns}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rush1stDownsPct}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rushFumbles}</TabCol>
                 </TableRow>
               </TableBody>
             }
           </Table>
         </div>
       }
-      {feedStats && feedStats.playerstatsentry &&
+      {feedStats && feedStats.playerStatsTotals &&
         <div>
           <TableText>RECEIVING</TableText>
           <Table bodyStyle={{overflow:'visible'}}>
@@ -203,23 +207,27 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                 <TabHeadCol>Yds</TabHeadCol>
                 <TabHeadCol>YPC</TabHeadCol>
                 <TabHeadCol>TD</TabHeadCol>
-                <TabHeadCol>20 YD Plus</TabHeadCol>
-                <TabHeadCol>40 YD Plus</TabHeadCol>
+                <TabHeadCol>20 YD+</TabHeadCol>
+                <TabHeadCol>40 YD+</TabHeadCol>
                 <TabHeadCol>Long</TabHeadCol>
+                <TabHeadCol>1st Downs</TabHeadCol>
+                <TabHeadCol>1st Down %</TabHeadCol>
                 <TabHeadCol>Targets</TabHeadCol>
               </TableRow>
             </TableHeader>
-            {!feedLoading && feedStats.playerstatsentry &&
+            {!feedLoading && feedStats.playerStatsTotals &&
               <TableBody displayRowCheckbox={false} showRowHover>
                 <TableRow>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Receptions["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RecYards["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RecAverage["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RecTD["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Rec20Plus["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Rec40Plus["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.RecLng["#text"]}</TabCol>
-                  <TabCol>{feedStats.playerstatsentry[0].stats.Targets["#text"]}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.receptions}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.recYards}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.recAverage}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.recTD}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.rec20Plus}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.rec40Plus}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.recLng}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.rec1stDowns}</TabCol>
+                  <TabCol>{(feedStats.playerStatsTotals[0].stats.receiving.rec1stDowns / feedStats.playerStatsTotals[0].stats.receiving.receptions).toFixed(3) * 100}</TabCol>
+                  <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.targets}</TabCol>
                 </TableRow>
               </TableBody>
             }

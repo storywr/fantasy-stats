@@ -47,9 +47,9 @@ const StatCard = styled(Card)`
 const CardSection = styled.div`
 `
 
-export const Stats = ({ gameFeed, feedStats }) => (
+export const Stats = ({ gameFeed }) => (
   <div>
-    {gameFeed && gameFeed.gamelogs && feedStats && feedStats.playerstatsentry &&
+    {gameFeed && gameFeed.gamelogs &&
       <Section>
         <StatCard>
           <CardSection>
@@ -76,15 +76,15 @@ export const Stats = ({ gameFeed, feedStats }) => (
                   {gameFeed.gamelogs.map((game, idx) => (
                     <TableRow>
                       <TabCol>{idx + 1}</TabCol>
-                      <TabCol>{game.stats.RushAttempts["#text"]}</TabCol>
-                      <TabCol>{game.stats.RushYards["#text"]}</TabCol>
-                      <TabCol>{game.stats.RushAverage["#text"]}</TabCol>
-                      <TabCol>{game.stats.RushTD["#text"]}</TabCol>
-                      <TabCol>{game.stats.Receptions["#text"]}</TabCol>
-                      <TabCol>{game.stats.RecYards["#text"]}</TabCol>
-                      <TabCol>{game.stats.RecAverage["#text"]}</TabCol>
-                      <TabCol>{game.stats.RecTD["#text"]}</TabCol>
-                      <TabCol>{game.stats.Targets["#text"]}</TabCol>
+                      <TabCol>{game.stats.rushing.rushAttempts}</TabCol>
+                      <TabCol>{game.stats.rushing.rushYards}</TabCol>
+                      <TabCol>{game.stats.rushing.rushAverage}</TabCol>
+                      <TabCol>{game.stats.rushing.rushTD}</TabCol>
+                      <TabCol>{game.stats.receiving.receptions}</TabCol>
+                      <TabCol>{game.stats.receiving.recYards}</TabCol>
+                      <TabCol>{game.stats.receiving.recAverage}</TabCol>
+                      <TabCol>{game.stats.receiving.recTD}</TabCol>
+                      <TabCol>{game.stats.receiving.targets}</TabCol>
                     </TableRow>
                   ))}
                 </TableBody>

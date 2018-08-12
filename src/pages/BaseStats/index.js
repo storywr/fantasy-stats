@@ -168,7 +168,7 @@ export class BaseStats extends Component {
 
     return (
       <div>
-        {!isLoading && cumulative && cumulative.playerstatsentry ?
+        {!isLoading && cumulative && cumulative.playerStatsTotals ?
           <div>
             <SearchBoxes>
               <PositionSearch
@@ -227,18 +227,18 @@ export class BaseStats extends Component {
                   </TableRow>
                 </TableHeader>
                 <TableBody displayRowCheckbox={false} showRowHover>
-                  {cumulative.playerstatsentry.map((player, idx) => (
+                  {cumulative.playerStatsTotals.map((week, idx) => (
                     <TableRow>
                       <RankCol>{idx + 1}</RankCol>
-                      <CatTab>{player.player.FirstName} {player.player.LastName}</CatTab>
-                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushYards["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='receiving'>{player.stats.RecYards["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushTD["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='receiving'>{player.stats.RecTD["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushAverage["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='receiving'>{player.stats.RecAverage["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='rushing'>{player.stats.RushAttempts["#text"]}</CatTab>
-                      <CatTab category={this.state.category} value='receiving'>{player.stats.Receptions["#text"]}</CatTab>
+                      <CatTab>{week.player.firstName} {week.player.lastName}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{week.stats.rushing.rushYards}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{week.stats.receiving.recYards}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{week.stats.rushing.rushTD}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{week.stats.receiving.recTD}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{week.stats.rushing.rushAverage}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{week.stats.receiving.recAverage}</CatTab>
+                      <CatTab category={this.state.category} value='rushing'>{week.stats.rushing.rushAttempts}</CatTab>
+                      <CatTab category={this.state.category} value='receiving'>{week.stats.receiving.receptions}</CatTab>
                     </TableRow>
                   ))}
                 </TableBody>
