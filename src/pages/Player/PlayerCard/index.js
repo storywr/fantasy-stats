@@ -160,7 +160,7 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
           <MenuItem value={'2017'} primaryText="2017" />
         </PositionSearch>
       </SearchBoxes>
-      {feedStats && feedStats.references && feedStats.references.playerReferences[0].position === 'RB' &&
+      {feedStats && feedStats.references && feedStats.references.playerReferences[0].primaryPosition === 'RB' &&
         <div>
           <TableText>RUSHING</TableText>
           <Table bodyStyle={{overflow:'visible'}}>
