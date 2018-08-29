@@ -128,7 +128,7 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
       </Flex>
       {feedStats && feedStats.references &&
         <div>
-          <PositionText>{`${feedStats.references.teamReferences[0].city} ${feedStats.references.teamReferences[0].name} | ${feedStats.references.playerReferences[0].position} | #${feedStats.references.playerReferences[0].jerseyNumber}`}</PositionText>
+          <PositionText>{`${feedStats.references.teamReferences[0].city} ${feedStats.references.teamReferences[0].name} | ${feedStats.references.playerReferences[0].primaryPosition} | #${feedStats.references.playerReferences[0].jerseyNumber}`}</PositionText>
           <PositionText>{`${feedStats.references.playerReferences[0].birthDate || ''} ${feedStats.references.playerReferences[0].age || ''} | ${feedStats.references.playerReferences[0].height} | ${feedStats.references.playerReferences[0].weight}`}</PositionText>
         </div>
       }  
