@@ -18,6 +18,6 @@ You can also change the year in the stat section.
 
 This will also be reflected in the "Stats" tab below.
 
-The Navigation icon in the top left will take you to player stat pages, scoring leaders, average draft position.
+The Navigation icon in the top left will take you to player stat pages, scoring leaders, and average draft position.
 
 In addition, under the navigation drawer you have the option to turn on/off the night theme.
