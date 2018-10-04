@@ -158,6 +158,7 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
           <MenuItem value={'2015'} primaryText="2015" />
           <MenuItem value={'2016'} primaryText="2016" />
           <MenuItem value={'2017'} primaryText="2017" />
+          <MenuItem value={'2018'} primaryText="2018" />
         </PositionSearch>
       </SearchBoxes>
       {feedStats && feedStats.references && feedStats.references.playerReferences[0].primaryPosition === 'RB' &&
