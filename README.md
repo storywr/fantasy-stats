@@ -21,3 +21,5 @@ This will also be reflected in the "Stats" tab below.
 The Navigation icon in the top left will take you to player stat pages, scoring leaders, and average draft position.
 
 In addition, under the navigation drawer you have the option to turn on/off the night theme.
+
+The App is also mobile responsive so be sure to try it out on your mobile devices.
