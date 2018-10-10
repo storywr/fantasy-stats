@@ -14,6 +14,8 @@ Use the search bar at the top to search for a player - "Todd Gurley"
 
 All the information in the below tabs will change to reflect stats and news for that player alone.
 
+The App utilizes Reddit's search API to find relevant posts to your fantasy players.
+
 You can also change the year in the stat section.
 
 This will also be reflected in the "Stats" tab below.
