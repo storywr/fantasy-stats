@@ -1,9 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import {Card, CardActions, CardMedia, CardTitle, CardText} from 'material-ui/Card'
-import Dialog from 'material-ui/Dialog';
+import { Card, CardActions, CardTitle, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 
 const RedditCard = styled(Card)`

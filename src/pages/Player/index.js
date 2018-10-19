@@ -10,12 +10,7 @@ import PlayerCard from './PlayerCard'
 import PlayerTabs from './PlayerTabs'
 
 import CircularProgress from 'material-ui/CircularProgress'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
-import Dialog from 'material-ui/Dialog';
-import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton'
-import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
 
 import {
   Table,

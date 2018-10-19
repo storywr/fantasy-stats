@@ -1,8 +1,7 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import { Card, CardTitle } from 'material-ui/Card'
 import {
   Table,
   TableBody,
