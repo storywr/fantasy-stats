@@ -1,12 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
-import Dialog from 'material-ui/Dialog';
+import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card'
 import {GridList, GridTile} from 'material-ui/GridList';
 import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import {
   Table,

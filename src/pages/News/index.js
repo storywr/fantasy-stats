@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 
 import CircularProgress from 'material-ui/CircularProgress'
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
+import { Card, CardActions, CardHeader, CardTitle, CardText } from 'material-ui/Card'
 import FlatButton from 'material-ui/FlatButton'
 import {Tabs, Tab} from 'material-ui/Tabs'
 

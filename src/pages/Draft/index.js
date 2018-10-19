@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import {Card, CardActions, CardHeader, CardMedia, CardTitle, CardText} from 'material-ui/Card'
-import FlatButton from 'material-ui/FlatButton'
+import { Card } from 'material-ui/Card'
 
 import {
   Table,
