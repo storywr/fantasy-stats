@@ -57,8 +57,8 @@ export class Player extends Component {
     year: '2018'
   }
 
-  componentDidMount() {
-    this.props.fetchPlayerDetails(this.props.match.params.playerId)
+  getPlayerDetails = (playerId) => {
+    this.props.fetchPlayerDetails(playerId)
       .then((response) => {
         const names = response.playerDetails.players[0].name.split(' ')
         const teamName = response.playerDetails.players[0].teamAbbr
@@ -79,28 +79,14 @@ export class Player extends Component {
     })
   }
 
+  componentDidMount() {
+    this.getPlayerDetails(this.props.match.params.playerId)
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.match.params.playerId !== this.props.match.params.playerId) {
       this.setState({ value: 'a', year: '2018' })
-      this.props.fetchPlayerDetails(nextProps.match.params.playerId)
-        .then((response) => {
-          const names = response.playerDetails.players[0].name.split(' ')
-          const teamName = response.playerDetails.players[0].teamAbbr
-          const params = {
-            firstName: names[0],
-            lastName: names[1],
-            year: 2018,
-            teamName
-          }
-          this.props.fetchBing(params)
-          this.props.fetchPlayerFeed(params)
-          this.props.fetchDfsStats(params)
-          this.props.fetchSportsFeed(params) 
-          this.props.fetchGameFeed(params) 
-          this.props.fetchNfl(response.playerDetails.players[0].name)
-          this.props.fetchFf(response.playerDetails.players[0].name)
-          this.props.fetchDynasty(response.playerDetails.players[0].name)
-        })
+      this.getPlayerDetails(nextProps.match.params.playerId)
     }
   }
 
