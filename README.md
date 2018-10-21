@@ -26,4 +26,4 @@ In addition, under the navigation drawer you have the option to turn on/off the 
 
 The App is also mobile responsive so be sure to try it out on your mobile devices.
 
-The UI utilizes Material UI and Styled Components
+The UI utilizes Material UI and Styled Components.
