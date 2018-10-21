@@ -80,7 +80,7 @@ export class Draft extends Component {
 
   state = {
     position: 'RB',
-    year: '2017',
+    year: '2018',
     week: 'All Season'
   }
 
@@ -154,6 +154,7 @@ export class Draft extends Component {
                 <MenuItem value={'2015'} primaryText="2015" />
                 <MenuItem value={'2016'} primaryText="2016" />
                 <MenuItem value={'2017'} primaryText="2017" />
+                <MenuItem value={'2018'} primaryText="2018" />
               </WeekSearch>
               <WeekSearch
                 floatingLabelText="Week"

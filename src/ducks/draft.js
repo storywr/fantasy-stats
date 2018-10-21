@@ -30,7 +30,7 @@ export default function (state = initialState, action) {
 export const fetchDraft = () => {
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch('http://api.fantasy.nfl.com/v1/players/editordraftranks?&format=json&season=2017')
+    return fetch('http://api.fantasy.nfl.com/v1/players/editordraftranks?&format=json&season=2018')
       .then(response => response.json())
       .then(draft => dispatch({ type: DRAFT, draft }))
       .catch(console.log)
