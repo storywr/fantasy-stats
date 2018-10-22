@@ -97,8 +97,8 @@ const RankHead = styled(TableHeaderColumn)`
     display: none;
   }
 
-  min-width: 4%;
-  width: 4%;
+  min-width: 6%;
+  width: 6%;
 `
 
 const RankCol = styled(TableRowColumn)`
@@ -107,8 +107,8 @@ const RankCol = styled(TableRowColumn)`
   }
 
   cursor: pointer;
-  min-width: 4%;
-  width: 4%;
+  min-width: 6%;
+  width: 6%;
 `
 
 const Progress = styled.div`
