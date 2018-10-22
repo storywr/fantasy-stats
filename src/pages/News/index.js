@@ -28,23 +28,8 @@ const RedditCard = styled(Card)`
   box-shadow: rgba(0, 0, 0, 0.12) 0px 4px 24px, rgba(0, 0, 0, 0.12) 0px 4px 16px !important;
 `
 
-const TableWrapper = styled.div`
-  margin-bottom: 80px;
-`
-
 const Text = styled(CardText)`
   line-height: 200%;
-`
-
-const TextLink = styled.a`
-  padding: 16px;
-  font-size: 14px;
-  line-height: 200%;
-  display: block;
-
-  &:hover{ 
-    background-color: rgba(0, 0, 0, 0.08) !important;
-  }
 `
 
 const Section = styled.div`

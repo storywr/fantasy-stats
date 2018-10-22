@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { Link, Route, Switch, withRouter } from 'react-router-dom'
-
-import Player from '../../pages/Player'
+import { withRouter } from 'react-router-dom'
 
 import AutoComplete from 'material-ui/AutoComplete'
 

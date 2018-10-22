@@ -21,10 +21,6 @@ import {
 
 import { fetchCumulativeFeed, selectIsLoading, selectCumulativeFeed } from '../../ducks/sportsFeed'
 
-const MaterialCard = styled(Card)`
-  margin: 40px 0;
-`
-
 const PositionSearch = styled(SelectField)`
   margin-bottom: 24px;
 
@@ -51,31 +47,9 @@ const SearchBoxes = styled.div`
   }
 `
 
-const PlayTabCol = styled(TableRowColumn)`
-  cursor: pointer;
-  min-width: 104px;
-  width: 104px;
-`
-
-const TabCol = styled(TableRowColumn)`
-  cursor: pointer;
-  min-width: 40px;
-  width: 40px;
-`
-
 const CatTab = styled(TableRowColumn)`
   display: ${p => p.category !== p.value && 'none'}
 
-  min-width: 40px;
-  width: 40px;
-`
-
-const PlayTabHeadCol = styled(TableHeaderColumn)`
-  min-width: 104px;
-  width: 104px;
-`
-
-const TabHeadCol = styled(TableHeaderColumn)`
   min-width: 40px;
   width: 40px;
 `

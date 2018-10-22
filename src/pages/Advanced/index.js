@@ -21,10 +21,6 @@ import {
 
 import { fetchAdvanced, selectIsLoading, selectAdvanced } from '../../ducks/advanced'
 
-const MaterialCard = styled(Card)`
-  margin: 40px 0;
-`
-
 const PositionSearch = styled(SelectField)`
   margin-bottom: 24px;
 

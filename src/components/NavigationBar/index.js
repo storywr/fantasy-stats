@@ -1,10 +1,11 @@
-import React from 'react';
-import AppBar from 'material-ui/AppBar';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
+import React from 'react'
 import styled from 'styled-components'
-import Divider from 'material-ui/Divider';
-import Toggle from 'material-ui/Toggle';
+
+import AppBar from 'material-ui/AppBar'
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
+import Divider from 'material-ui/Divider'
+import Toggle from 'material-ui/Toggle'
 
 import { Link } from 'react-router-dom'
 

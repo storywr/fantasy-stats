@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { Card } from 'material-ui/Card'
-
 import {
   Table,
   TableBody,
@@ -17,16 +15,6 @@ import { fetchDraft, selectIsLoading, selectDraft } from '../../ducks/draft'
 
 const Wrapper = styled.div`
   margin-top: 24px;
-`
-
-const MaterialCard = styled(Card)`
-  margin: 40px 0;
-`
-
-const MobileHeaderCol = styled(TableHeaderColumn)`
-  @media (max-width: 767px) {
-    display: none;
-  }
 `
 
 const TabCol = styled(TableRowColumn)`

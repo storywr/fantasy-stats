@@ -7,8 +7,6 @@ import { withRouter } from 'react-router-dom'
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 
-import { Card } from 'material-ui/Card'
-
 import {
   Table,
   TableBody,
@@ -19,10 +17,6 @@ import {
 } from 'material-ui/Table';
 
 import { fetchScoring, selectIsLoading, selectScoring } from '../../ducks/scoring'
-
-const MaterialCard = styled(Card)`
-  margin: 40px 0;
-`
 
 const PositionSearch = styled(SelectField)`
   margin-bottom: 24px;
@@ -35,20 +29,6 @@ const WeekSearch = styled(SelectField)`
 
 const SearchBoxes = styled.div`
   display: flex;
-`
-
-const MobileHeaderCol = styled(TableHeaderColumn)`
-  @media (max-width: 767px) {
-    display: none;
-  }
-`
-
-const StatCol = styled(TableHeaderColumn)`
-  width: 35%;
-
-  @media (max-width: 767px) {
-    display: none;
-  }
 `
 
 const TabCol = styled(TableRowColumn)`

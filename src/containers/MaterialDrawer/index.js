@@ -1,7 +1,7 @@
-import React from 'react';
-import Drawer from 'material-ui/Drawer';
-import MenuItem from 'material-ui/MenuItem';
-import RaisedButton from 'material-ui/RaisedButton';
+import React from 'react'
+
+import Drawer from 'material-ui/Drawer'
+import MenuItem from 'material-ui/MenuItem'
 import styled from 'styled-components'
 import Menu from 'material-ui/svg-icons/navigation/menu'
 
