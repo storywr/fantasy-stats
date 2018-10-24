@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 const API_USERNAME = process.env.REACT_APP_USERNAME
 const API_PASSWORD = process.env.REACT_APP_PASSWORD
 

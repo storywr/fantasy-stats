@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 // Action types
 
 const BEGIN_NFL = 'BEGIN_NFL_FETCH'

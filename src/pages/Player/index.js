@@ -1,25 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
-import {
-  LineChart, Line, XAxis, YAxis, CartesianGrid,
-  Tooltip, Legend, ResponsiveContainer
-} from 'recharts'
 
 import PlayerCard from './PlayerCard'
 import PlayerTabs from './PlayerTabs'
 
 import CircularProgress from 'material-ui/CircularProgress'
 import FlatButton from 'material-ui/FlatButton'
-
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
 
 import { fetchNfl, fetchFf, fetchDynasty, selectNfl, selectFf, selectDynasty } from '../../ducks/redditPlayer'
 import { fetchPlayerDetails, selectIsLoading, selectNotes, selectPlayerDetails } from '../../ducks/playerDetails'
@@ -126,7 +113,7 @@ export class Player extends Component {
   render() {
     const {
       bing, playerFeed, dfsStats, gameFeed, isLoading, feedLoading,
-      feedStats, notes, playerDetails, nfl, ff, dynasty, statLoading
+      feedStats, notes, playerDetails, nfl, ff, dynasty
     } = this.props
 
     const actions = [

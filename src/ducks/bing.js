@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 const API_KEY = process.env.REACT_APP_BING
 
 // Action types

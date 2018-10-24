@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 // Action types
 
 const BEGIN = 'BEGIN_SURE_STATS_FETCH'

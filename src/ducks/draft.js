@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 // Action types
 
 const BEGIN = 'BEGIN_DRAFT_FETCH'

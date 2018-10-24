@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Card, CardMedia, CardTitle, CardText } from 'material-ui/Card'
+import { Card, CardMedia, CardTitle } from 'material-ui/Card'
 import {GridList, GridTile} from 'material-ui/GridList';
 import MenuItem from 'material-ui/MenuItem';
 import SelectField from 'material-ui/SelectField';
@@ -13,19 +13,6 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-
-const VideoPlayer = styled.iframe`
-  height: 45vh;
-  width: 45vw;
-  margin: 1%;
-`
-
-const HighlightsButton = styled.div`
-  @media (max-width: 767px) {
-    display: none;
-  }
-  margin-left: auto;
-`
 
 const SearchBoxes = styled.div`
   display: flex;
@@ -45,10 +32,6 @@ const PositionSearch = styled(SelectField)`
 
 const PlayerName = styled(CardTitle)`
   padding-left: 0 !important;
-`
-
-const Text = styled(CardText)`
-  line-height: 200%;
 `
 
 const TableText = styled(CardTitle)`

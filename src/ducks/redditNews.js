@@ -1,5 +1,3 @@
-import { createSelector } from 'reselect'
-
 // Action types
 
 const BEGIN_NFL_NEWS = 'BEGIN_NFL_NEWS_FETCH'
