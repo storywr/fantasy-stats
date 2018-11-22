@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
 export const fetchNews = () => {
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch('http://api.fantasy.nfl.com/v1/players/news?&format=json')
+    return fetch('http://cors-anywhere.herokuapp.com/api.fantasy.nfl.com/v1/players/news?&format=json')
       .then(response => response.json())
       .then(news => dispatch({ type: NEWS, news }))
       .catch(console.log)

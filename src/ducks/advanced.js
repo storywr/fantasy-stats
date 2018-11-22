@@ -30,9 +30,9 @@ export const fetchAdvanced = params => {
     dispatch({ type: BEGIN })
     return fetch(
       params.week === 'All Season' ?
-      `http://api.fantasy.nfl.com/v1/players/advanced?season=${params.year}&count=50&format=json&position=${params.position}&sort=${params.sort}`
+      `http://cors-anywhere.herokuapp.com/api.fantasy.nfl.com/v1/players/advanced?season=${params.year}&count=50&format=json&position=${params.position}&sort=${params.sort}`
       :
-      `http://api.fantasy.nfl.com/v1/players/advanced?season=${params.year}&count=50&format=json&position=${params.position}&week=${params.week}&sort=${params.sort}`
+      `http://cors-anywhere.herokuapp.com/api.fantasy.nfl.com/v1/players/advanced?season=${params.year}&count=50&format=json&position=${params.position}&week=${params.week}&sort=${params.sort}`
     )
       .then(response => response.json())
       .then(advanced => dispatch({ type: ADVANCED, advanced }))

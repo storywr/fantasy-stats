@@ -30,9 +30,9 @@ export const fetchScoring = params => {
     dispatch({ type: BEGIN })
     return fetch(
       params.week === 'All Season' ?
-      `http://api.fantasy.nfl.com/v1/players/scoringleaders?season=${params.year}&format=json&position=${params.position}`
+      `http://cors-anywhere.herokuapp.com/api.fantasy.nfl.com/v1/players/scoringleaders?season=${params.year}&format=json&position=${params.position}`
       :
-      `http://api.fantasy.nfl.com/v1/players/scoringleaders?season=${params.year}&format=json&week=${params.week}&position=${params.position}`
+      `http://cors-anywhere.herokuapp.com/api.fantasy.nfl.com/v1/players/scoringleaders?season=${params.year}&format=json&week=${params.week}&position=${params.position}`
     )
       .then(response => response.json())
       .then(scoring => dispatch({ type: SCORING, scoring }))

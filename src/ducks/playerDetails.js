@@ -28,7 +28,7 @@ export default function (state = initialState, action) {
 export const fetchPlayerDetails = playerId => {
   return dispatch => {
     dispatch({ type: BEGIN })
-    return fetch(`http://api.fantasy.nfl.com/v1/players/details?playerId=1&statType=seasonStatsformat=json&playerId=${playerId}`)
+    return fetch(`http://cors-anywhere.herokuapp.com/api.fantasy.nfl.com/v1/players/details?playerId=1&statType=seasonStatsformat=json&playerId=${playerId}`)
       .then(response => response.json())
       .then(playerDetails => dispatch({ type: DETAILS, playerDetails }))
       .catch(console.log)
