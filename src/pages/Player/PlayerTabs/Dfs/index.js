@@ -1,6 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid,
+  Tooltip, Legend, ResponsiveContainer
+} from 'recharts'
 
 import {
   Table,
@@ -54,8 +57,20 @@ export const Dfs = ({ dfsStats, chartData }) => (
               <Tooltip />
               <Legend />
               <XAxis tick={{ fill: 'white' }} dataKey="name" tickCount={16} />
-              <YAxis tick={{ fill: 'white' }} yAxisId="right" orientation='right' name='salary' label={{ value: 'Salary', angle: -90, position: 'right', fill: 'white' }} domain={["dataMin", "dataMax"]} />
-              <YAxis tick={{ fill: 'white' }} yAxisId="left" orientation='left' name='fantasy points' label={{ value: 'Fantasy Points', angle: -90, position: 'insideLeft', fill: 'white' }} />
+              <YAxis
+                tick={{ fill: 'white' }}
+                yAxisId="right"
+                orientation='right'
+                name='salary'
+                label={{ value: 'Salary', angle: -90, position: 'right', fill: 'white' }} domain={["dataMin", "dataMax"]}
+              />
+              <YAxis
+                tick={{ fill: 'white' }}
+                yAxisId="left"
+                orientation='left'
+                name='fantasy points'
+                label={{ value: 'Fantasy Points', angle: -90, position: 'insideLeft', fill: 'white' }}
+              />
               <CartesianGrid stroke="#eee" strokeDasharray="5 5"/>
               <Line yAxisId="right" type="monotone" dataKey="Salary" stroke="#00bcd4" strokeWidth={2} />
               <Line yAxisId="left" type="monotone" dataKey="FantasyPoints" stroke="#fc4482" strokeWidth={2} />

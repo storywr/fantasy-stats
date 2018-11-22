@@ -24,8 +24,18 @@ export const Dff = ({ dynasty }) => (
         <CardTitle title={post.data.title} />
         {post.data.selfText && <Text>{post.data.selftext}</Text>}
         <CardActions>
-          <FlatButton label="Article" href={post.data.url} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
-          <FlatButton label="Reddit Post" href={`https://reddit.com${post.data.permalink}`} style={{ textDecoration: 'none', color: 'inherit' }} target="_blank" />
+          <FlatButton
+            label="Article"
+            href={post.data.url}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            target="_blank"
+          />
+          <FlatButton
+            label="Reddit Post"
+            href={`https://reddit.com${post.data.permalink}`}
+            style={{ textDecoration: 'none', color: 'inherit' }}
+            target="_blank"
+          />
         </CardActions>
       </RedditCard>
     ))}

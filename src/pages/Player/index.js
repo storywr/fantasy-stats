@@ -73,11 +73,11 @@ export class Player extends Component {
   }
 
   handleOpen = () => {
-    this.setState({open: true});
+    this.setState({ open: true });
   }
 
   handleClose = () => {
-    this.setState({open: false});
+    this.setState({ open: false });
   }
 
   getTitle = (playerDetails) => (
@@ -186,7 +186,7 @@ const mapDispatchToProps = {
   fetchDynasty
 }
 
-const mapStateToProps = (state, props) => ({
+const mapStateToProps = (state) => ({
   bing: selectBing(state),
   playerFeed: selectPlayerFeed(state),
   feedLoading: feedLoading(state),
