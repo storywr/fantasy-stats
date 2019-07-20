@@ -159,7 +159,7 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                 <TabHeadCol>Fumbles Lost</TabHeadCol>
               </TableRow>
             </TableHeader>
-            {!feedLoading && feedStats.playerStatsTotals &&
+            {!feedLoading && feedStats.playerStatsTotals && feedStats.playerStatsTotals[0] &&
               <TableBody displayRowCheckbox={false} showRowHover>
                 <TableRow>
                   <TabCol>{feedStats.playerStatsTotals[0].stats.rushing.rushAttempts}</TabCol>
@@ -196,7 +196,7 @@ export const PlayerCard = ({ bing, playerDetails, handleOpen, actions, open, han
                 <TabHeadCol>Targets</TabHeadCol>
               </TableRow>
             </TableHeader>
-            {!feedLoading && feedStats.playerStatsTotals &&
+            {!feedLoading && feedStats.playerStatsTotals && feedStats.playerStatsTotals[0] &&
               <TableBody displayRowCheckbox={false} showRowHover>
                 <TableRow>
                   <TabCol>{feedStats.playerStatsTotals[0].stats.receiving.receptions}</TabCol>

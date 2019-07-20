@@ -10,7 +10,7 @@ Fantasy news pulled from Rotowire, and Reddit's API.
 
 The different tabs on the player's news page refers to Rotowire, the NFL subreddit, the Fantasy Football Subreddit, and the DynastyFF subreddit.
 
-Use the search bar at the top to search for a player - "Todd Gurley"
+Use the search bar at the top to search for a player - "Christian McCaffrey"
 
 All the information in the below tabs will change to reflect stats and news for that player alone.
 
